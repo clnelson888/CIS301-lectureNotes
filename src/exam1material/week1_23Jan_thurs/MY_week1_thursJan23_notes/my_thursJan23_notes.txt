@@ -50,9 +50,16 @@ else {
 
 
 
+
+
+
+
 ////////////////////////////////////////////////////////
 
 More with knights and knaves.
+
+Knights: each full statement that they make is true
+Knave: each full statement that they make is false
 
 
 
@@ -64,21 +71,26 @@ Bob says, "Neither Ava nor I are knaves."
     "Ava is a knight and I am a knight"
 
 
-What does "neither" mean?
+What does "neither" mean? 
+
 
 Rewrite both statements.
-
+    Bob: Ava and I are both Knights
 
 
 What are Ava and Bob?
+    Suppose Ava is a knight:
+        Then from her statement, Bob must be a knave. 
+        This works, since Bob's statement 
+        would be a Lie (he isn't a knight)
+
+    Suppose Ava is a Knave:
+        Then from her statement, Bob has to be a Knight.
+        This doesn't work, because Bob's statement wouldn't  be
+        true since Ava is a Knave, so this doesn't work.
 
 
-
-
-
-
-
-
+Solution: Ava is a knight, Bob is a Knave.
 
 
 ////////////////////////////////////////////////////////
@@ -95,10 +107,20 @@ What types are Sarah, Bill, and Mae?
 
 (How might we simplify everything?)
 
+Sarah: Bill is a Knight
+Bill: Mae is a Knight
+Mae: Bill says Mae is a Knave
 
+Suppose that Sarah is a Knight: 
+    From her statement, Bill must be a knight, and from his statement, Mae must also be a knight.
+    Bill wouldnt not say Mae is a Knave, so this doesn't work.
 
+Suppose that Sarah is a Knave: ************Similar HW problem*************
+    From her statement, Bill must be a Knave, and from his statement, Mae must be a Knave.
+    Bill would say that Mae is a Knight (lying), but Mae would lie and say Bill would say she was a Knave.
+    This works.
 
-
+Solution: all 3 are Knaves.
 
 
 ////////////////////////////////////
@@ -115,6 +137,19 @@ Unicorn says: "Yesterday was one of my lying days, too."
 
 What day is it?
 
+Sunday: Doesn't work;
+    Lion should tell the Truth and Saterday wasn't a lying day.
+
+Tuesday: Doesn't work for Lion. Mon. was one of his lying days,
+    but he should be lying about it. 
+    Similarly, Wed/Fri/Sat also don't work
+
+Monday: Works for lion, but unicorn shuold tell the truth
+    so doesn't work.
+
+Thursday: Works. Yesterday was oneof Lion's lying days and 
+    Lion is telling the truth. Yesterday was not one of Unicorn's 
+    lying days (and Unicorn is correctly lying about that)
 
 
 
@@ -136,6 +171,11 @@ The second one says: "I'm Tweedledee."
 
 Which is which? What day is it?
 
+On every day but sunday, one would lie and one would tell the truth;
+    in that case they would say the SAME NAME.
+
+Solution: It must be Sunday.
+
 
 
 
@@ -145,7 +185,7 @@ Which is which? What day is it?
 
 In-class quiz
 
-
+Monday: first twin: True. Second: True.
 
 
 
@@ -165,6 +205,14 @@ The second one says: "I'm Tweedledee!"
 
 Who gets the rattle?
 
+Suppose first twin is telling truth, and second is lying:
+    Tweedledee really does own the rattle. Second twin must be Tweedledum, and the first twin is
+    Tweedledee. The first twin owns the rattle.
+
+Suppose the first twin is the lyer and the second twin is telling the truth:
+    Tweedledum owns the rattle and the second twin is Tweedledee. The First twin owns the rattle.
+
+Solution: Rattle goes to the First twin (We still don't know who is who)
 
 
 
@@ -220,7 +268,7 @@ Bernard says: "At first I didn't know when Cheryl's
 
 Albert says: "Then I also know when Cheryl's birthday is."
 
-
+Answer: July 16th
 
 ///////////////////////////////////
 
@@ -233,23 +281,25 @@ Variables can be true or false
 
 Basic operations:
 
-∧   and
-∨   or (inclusive or)
-¬   not
-→   implies
+∧   and (&&)
+∨   or (inclusive or) (||)
+¬   not (!)
+→   implies (if/then ->)
 
 
 Basic logic gates (draw on board)
-
+p->o NOT
+pq =D- AND
+pq =)D- OR
 
 gates still used to design circuits
 
 
 why do we care about equivalent circuits?
-
+Costs more money
 
 what about programming?
-
+Easier to read
 
 ///////////////////////////////////////////////////
 
@@ -260,28 +310,28 @@ AND:
 
 p q  #  p ∧ q
 --------------
-T T  #    
-T F  #    
-F T  #    
-F F  #    
+T T  #    T
+T F  #    F
+F T  #    F
+F F  #    F
 
 
 OR:
 
 p q  #  p ∨ q
 --------------
-T T  #    
-T F  #    
-F T  #    
-F F  #    
+T T  #    T
+T F  #    T
+F T  #    T
+F F  #    F
 
 
 NOT:
 
 p  # ¬p
 --------
-T  # 
-F  # 
+T  # F
+F  # T
 
 ////////////////////////////////////////////////
 
@@ -299,14 +349,17 @@ Otherwise we have not.
 
 p q  #  p → q
 --------------
-T T  #    
-T F  #    
-F T  #    
-F F  #    
+T T  #    T
+T F  #    F
+F T  #    T
+F F  #    T
+
 
 /////////////////////////////////////////
 
 How does the implies operator relate to programming?
+
+    if statement
 
 //////////////////////////////////////////
 
@@ -317,6 +370,8 @@ Design circuits for:
 ¬(p ∧ (q ∨ r))
 
 p XOR q (with just the gates we've seen, not a specific XOR gate)
+
+(p \/ q)^!(p^q)
 
 /////////////////////////////////////
 
@@ -354,7 +409,7 @@ Order of operations
 
 In math?
 
-
+P E M D A S
 
 
 For logic statements:
