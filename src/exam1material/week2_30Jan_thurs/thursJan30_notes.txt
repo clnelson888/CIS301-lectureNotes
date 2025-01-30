@@ -42,30 +42,44 @@ Propositional logic.
 
 Which ones are propositions? Propositional atoms?
 
-Today is Thursday.
 
+Today is Thursday.
+    proposition
+    propositional atom
 
 
 What time is it?
+    not a proposition, not a propositional atom
 
 
 x == 2
+    proposition, propositional atom
 
 
 x != 2
+    proposition, NOT a propositional atom
 
 
 Pigs can fly.
+    proposition, propositional atom
 
 
 z != 7 && str.contains(sub)
+    proposition, NOT a propositional atom
+
 
 Drive carefully.
+    not a proposition, not a propositional atom
 
-y <= 4
+
+y <= 4  
+    proposition, propositional atom
+
 
 
 I am hungry and thirsty.
+    proposition
+    NOT a propositional atom
 
 
 ////////////////////////////////////////
@@ -79,23 +93,23 @@ Suppose we have these propositional atoms:
 
 How would we express these as English sentences?
 
-    ¬p:
+    ¬p: It is not below freezing
 
 
-    p ∧ q:
+    p ∧ q: It is below freezing and it is snowing
 
 
-    p → q :
+    p → q : If it is below freezing, then it is snowing
 
 
-    ¬p → ¬q:
+    ¬p → ¬q: If it is not below freezing, then it is not snowing
+ 
 
 
+    r ∨ s: y <= 4 || r == 2
 
-    r ∨ s:
 
-
-    ¬r:
+    ¬r: y > 4
 
 
 
@@ -108,14 +122,25 @@ You can't enroll for the course if you haven't taken the prerequisite.
 
 --> what are the propositional atoms?
 
+p: You can enroll for the course
+q: you have taken to prerequisite
 
 
 --> translate to propositional logic:
 
+really saying:
+"If you haven't taken the prerequisite, then you can't enroll"
+
+
+¬q -> ¬p
 
 
 
 What is the *contrapositive* of our statement?
+
+p -> q 
+
+contrapositive is: ¬q -> ¬p
 
 
 
@@ -132,10 +157,16 @@ if (x <= 2 || y >= 0) {
 
 How could we write what our if-statement is doing using propositional logic?
 
-
-
 Propositional atoms/translation?
 
+p: x <= 2
+q: y >= 0
+r: z == 17
+s: answer == 25
+
+If all my conditions happen, then answer should be 25
+
+(p ∨ q) ∧ ¬r -> s
 
 
 //////////////////////////////////
@@ -148,14 +179,15 @@ q: I can drive a car
 
 1) If I am at least 16 years old, then I can drive a car.
 
+    p -> q
+
+only false when p = T and q = F
 
 2) I'm not at least 16 years old or I can drive a car.
 
+    ¬p ∨ q
 
-
---> how could we translate them to propositional logic statements?
-
-
+p = T, q = F
 
 
 --> are they saying the same thing?
@@ -163,9 +195,13 @@ q: I can drive a car
 
 
 
---> could we PROVE it?
+--> could we PROVE it? (equiv1.logika, equiv2.logika)
+
+show that for all truth assignments, they have the same output
 
 
+The statements are logically equivalent because for each possible 
+input, they have the same output.
 
 
 
@@ -190,8 +226,12 @@ How could we express the NEGATION
 (i.e., what condition would be true for the "else")?
 
 
+if (a != 4 && a != 5)
+
+is the same as
 
 
+if (!(a == 4 || a == 5))
 
 
 ///
@@ -204,16 +244,16 @@ How could we express the NEGATION
 (i.e., what condition would be true for the "else")?
 
 
-
+if (a != 4 || b != 5)
 
 
 //////////////////////////////
 
 DeMorgan's laws in propositional logic:
 
-¬(p ∨ q) is equivalent to...
+¬(p ∨ q) is equivalent to... ¬p ∧ ¬q
 
-¬(p ∧ q) is equivalent to...
+¬(p ∧ q) is equivalent to... ¬p ∨ ¬q
 
 
 --> how can we prove the first of DeMorgan's laws?
@@ -227,16 +267,20 @@ DeMorgan's laws in propositional logic:
 Another if-statement example.
 
 'a'
+'0'
 
 if (Character.isDigit(letter) || num < 10) {
     statements
 }
 
 --> how would we negate it without using a ! operator?
+    also no extra ()
 
+if (!(Character.isDigit(letter) || num < 10))
 
+if ((!Character.isDigit(letter) && !(num < 10)))
 
-
+if (Character.isDigit(letter) == false && num >= 10)
 
 
 ///////////////////////
@@ -249,7 +293,13 @@ if ((y >= 4 && num != 14) || x > 0) {
 
 negate it:
 
+if (!((y >= 4 && num != 14) || x > 0))
 
+if ((!(y >= 4 && num != 14) && !(x > 0)))
+
+if ((!(y >= 4 && num != 14) && !(x > 0)))
+
+if ((y < 4 || num == 14) && x <= 0)
 
 ///////////////////////
 
@@ -263,14 +313,33 @@ Summary of important equivalences (≡ means "is equivalent to").
 ¬(p ∧ q) ≡ ¬p ∨ ¬q                  (DeMorgan's laws)
 ¬(p ∨ q) ≡ ¬p ∧ ¬q
 
-p → q ≡                             (contrapositive)
-p → q ≡                             (can turn implies into an or)
+p → q ≡  ¬q → ¬p                        (contrapositive)
+p → q ≡  ¬p ∨ q                          (can turn implies into an or)
 
 
 associative laws
 
+    (2 + 3) + 5 = 2 + (3 + 5)
 
-commutative laws
+    (p ∧ q) ∧ r     vs    p ∧ (q ∧ r )
+
+
+    (p → q) → r
+    p → (q → r)
+
+    logically equivalent? need two truth tables
+    NOT equivalent? find ONE truth assignment where the statements have different
+        outputs
+
+        p = F 
+        q = T 
+        r = F
+
+        (p → q) → r would have (F → T) → F    would be T -> F would be F 
+        p → (q → r) would have F → (T → F)  would be F -> (F) would be T 
+
+
+commutative laws (skipped this, will discuss next week)
 
 
 
@@ -283,10 +352,12 @@ commutative laws
 Summary of equivalence.
 
 How do we prove two statements ARE equivalent?
-
+    need two truth tables, show both statements have same output for every input
 
 
 How do we prove two statements are NOT equivalent?
+    just need one counterexample (truth assignment) that has a different output
+        for the two statements
 
 
 
@@ -296,7 +367,8 @@ What is equivalent to:
 
 ¬p → q
 
-
+(skipped this, recommend thinking through on your own what statements
+would be equivalent)
 
 //////////////////////////
 
@@ -307,15 +379,19 @@ are these equivalent?
 
 How could we show it?
 
+(we showed these were not equivalent earlier on in the notes)
 
 /////////////////////////
 
 Satisfiability.
 
-- definition: 
+- definition: a statement is satisfiable if there exists a truth assignment
+    that makes the statement true
 
 
 - what kind of statement is satisfiable? what kind is not?
+    satisfiable: contingent, tautology
+    not statisfiable: contradictory
 
 
 - is this satisfiable?
@@ -323,12 +399,23 @@ Satisfiability.
     (p ∨ ¬q) ∧ (q ∨ ¬r) ∧ (r ∨ ¬p)
 
 
+yes, satisfiable. Just need one truth assignment that makes output true:
+
+p = T
+q = T
+r = T
 
 
 
+to show NOT satisfiable: need to show that ALL truth assignments make
+    output false. Would need full truth table.
 
 
+////////////////////////////
 
+<--- stopped here, will continue next week
+
+///////////////////////////
 
 
 SAT
