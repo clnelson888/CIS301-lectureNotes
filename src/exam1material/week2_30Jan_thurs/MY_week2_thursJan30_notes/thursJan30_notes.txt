@@ -43,29 +43,44 @@ Propositional logic.
 Which ones are propositions? Propositional atoms?
 
 Today is Thursday.
-
+    Proposition
+    Propositional Atom (as simplified as can be)
 
 
 What time is it?
-
+    Not a proposition or propositional atom
 
 x == 2
+    Proposition
+    Propositional Atom
 
 
 x != 2
+    Proposition
+    NOT a Propositional Atom
 
 
 Pigs can fly.
+    Proposition
+    Propositional Atom
 
 
 z != 7 && str.contains(sub)
+    Proposition
+    NOT Propostional Atom
 
 Drive carefully.
+    Not a propositon
 
 y <= 4
+    Proposition
+    Propositional Atom
+
 
 
 I am hungry and thirsty.
+    Proposition
+    NOT propositional Atom
 
 
 ////////////////////////////////////////
@@ -79,23 +94,23 @@ Suppose we have these propositional atoms:
 
 How would we express these as English sentences?
 
-    ¬p:
+    ¬p: It is NOT below freezing
 
 
-    p ∧ q:
+    p ∧ q: It is below freezing and it is snowing
 
 
-    p → q :
+    p → q : If it is below freezing, then it is snowing
 
 
-    ¬p → ¬q:
+    ¬p → ¬q: If it is NOT below freezing, then it is NOT snowing
 
 
 
-    r ∨ s:
+    r ∨ s: y <= 4 || x == 2
 
 
-    ¬r:
+    ¬r: y > 4
 
 
 
@@ -107,17 +122,22 @@ You can't enroll for the course if you haven't taken the prerequisite.
 
 
 --> what are the propositional atoms?
+    p: You can enroll for the course
+    q: You have taken the prerequisite
 
 
 
 --> translate to propositional logic:
+    Really saying:
+    "If you haven't take the prerequisite, then you can't enroll"
 
-
+    ¬q -> ¬p
 
 
 What is the *contrapositive* of our statement?
+    p -> q
 
-
+    Contrapositive is: ¬q -> ¬p
 
 
 /////////////
@@ -134,7 +154,16 @@ How could we write what our if-statement is doing using propositional logic?
 
 
 
+
 Propositional atoms/translation?
+    p: x <= 2
+    q: y >=0
+    r: z == 17
+    s: answer == 25
+
+    If all of my conditions happen, then the answer should be 25
+
+    ((p V q) ∧ ¬r) -> s
 
 
 
@@ -148,8 +177,14 @@ q: I can drive a car
 
 1) If I am at least 16 years old, then I can drive a car.
 
+    p -> q
+    Only false when p = T, and q = F
+
 
 2) I'm not at least 16 years old or I can drive a car.
+
+    ¬p V q
+    P would have to be = T, q = F
 
 
 
@@ -160,13 +195,15 @@ q: I can drive a car
 
 --> are they saying the same thing?
 
-
+    Yes
 
 
 --> could we PROVE it?
 
+    Show that for all truth assignments, they have the same output
 
-
+    The statements are logically equivalent because for each possible input, 
+    they have the same output
 
 
 
@@ -189,7 +226,7 @@ if (a == 4 || a == 5) {
 How could we express the NEGATION
 (i.e., what condition would be true for the "else")?
 
-
+    if (a != 4 && a != 5)
 
 
 
@@ -203,21 +240,21 @@ if (a == 4 && b == 5) {
 How could we express the NEGATION
 (i.e., what condition would be true for the "else")?
 
+    if (a != || b != 5)
 
 
 
-
-//////////////////////////////
+////////////////////////////// *********** HW PROBLEM ***************
 
 DeMorgan's laws in propositional logic:
 
-¬(p ∨ q) is equivalent to...
+¬(p ∨ q) is equivalent to... ¬p ∧ ¬q
 
-¬(p ∧ q) is equivalent to...
+¬(p ∧ q) is equivalent to... ¬p ∨ ¬q
 
 
 --> how can we prove the first of DeMorgan's laws?
-
+    For every possible truth 
 
 
 
@@ -233,8 +270,13 @@ if (Character.isDigit(letter) || num < 10) {
 }
 
 --> how would we negate it without using a ! operator?
+    also no extra ()
 
+    if (!(Character.isDigit(letter) || num < 10))
 
+    if ((!Character.isDigit(letter) || !(num < 10)))
+
+#   if (Character.isDigit(letter) == false && num >= 10)
 
 
 
@@ -247,7 +289,10 @@ if ((y >= 4 && num != 14) || x > 0) {
     statements
 }
 
-negate it:
+negate it:                      *
+    if (!((y >= 4 && num != 14) || x > 0))
+    if ((!(y >= 4 && num != 14) && !(x > 0)))
+#   if ((y < 4 || num == 14) && x <= 0)
 
 
 
@@ -263,14 +308,32 @@ Summary of important equivalences (≡ means "is equivalent to").
 ¬(p ∧ q) ≡ ¬p ∨ ¬q                  (DeMorgan's laws)
 ¬(p ∨ q) ≡ ¬p ∧ ¬q
 
-p → q ≡                             (contrapositive)
-p → q ≡                             (can turn implies into an or)
+p → q ≡ ¬q → ¬p                            (contrapositive)
+p → q ≡ ¬q ∨ ¬p                            (can turn implies into an or)
 
 
 associative laws
+    (2 + 3) + 5 = 2 + (3 + 5)
+
+    (p ∧ q) ∧ r     vs      p ∧ (q ∧ r)
+
+
+    (p → q) → r
+    p → (q → r)
+
+    logicially equivalent? Need two truth tables
+    NOT equivalent? Find ONE truth assignemnt where the statements have different outputs
+
+    p = F 
+    q = T
+    r = F
+
+    (p → q) → r would have (F → T) → F  would be T -> F would be F
+    p → (q → r) would have F → (T → F) woould be F -> F would be T
 
 
 commutative laws
+    
 
 
 
@@ -283,10 +346,12 @@ commutative laws
 Summary of equivalence.
 
 How do we prove two statements ARE equivalent?
+    Need two truth table, show both statements ahve some output for every input
 
 
 
 How do we prove two statements are NOT equivalent?
+    Just need one counterexample (truth assignemnt) that does not match
 
 
 
@@ -312,21 +377,28 @@ How could we show it?
 
 Satisfiability.
 
-- definition: 
+- definition: Statement is satisfiable if there exists a truth asignemnt 
+              that makes the statement true
 
 
 - what kind of statement is satisfiable? what kind is not?
+    Satisfiable: Contingent, Tautology
+    NOT Satisfiable: Contradictory
 
 
 - is this satisfiable?
 
     (p ∨ ¬q) ∧ (q ∨ ¬r) ∧ (r ∨ ¬p)
 
+    Yes, satisfiable. ust need one truth assignemnt that makes output true.
+    
+    p = T 
+    q = T 
+    r = T
 
-
-
-
-
+    to show NOT satisfiable: need to show that ALL truth assignemnts make output false.
+        Would need a fill truth table.
+    To find that it is NOT satisfiable, you would need an entire truth table
 
 
 
