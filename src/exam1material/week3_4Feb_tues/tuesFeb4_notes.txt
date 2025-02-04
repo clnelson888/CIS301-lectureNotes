@@ -9,25 +9,65 @@ Exam 1 is Thursday, February 13
 Today:
 - More with equivalence
 - More with satisfiability
+- Start on natural deduction
 
 ////////////////////////////////
 
+Associativity
+
+(p ∧ q) ∧ r equivalent to p ∧ (q ∧ r)
+OR - also associative
+implies - NOT associative
+    showed by: 
+        p → (q → r)
+        (p → q) → r
+        showed not equivalent by finding a truth assignment
+            where the statements had different outputs
+
+
+
 Commutativity.
+
+AND 
+    p ∧ q   vs  q ∧ p
+    to prove: truth tables, show for every input the two
+        statements had the same output
+
+OR - is commutative
+
+IMPLIES - p → q        vs  q → p
+    p = T, q = F
+    p → q  is F 
+    q → p is T
+
 
 - which operators are commutative?
 - which are not?
 
 --> how could we prove each case?
 
+
+////////////////////////////////
+
+∧ ∨ ¬ →
+
 ////////////////////////////////
 
 Satisfiability.
 
---> definition?
+--> definition? There exists a truth assignment that
+    makes the statement true
 
 --> how to prove something is satisfiable?
 
+    just need to show one truth assignment that makes the
+        statement output true
+
+
 --> how to prove something is not satisfiable?
+
+    make truth table, demonstrate all truth assignments make it
+        false
 
 
 /////////////////////////////////////////
@@ -40,10 +80,13 @@ Proving an argument.
     from our premises.
 
 
+IF all the premises really are true, Then the conclusion is true
 
 
 --> When is an argument considered valid?
 
+if every time all the premises are true, then the conclusion
+    is also true
 
 
 ///////////////////////////////////////
@@ -67,11 +110,18 @@ I want to prove:
 
 Propositional atoms:
 
+p: I am in the CS department
+q: I am in the ECE department
+r: I can log in to the CS lab computers
 
 Translations:
 
+Premises:
+    p ∨ q 
+    ¬q
+    p → r
 
-
+Conclusion: r ∧ p
 
 
 --> How to prove with a truth table?
@@ -79,8 +129,11 @@ Translations:
 
 
 
+////////////////////////////////
 
-////////////////////////////
+∧ ∨ ¬ →
+
+////////////////////////////////
 
 Format for a truth table proof:
 
@@ -120,6 +173,9 @@ We wish to prove:
 
 When is an argument invalid?
 
+    if I can find a truth assigment where all premises are true,
+        but the conclusion is NOT true
+
 
 
 
@@ -134,16 +190,25 @@ Proposed conclusion:
 
 1) Translate to propositional logic
 
-    p: 
-    q: 
+    p: it is sunny
+    q: I wear sunscreen
 
+p → q, q  ⊢  p
 
 
 2) How can we show it is invalid?
 
+p = F
+q = T
+
+all premises are true, but conclusion is false
 
 
-////////////////////////////
+////////////////////////////////
+
+∧ ∨ ¬ →
+
+////////////////////////////////
 
 Showing arguments are invalid in Logika
 
@@ -222,7 +287,7 @@ AND rules idea.
 
     --> what new claims would make sense using that statement?
 
-
+    P, Q (separately)
 
 
     --> what happened to the AND operator in both cases?
@@ -253,7 +318,7 @@ AND elimination:
 
           P ∧ Q               P ∧ Q
 AndE1 : ---------   AndE2 : ---------
-          P                  Q
+          P                     Q
 
 
 
