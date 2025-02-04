@@ -38,12 +38,14 @@ Proving an argument.
 
 *Conclusion* - something we are trying to show logically follows
     from our premises.
-
+    
+#    If all the premises really are true, then the conclusion is true.
 
 
 
 --> When is an argument considered valid?
 
+#   If every time all the premises are true, then the conlusion is also true
 
 
 ///////////////////////////////////////
@@ -66,9 +68,16 @@ I want to prove:
 
 
 Propositional atoms:
+#    p: I am in the CS department
+#    q: I am in the ECE department
+#    r: I can log in to the CS lab computers
 
 
 Translations:
+
+p V q
+!q 
+r & p
 
 
 
@@ -93,7 +102,7 @@ variables # (premise1, premise2, ..., premiseN) ⊢ conclusion
 
 Valid [T assigns where all premises T - conclusion should also be T]
 
-
+ |- 
 
 ////////////////////////////
 
@@ -120,7 +129,8 @@ We wish to prove:
 
 When is an argument invalid?
 
-
+#   If I can dind a truth assignment where all premises are true,
+#   But the conclusion is NOT true.
 
 
 Example:
@@ -134,12 +144,20 @@ Proposed conclusion:
 
 1) Translate to propositional logic
 
-    p: 
-    q: 
+    p: It is sunny
+    q: I wear sunscreen
+
+    p -> q, q |- p
 
 
 
 2) How can we show it is invalid?
+
+#   p = F
+#   q = T
+
+#   All premises are true, but the conclusion is false.
+
 
 
 
@@ -222,7 +240,7 @@ AND rules idea.
 
     --> what new claims would make sense using that statement?
 
-
+#   P, Q (separately)
 
 
     --> what happened to the AND operator in both cases?

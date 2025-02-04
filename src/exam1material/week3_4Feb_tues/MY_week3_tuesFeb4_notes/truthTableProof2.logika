@@ -5,7 +5,7 @@
 
 //put * over atom itself if no operators
 //don't need to fill out column
-
+         *   *     *        *             
 ---------------------------------------
 p q # (p ->: !q, p ->: q, p | q) |- q
 ---------------------------------------
