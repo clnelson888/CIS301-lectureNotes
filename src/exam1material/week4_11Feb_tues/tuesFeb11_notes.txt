@@ -1,17 +1,41 @@
 HW 3 due tonight - don't add parentheses
 
 
-p ∨ q ∨ r
+Problem 6:
+
+p ∨ q ∨ r |- r ∨ q ∨ p
 
 vs
 
-p ∨ (q ∨ r)   ??
+p ∨ (q ∨ r)   ?? NOT the same thing as p ∨ q ∨ r
+
+
+use OrE on p ∨ q ∨ r
+
+SubProof, assume p ∨ q
+    SubProof, assume p
+        use OrI2 to get r ∨ q ∨ p
+        want: r ∨ q ∨ p
+    SubProof, assume q
+         build r ∨ q
+        want: r ∨ q ∨ p
+    afterwards, use OrE to claim 
+    want to end with: r ∨ q ∨ p
+
+SubProof, assume r
+    r ∨ q because OrI1(r's line number)
+    another OrI on the r ∨ q to get r ∨ q ∨ p
+    want to end: r ∨ q ∨ p
 
 /////////////
 
 no new homework this week
 
 Exam 1 is Thursday, February 13
+
+
+Rachel will have review session Wed. 3-5 pm
+    in DUE 1118
 
 ////////////////////////////////
 
@@ -22,13 +46,19 @@ Today:
 
 ////////////////////////////////
 
-Proving equivalence with natural deduction?
+Proving two statements are equivalent with deduction?
 
-first |- second
 
-AND
+statement1
+statement2
 
-second |- first
+
+proof 1: 
+    statement1 |- statement2
+
+proof 2:
+    statement2 |- statement1
+
 
 ////////////////////////////////
 
@@ -40,7 +70,7 @@ p ∨ (q ∧ r)     is equivalent to       (p ∨ q) ∧ (p ∨ r)
 
 Already did on Thursday:
 
-    (p ∨ q) ∧ (p ∨ r) ⊢  p ∨ (q ∧ r)
+      p ∨ (q ∧ r) ⊢ (p ∨ q) ∧ (p ∨ r)
 
 
 
@@ -62,7 +92,8 @@ if (extraCredit == true || grade < 90) {
 }
 
 
---> how does the distributive law tell us we can rewrite this?
+--> how does the distributive law tell us we can rewrite 
+    this?
 
 
 ////////////////////////////////
@@ -97,7 +128,7 @@ __>:
 
 ////////////////////////////////////////
 
-Example (imply1.logika):
+Example (imply1.sc):
 
 (p ∧ q) → r,  p → q,  p  ⊢ r
 
@@ -123,31 +154,58 @@ p → r,  q → r,  p ∨ q  ⊢ r
 
 Exam 1 review.
 
-Covers everything we've done up to this point (including today).
+Covers everything we've done up to this point 
+(including today).
+
 
 See Canvas announcement for list of topics.
 
 
 
 
-How to prove two propositional logic statements are equivalent?
+How to prove two propositional logic statements are 
+equivalent?
 
     Approach 1:
-    Approach 2:
+        two deduction proofs, taking turns where one
+        is the premise and the other is the conclusion
 
-How to prove propositional logic statements are NOT equivalent?
+    Approach 2:
+        "combined" truth table
+        show that both statements have the same output
+        for every possible input
+
+
+
+
+How to prove propositional logic statements are 
+NOT equivalent?
+
+    find one truth assignment where the outputs are different
 
 
 
 What is satisfiability? 
+    I can find a truth assignment that makes it true
+
 
 
 - Determining whether an argument is valid or invalid
     (what is an argument?)
+    valid: every truth assignment that makes
+         all the premises are true also makes the
+        conclusion true
 
     how prove valid?
 
+        truth table? use definition above
+
+        or, complete a deduction proof
+
     how prove invalid?
+
+        find a truth assignment that makes all premises
+        true but the conclusion false
 
 
 /////////////////////////////////////////
@@ -155,8 +213,8 @@ What is satisfiability?
 Closed notes/computers.
 
 
-All problems will be "open-ended" - similar in content/format
-to HW problems.
+All problems will be "open-ended" - similar in 
+content/format to HW problems.
 
 
 Some problems will ask for a proof or explanation --
