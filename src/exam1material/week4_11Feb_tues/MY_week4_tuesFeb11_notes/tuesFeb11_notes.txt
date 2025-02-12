@@ -5,7 +5,26 @@ p ∨ q ∨ r
 
 vs
 
-p ∨ (q ∨ r)   ??
+p ∨ (q ∨ r)   ?? NOT THE SAME THING
+(p | q) | r
+
+use OrE on P | q | r
+
+Problem 6:
+SubProof, assume (p | q), subproof, assume (r),
+    Subproof, assume (p),
+        use OrI2 to get r | q | p
+        Want: (r | q | p),
+    subproof, assume (q),
+        build r | q
+        Want: r | q | p
+    Afterwards use OrE to claim (p | q)
+    //Want to end with: r | q | p
+
+Subproof, assume (r)
+    (r | q) because OrI1(r's line number)
+    another OrI on the r | q to get r | q | p
+    //want to end r | q | p
 
 /////////////
 
@@ -24,6 +43,11 @@ Today:
 
 Proving equivalence with natural deduction?
 
+proof 1: 
+    statement1 |- statement2
+Proof 2:
+    statement2 |- statement1
+
 first |- second
 
 AND
@@ -40,7 +64,7 @@ p ∨ (q ∧ r)     is equivalent to       (p ∨ q) ∧ (p ∨ r)
 
 Already did on Thursday:
 
-    (p ∨ q) ∧ (p ∨ r) ⊢  p ∨ (q ∧ r)
+    p ∨ (q ∧ r)  ⊢  (p ∨ q) ∧ (p ∨ r) 
 
 
 
@@ -133,21 +157,34 @@ See Canvas announcement for list of topics.
 How to prove two propositional logic statements are equivalent?
 
     Approach 1:
+        Two deduction proofs, taking turns where one
+        is the premis and the other is the conclusion
     Approach 2:
+        ("combined") Truth tables
+        Show that both statments have the same output for every possible input
 
 How to prove propositional logic statements are NOT equivalent?
+
+#   Find one truth assignment where the ouputs are different
 
 
 
 What is satisfiability? 
+#   I can find a truth assignemnt that makes it true
 
 
 - Determining whether an argument is valid or invalid
     (what is an argument?)
+#    Valid: every truth assignemnt that makes all the premises are true, the
+#    conclusion is also true
 
     how prove valid?
+#        Truth table: use definition above
 
     how prove invalid?
+#        Find a truth assignment that makes all premises ture but the conclusion false
+
+#        or complete a deduction proof
 
 
 /////////////////////////////////////////
