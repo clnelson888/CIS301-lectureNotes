@@ -63,7 +63,7 @@ Typing a → in Logika for natural deduction:
 
     __>:
 
-OR: right-click, Insert, Implies
+(two underscores, >, :)
 
 //////////////////////////
 
@@ -141,27 +141,15 @@ Examples:
 Proof(
     1 ( p → q   ) by Premise,
     2 ( ¬q      ) by Premise,
-    3 SubProof(
-        4 Assume(p),
-        5 (q) by ImplyE(1, 4),
-        6 (F) by NegE(5, 2)
-        //goal: F
-    ),
-    7 (¬p) by NegI(3)
-    //use NegI to conclude ¬p
+    
+
 )
 
 
 ( p ) ⊢ ( ¬¬p )
 Proof(
     1 ( p   ) by Premise,
-    2 SubProof(
-        3 Assume(¬p),
-        4 (F) by NegE(1, 3)
-        //goal: F
-    ),
-    5 (¬¬p) by NegI(2)
-    //conclude ¬¬p using NegI
+    
 )
 
 
