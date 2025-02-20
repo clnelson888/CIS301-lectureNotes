@@ -1,0 +1,205 @@
+HW 4 posted, due Tues Feb 25
+
+--> this is one of the harder assignments
+
+////////////////////////////////
+
+Today:
+
+- remaining negation rules
+- applications to conditional statements
+- natural deduction proof strategies
+
+////////////////////////////////
+
+Reminder: NegE and NegI.
+
+
+        P    ¬P
+NegE: ----------
+          F
+
+
+
+        SubProof(
+            Assume( P ),
+          ... F
+        )
+NegI: ------------------
+              ¬P
+
+
+
+//////////////////////////
+
+Review rules so far: not3.sc
+
+////////////////////////////////
+
+Bottom-elimination:
+
+               F
+BottomE:  ----------
+               Q
+
+
+//how does this make logical sense?
+
+(think about what we are proving with an argument --
+    IF all the premises are true,
+    THEN we promise the conclusion is true)
+
+
+
+
+Proof by contradiction (reductio ad absurdum):
+
+        SubProof(
+            Assume(¬P),
+            ...
+            F
+        )
+PbC:  -------------------
+          P
+
+
+--> Difference between NegI and PbC?
+
+///////////////////////////////////
+
+First examples.
+
+( p, ¬p ) ⊢ ( q )
+Proof(
+    1 ( p )     by Premise,
+    2 ( ¬p )    by Premise,
+
+)
+
+
+///////////////////////////////////
+
+p: I go for a walk
+q: I get coffee
+
+Premises:
+p ∨ q: 
+¬p: 
+
+Conclusion:
+q: 
+
+
+( p ∨ q, ¬p ) ⊢ ( q )
+Proof(
+    1 ( p ∨ q )     by Premise,
+    2 ( ¬p )        by Premise,
+
+    
+)
+
+
+//////////////////////////////////
+
+( ¬¬p ) ⊢ ( p )
+Proof(
+    1 ( ¬¬p )   by Premise,
+
+    
+)
+
+
+
+
+///////////////////////////////////
+
+
+( ¬q → ¬p ) ⊢ ( p → q )         //not4.sc
+
+
+//////////////////////////////////
+
+(in-class quiz)
+
+
+//////////////////////////////////
+
+
+( ¬(¬p ∨ ¬q) ) ⊢ ( p ∧ q )     //not5.sc
+
+
+
+
+//////////////////
+
+A THEOREM in propositional logic is something that is
+always true with no need for premises. For example:
+
+
+Law of the excluded middle. (LEM)
+
+p ∨ ¬p
+
+
+
+What would a theorem be in a truth table?
+
+
+
+Prove LEM:
+
+⊢ p ∨ ¬p                //lem.sc
+
+
+
+⊢ (theorem that you are trying to prove)
+
+//////////////////////////////////
+
+How do we approach proofs?
+
+1. Write out all the premises
+2. Extract all information from premises (∧e, →e)
+3. Look at what you are trying to prove (find top level operator)
+
+    ∧ -
+
+    ∨ -
+
+    → -
+
+    ¬(something) -
+
+    just a propositional atom?
+
+
+
+
+After each claim - 
+
+
+Inside a subproof - 
+
+
+
+Doesn't fit a pattern or doesn't work out from above:
+
+
+
+--> when do we open a subproof?
+
+
+
+
+
+--> can we assume anything? 
+
+
+
+/////////////////////////////////
+
+Next time:
+- putting everything together
+- soundness and completeness
+- proving equivalence (more)
+- begin sets
