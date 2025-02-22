@@ -73,6 +73,8 @@ First examples.
 Proof(
     1 ( p )     by Premise,
     2 ( ¬p )    by Premise,
+    3 ( F )     by NegE(1, 2),
+    4 ( q )     by BottomE(3)
 
 )
 
@@ -83,17 +85,30 @@ p: I go for a walk
 q: I get coffee
 
 Premises:
-p ∨ q: 
-¬p: 
+p ∨ q: I go for a walk or I get coffee
+¬p: I don't go for a walk
 
 Conclusion:
-q: 
+q: I get coffee
 
 
 ( p ∨ q, ¬p ) ⊢ ( q )
 Proof(
     1 ( p ∨ q )     by Premise,
     2 ( ¬p )        by Premise,
+
+    //OrE on p | q
+    3 SubProof(
+        4 Assume ( p ),
+        5 ( F ) by NegE(4, 2),
+        6 ( q ) by BottomE(5)
+        //Goal: q
+    ),
+    7 SubProof(
+        8 Assume( q )
+    ),
+    9 (q) by OrE(1, 3, 7)
+    //goal: q
 
     
 )
@@ -104,6 +119,13 @@ Proof(
 ( ¬¬p ) ⊢ ( p )
 Proof(
     1 ( ¬¬p )   by Premise,
+    2 SubProof(
+        3 Assume (¬p),
+        4 ( F ) by NegI(3, 1)
+        //Goal: F
+    ),
+    5 ( p ) PbC(2)
+    //use PbC p
 
     
 )
@@ -159,31 +181,38 @@ Prove LEM:
 How do we approach proofs?
 
 1. Write out all the premises
-2. Extract all information from premises (∧e, →e)
+2. Extract all information from premises (∧e (AndE), →e (ImplyE))
 3. Look at what you are trying to prove (find top level operator)
 
-    ∧ -
+    ∧ - Try to use AndI (prove the LHS of the goal AND prove the RHS of the goal AND)
 
-    ∨ -
+    ∨ - See if you can prove just the LHS or RHS of the goal OR, then use OrI
+      - if you have an OR as a premise/claim, try OrE to prove conclusion in both subproofs
 
-    → -
+    → - use ImplyI. Assume LHS of the goal implies, try to get to RHS of goal implies.
 
-    ¬(something) -
+    ¬(something) - Use NegI. Assume "something", try get F(contradiction)
 
-    just a propositional atom?
+    just a propositional atom? - Look for that propositional atom in your current claims
+
+        Do you have an OR Statement? Try OrE, see if you can get that propositional atom in both cases 
+
+        Is Negation involved? Try PbC.
 
 
 
 
 After each claim - 
+    Scan through previous claims, see if you can extract extra (esp. implies statements)
 
 
-Inside a subproof - 
+Inside a subproof - Think about goal for ending the subproof
+    You should have a plan for which rule subproof will use
 
 
 
 Doesn't fit a pattern or doesn't work out from above:
-
+    OR Statement for OrE, or use PbC
 
 
 --> when do we open a subproof?
