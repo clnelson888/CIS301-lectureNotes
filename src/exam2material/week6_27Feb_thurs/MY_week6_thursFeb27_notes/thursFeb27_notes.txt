@@ -76,8 +76,8 @@ Set difference,
 
 / or \ (means the same thing)
 
-The difference between the sets A and B, written A - B, is the set
-of all elements...?
+The difference between the sets A and B, written A - B, 
+    is the set of all elements...?
 
 
 How could we express in set builder notation?
@@ -106,7 +106,23 @@ A - B =
 
 B - A =
 
+
 /////////////////
+
+Draw a Venn diagram for A ⋃ (B ⋂ C)
+
+
+Draw a Venn diagram for (A ⋂ B) − C
+
+
+Draw Venn diagrams for A ⋃ (B ⋂ C) and (A ⋃ B) ⋂ (A ⋃ C)
+
+/////////////////
+
+How does A - B relate to A ⋃ B and A ⋂ B?
+
+A - b = 
+
 
 What do we know if A ⋂ B = A ⋃ B?
 
@@ -116,7 +132,9 @@ What do we know if A - B = A?
 
 
 
+
 What do we know if A - B = B - A?
+
 
 
 
@@ -177,6 +195,10 @@ How could we define that set A equals set B using quantifiers?
 
 (we will come back to sets in a couple of weeks to
 do proofs with them)
+
+//////////////////////////////////////
+
+(in-class quiz)
 
 //////////////////////////////////////
 
@@ -272,12 +294,14 @@ Example:
 
     What is the value of C(Bob) ⋀ C(Jill)? 
 
-
+////////////////
+∀ ∃     ∈ ∉     ∅ ⋂ ⋃ ⊂ ⊆   ⋀ ⋁ ¬ →     ℕ ℤ     ≠ ≤ ≥
 ////////////////
 
 Quantifiers and predicates
 
-Domain: {strawberry, blueberry, banana, orange, grapefruit, apple}
+Domain: {strawberry, blueberry, banana, orange, 
+            grapefruit, apple}
 
 Berry(x): x is a berry
 Citrus(x): x is a citrus fruit
@@ -390,6 +414,6 @@ There exists: usually connect with...
 
 Next time:
 - quantifiers with sets of numbers
-- more translations
+- translations involving multiple variables/quantifiers
 - DeMorgan's laws for quantifiers
 - begin natural deduction in predicate logic
