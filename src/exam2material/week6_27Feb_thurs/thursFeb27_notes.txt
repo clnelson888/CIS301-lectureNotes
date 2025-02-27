@@ -1,5 +1,7 @@
 HW 5 is due Tues March 4
 
+(this assignment does NOT use the Logika proof checker)
+
 ////////////////////////////
 
 Today:
@@ -19,6 +21,8 @@ Reminder: set builder notation
 
 {x : x ∈ ℤ, x^2 <= 25}
 
+{1, -1, 2, -2, 3, -3, 4, -4, 5, -5, 0}
+
 //////////////////////////////
 
 Describe these sets in set builder notation
@@ -26,13 +30,19 @@ Describe these sets in set builder notation
 
 {5,10,15}
 
+{x : x = 5k, k ∈ ℕ, k ≤ 3}
+
 
 
 {CIS 115, CIS 200, CIS 300, CIS 301}
 
+{x : x is a CIS course and is in the CIS minor}
+
 
 
 {2,4,8,16,32}
+
+{x : x = 2^k, k ∈ ℕ, k ≤ 5}
 
 
 ///////////////////////////////////////
@@ -43,12 +53,12 @@ Describe these sets in set builder notation
 Set union, ⋃
 
 The union of the sets A and B, written A ⋃ B, is the set
-of all elements....?
+of all elements....that are in either A or B (or both),
 
 
 How could we express in set builder notation?
 
-A ⋃ B =
+A ⋃ B = {x : x ∈ A ⋁ x ∈ B}
 
 
 Show as a Venn diagram.
@@ -60,29 +70,29 @@ Show as a Venn diagram.
 Set intersection, ⋂
 
 The intersection of the sets A and B, written A ⋂ B, is the set
-of all elements that are...?
+of all elements that are...in both A and B
 
 
 How could we express in set builder notation?
 
-A ⋂ B =
+A ⋂ B ={x : x ∈ A ⋀ x ∈ B}
 
 
 Show as a Venn diagram.
 
 ///////////////////////////////////////
 
-Set difference,
+Set difference, -
 
 / or \ (means the same thing)
 
 The difference between the sets A and B, written A - B, 
-    is the set of all elements...?
+    is the set of all elements...that are in A but not in B
 
 
 How could we express in set builder notation?
 
-A - B =
+A - B = {x : x ∈ A ⋀ x ∉ B}
 
 
 Show as a Venn diagram.
@@ -92,19 +102,14 @@ Show as a Venn diagram.
 ///////////////////////////////////////
 
 A = {1,3,7,10,11,12}
-
 B = {2,3,4,5,6,7}
-
 
 Find:
 
-A ⋃ B =
-
-A ⋂ B =
-
-A - B =
-
-B - A =
+A ⋃ B = {1,2,3,4,5,6,7,10,11,12}
+A ⋂ B = {3,7}
+A - B = {1,10,11,12}
+B - A = {2,4,5,6}
 
 
 /////////////////
@@ -119,23 +124,29 @@ Draw Venn diagrams for A ⋃ (B ⋂ C) and (A ⋃ B) ⋂ (A ⋃ C)
 
 /////////////////
 
-How does A - B relate to A ⋃ B and A ⋂ B?
+How does A - B relate to A ⋂ B?
 
-A - b = 
+A - B = A - A ⋂ B
+
 
 
 What do we know if A ⋂ B = A ⋃ B?
 
+A = B
+
 
 
 What do we know if A - B = A?
+
+A ⋂ B = ∅
 
 
 
 
 What do we know if A - B = B - A?
 
-
+only happens when A = B
+in this case A - B = B - A = ∅
 
 
 //////////////////
@@ -156,6 +167,9 @@ B = {1,3,5,8}
 
 --> is A a subset of B?
 
+NO! 4 is in A but is not in B.
+
+
 
 
 A = {8,1,3}
@@ -164,6 +178,7 @@ B = {1,3,5,8}
 
 --> is A a subset of B?
 
+YES! Every element in A is also in B.
 
 
 //////////////////////////////////
@@ -180,11 +195,13 @@ Can we define that set A is a subset of set B using quantifiers?
 
 A ⊆ B means ...
 
+    ∀ x ∈ A → x ∈ B
 
 
 
 How could we define that set A equals set B using quantifiers?
 
+(∀ x ∈ A → x ∈ B) ⋀ (∀ x ∈ B → x ∈ A)
 
 
 //////////////////////////////////////
@@ -228,9 +245,9 @@ P(x) = x ∈ ℕ ⋀ x^2 ≥ 25
 
 What are these saying? Are they true?
 
-P(2) = 
-P(-6) = 
-P(10) = 
+P(2) = false
+P(-6) = false
+P(10) = true
 
 Is 2 in A? Is -6? Is 10?
 
@@ -254,9 +271,9 @@ How would we prove this in propositional logic?
 
 What propositional atoms?
 
-p: 
-q: 
-r: 
+p: all humans are mortal
+q: Socrates is human
+r: Socrates is mortal
 
 
 p, q ⊢ r
@@ -288,11 +305,11 @@ Example:
     Jill is taking: CIS 301, MATH 510, HIST 251, MUSIC 170
 
 
-    What is the value of C(Bob)? 
+    What is the value of C(Bob)? false
 
-    What is the value of C(Jill)? 
+    What is the value of C(Jill)? true
 
-    What is the value of C(Bob) ⋀ C(Jill)? 
+    What is the value of C(Bob) ⋀ C(Jill)? false
 
 ////////////////
 ∀ ∃     ∈ ∉     ∅ ⋂ ⋃ ⊂ ⊆   ⋀ ⋁ ¬ →     ℕ ℤ     ≠ ≤ ≥
@@ -309,11 +326,11 @@ Peel(x): x has a peel (that needs to be removed before eating)
 Seeds(x): x contains inedible seeds
 Bite(x): x is bite-sized
 
-Berry(strawberry) -  
-Citrus(strawberry) - 
-Peel(strawberry) - 
-Seeds(strawberry) - 
-Bite(strawberry) - 
+Berry(strawberry) -  true
+Citrus(strawberry) - false
+Peel(strawberry) - false
+Seeds(strawberry) - false
+Bite(strawberry) - true
 
 
 
@@ -322,44 +339,77 @@ Write each statement in English. Is each one true or false?
 ∀ x (Berry(x))
 
 
+All fruits are berries
+(Every fruit is a berry)
+
+
     --> how could we express the same statement in our domain
     WITHOUT a quantifier?
 
+Berry(strawberry) ^ Berry(blueberry) ^ .. for all of them
 
+
+is false in our domain - a banana is not a berry
 
 
 ///
 
 ∃ x (Citrus(x) ⋀ Seeds(x))
 
+There exists a fruit that is citrus and has inedible seeds.
+
+
+true - orange is citrus and has inedible seeds
 
     --> how could we express the same statement in our domain
     WITHOUT a quantifier?
 
+(Citrus(strawberry) ^ Seeds(strawberry)) V (the next fruit) V ...
 
 ///
 
 ∀ x (Berry(x) ⋀ Bite(x))
 
+All fruits are berries and are bite-sized.
 
 
+(Berry(strawberry) ⋀ Bite(strawberry)) ^ ... (Berry(banana) ⋀ Bite(banana))
 
 ///
 
 ∀ x (Berry(x) → Bite(x))
 
+All berries are bite-sized.
+
+true (only need to consider whether my berries are also
+bite-sized)
 
 
 ///
 
 ¬(∀ x Peel(x))
 
+Not all fruits have a peel that needs removed
 
+¬(Peel(strawberry) ^ Peel(blueberry) ^ ...)
+
+
+True - strawberry doesn't have a peel that needs removed
 
 
 Can you think of another way to write the same thing?
 
+¬Peel(strawberry) V ¬Peel(blueberry) V ...
 
+∃ x ¬Peel(x)
+
+There is a fruit that doesn't have a peel that needs removed.
+
+(this is another application of DeMorgan's law)
+
+//////////////////////////
+<--- stopped here, will continue next week
+/////////////////////////
 
 ///
 
