@@ -98,13 +98,13 @@ B = {2,3,4,5,6,7}
 
 Find:
 
-A ⋃ B =
+A ⋃ B = {1,2,3,4,5,6,7,8,10,11,12}
 
-A ⋂ B =
+A ⋂ B = {3,7}
 
-A - B =
+A - B = {1,7,10,11,12}
 
-B - A =
+B - A = {2,4,5,6}
 
 
 /////////////////
@@ -121,19 +121,23 @@ Draw Venn diagrams for A ⋃ (B ⋂ C) and (A ⋃ B) ⋂ (A ⋃ C)
 
 How does A - B relate to A ⋃ B and A ⋂ B?
 
-A - b = 
+A - b = A - A ⋂ B
 
 
 What do we know if A ⋂ B = A ⋃ B?
 
-
+    They're Equivilant
 
 What do we know if A - B = A?
 
-
+    A and B don't overlap:
+    A ⋂ B = ∅
 
 
 What do we know if A - B = B - A?
+
+    Only happens when A = B
+    In this case, A - B = B - A = ∅
 
 
 
@@ -180,12 +184,14 @@ Can we define that set A is a subset of set B using quantifiers?
 
 A ⊆ B means ...
 
+    ∀ x ∈ A → x ∈ B
+
 
 
 
 How could we define that set A equals set B using quantifiers?
 
-
+    (∀ x ∈ A → x ∈ B) ⋀ (∀ x ∈ B → x ∈ A)
 
 //////////////////////////////////////
 
@@ -228,9 +234,9 @@ P(x) = x ∈ ℕ ⋀ x^2 ≥ 25
 
 What are these saying? Are they true?
 
-P(2) = 
-P(-6) = 
-P(10) = 
+P(2) = F (not greater than 25)
+P(-6) = F (not a natural number)
+P(10) = T 
 
 Is 2 in A? Is -6? Is 10?
 
@@ -254,9 +260,9 @@ How would we prove this in propositional logic?
 
 What propositional atoms?
 
-p: 
-q: 
-r: 
+p: All humans are mortal
+q: Socrates is human
+r: Socrates is mortal
 
 
 p, q ⊢ r
@@ -288,11 +294,11 @@ Example:
     Jill is taking: CIS 301, MATH 510, HIST 251, MUSIC 170
 
 
-    What is the value of C(Bob)? 
+    What is the value of C(Bob)? False
 
-    What is the value of C(Jill)? 
+    What is the value of C(Jill)? True
 
-    What is the value of C(Bob) ⋀ C(Jill)? 
+    What is the value of C(Bob) ⋀ C(Jill)? False
 
 ////////////////
 ∀ ∃     ∈ ∉     ∅ ⋂ ⋃ ⊂ ⊆   ⋀ ⋁ ¬ →     ℕ ℤ     ≠ ≤ ≥
@@ -309,11 +315,11 @@ Peel(x): x has a peel (that needs to be removed before eating)
 Seeds(x): x contains inedible seeds
 Bite(x): x is bite-sized
 
-Berry(strawberry) -  
-Citrus(strawberry) - 
-Peel(strawberry) - 
-Seeds(strawberry) - 
-Bite(strawberry) - 
+Berry(strawberry) -  True
+Citrus(strawberry) - False
+Peel(strawberry) - False
+Seeds(strawberry) - False
+Bite(strawberry) - True
 
 
 
@@ -321,25 +327,40 @@ Write each statement in English. Is each one true or false?
 
 ∀ x (Berry(x))
 
+    All fruits are berries
+    (Every fruit is a berry)
+
 
     --> how could we express the same statement in our domain
     WITHOUT a quantifier?
 
+    Is false in our domain - a bannana is not a berry
 
+    Berry(strawberry) ^ Berry(Blueberry) ^ ... for all of them
 
 
 ///
 
 ∃ x (Citrus(x) ⋀ Seeds(x))
 
+There exists a feuit that is citrus and has inedible seeds
+
+True - orange is citrus and has inedible seeds
 
     --> how could we express the same statement in our domain
     WITHOUT a quantifier?
+
+(Citrus(strawberry) ^ Seeds(strawberry)) | (Citrus(Orange) ^ Seeds(orange)) | ...
 
 
 ///
 
 ∀ x (Berry(x) ⋀ Bite(x))
+
+Every fruit is both a berry and bite sized
+All fruits are berries and are bite-sized
+
+(Berry(strawberry) ^ Bite(strawberry)) ^ (Berry(bannana) ^ Bite(bannana)) ^ ...
 
 
 
@@ -348,18 +369,30 @@ Write each statement in English. Is each one true or false?
 
 ∀ x (Berry(x) → Bite(x))
 
+All berries are bite sized
+Everything that is a berry is bit sized
+
+True (only need to consider whether my berries are also bite-sized)
+
 
 
 ///
 
 ¬(∀ x Peel(x))
 
+    Not all fruits have a peel that needs removed.
 
+    ¬(Peel(strawberry) ^ Peel(blueberry) ^ ...)
+
+    True - Strawberry doesn't have a peel tht needs removed
 
 
 Can you think of another way to write the same thing?
 
+    ¬Peel(strawberry) | ¬Peel(blueberry) | ...
 
+    ∃ x ¬Peel(x)
+        There is a fruit that doesn't have a peel that needs removed
 
 ///
 
