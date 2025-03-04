@@ -72,7 +72,7 @@ HasChocolate(M&M's) V ContainsPeanuts(Skittles)
 
 ///
 
-∃ x (ContainsPeanuts(x) → HasChocolate(x))
+∃ x (HasChocolate(x) → ContainsPeanuts(x))
 
     translation?
 

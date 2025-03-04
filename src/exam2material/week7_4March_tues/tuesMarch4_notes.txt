@@ -72,7 +72,7 @@ HasChocolate(M&M's) V ContainsPeanuts(Skittles)
 
 ///
 
-∃ x (ContainsPeanuts(x) → HasChocolate(x))
+∃ x (HasChocolate(x) → ContainsPeanuts(x))
 
     translation?
 
@@ -314,7 +314,8 @@ In Logika, ∃ x P(x) is written as:
 --> what is "T"?
 
 
-Settings->Command Palette->Tasks (run task)->Sireum slang template->Insert a for-all quantification
+Settings->Command Palette->Tasks (run task)->Sireum slang template->
+    Insert a for-all quantification
 
 This will insert the statement:
 
