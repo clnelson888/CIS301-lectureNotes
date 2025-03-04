@@ -25,21 +25,28 @@ Predicates:
 
 Statements:
 
+HasChocolate(M&M's) V ContainsPeanuts(Sittles)
+
+    Translation? M&M's have chocolate or skittles contain peanuts
+
 
 HasChocolate(M&M's) V ContainsPeanuts(Skittles)
 
     translation?
 
-    true or false?
+    true or false? True, because M&M's have chocolate
 
 
 ///
+Domain: Reese's, Snickers, Kit Kat, M&M's, Butterfinger, Skittles
 
 ¬(∀ x (HasChocolate(x) → ContainsPeanuts(x)))
 
-    translation?
+    translation? 
+        Not every candy with chocolate contains peanuts
 
     true or false?
+        True; Kit Kat doens't have peanuts
 
 
 
@@ -48,8 +55,10 @@ HasChocolate(M&M's) V ContainsPeanuts(Skittles)
 ∀ x (¬ContainsPeanuts(x))
 
     translation?
+        Every candy doesn't not contain peanuts
 
     true or false?
+        False, Skittles doesn't have peanuts
 
 
 ///
@@ -57,16 +66,22 @@ HasChocolate(M&M's) V ContainsPeanuts(Skittles)
 ¬(∃ x IsBrown(x))
 
     translation?
+        It is not the case that there is a candy that is brown.
+            More relaxed: There is not a brown candy
 
     true or false?
+        False, Kit Kat is brown
 
 ///
 
 ∃ x ¬(HasChocolate(x) ⋀ IsBrown(x))
 
     translation?
+        There is a candy that is isn't both chocolate and brown
+            There is a candy that either doesn't have chocolate or isn't brown.
 
     true or false?
+        True, Skittles
 
 
 
@@ -75,16 +90,18 @@ HasChocolate(M&M's) V ContainsPeanuts(Skittles)
 ∃ x (HasChocolate(x) → ContainsPeanuts(x))
 
     translation?
+        There is a candy that if it has chocolate, it contains peanuts
 
     true or false?
+        True, Skittles (implies is only false when T -> F, so skittles is True)
 
 ////////////////////////
 
-For all: usually connect with...
+For all: usually connect with...        →
 
 
 
-There exists: usually connect with...
+There exists: usually connect with...   ⋀
 
 
 
@@ -94,33 +111,33 @@ Evaluating predicate logic statements
 
 1) ∀ x P(x)
     translation: all x's are P-ish
-    true when: 
-    false when: 
+    true when: Look at all k in our domain, P(k) true for all
+    false when: Find ONE k where P(k) is False
 
 2) ∃ x P(x)
     translation: there exists an x that is P-ish
-    true when: 
-    false when: 
+    true when: Find ONE k where P(k) is True
+    false when: Look at all k in our domain, P(k) False for all
 
 3) ¬(∀ x P(x))
     translation: not all x's are P-ish
-    true when: 
-    false when: 
+    true when: Find ONE k where P(k) is False
+    false when: Look at all k in our domain, P(k) is True for all
 
 4) ¬(∃ x P(x))
     translation: there does not exist an x that is P-ish
-    true when: 
-    false when:
+    true when: Look at all k in our domain, P(k) is False for all
+    false when: Find one k where P(k) is True
 
 5) ∀ x ¬P(x)
     translation: all x's are not P-ish
-    true when:
-    false when:
+    true when: Look at all k in our domain, P(k) is False for all
+    false when: Find one k where P(k) is True
 
 6) ∃ x ¬P(x)
     translation: there is an x that is not P-ish
-    true when: 
-    false when: 
+    true when: Find one k where P(k) is False
+    false when: Look at all k in our domain, P(k) is True for all
 
 
 /////////////////
@@ -132,17 +149,29 @@ What do these mean in English? Are they true?
 
 
 ∀ n ∃ m (n^2 < m)
-
+    The square of every integer is less than some other integer.
+        True, for each n pick m = n^2 + 1, and m > n^2
 
 
 ∀ x ∃ y (x == y^2)
-
+    All integers equal the square of some other integer 
+    (or)
+    All integers are perfect squares
+        
+        False, x = 7, no integer squared equals 7.
 
 
 ∀ n ∃ m (n^2 == m)
+    The square of all integers is another integer
+        
+        True, when I multiply any two integers I always get another integer
 
 
 ∃ m ∀ n (n^2 == m)
+    There is a number (the SAME number in all cases) that equals the square of every integer
+
+        False, obviously no number is the square of everything
+
 
 
 
@@ -160,7 +189,8 @@ The sum of two negative integers is negative
 
 Domain: ℤ
 
-
+    ∀ x ∀ y (x < 0 ⋀ y < 0 → x + y < 0)
+        True - the sum of two negative numbers becomes more negative, so it is < 0
 
 
 
@@ -168,6 +198,14 @@ Domain: ℤ
 The difference of two positive integers is
 not necessarily positive
 
+    ∃ x ∃ y (x > 0 ⋀ y > 0 ⋀ x - y <= 0)
+
+        (or)
+
+    ¬(∀ x ∀ y (x > 0 ⋀ y > 0 → x - y > 0))
+
+        True, 5 - 10 = -5, which is not positive
+    
 
 /////////////////////////
 
@@ -188,8 +226,10 @@ Equivalence: DeMorgan's law (part 1).
 suppose our domain is k1 through kn
 
 
-¬(∃ x P(x)) is  equivalent to...
+¬(∃ x P(x)) is  equivalent to... ¬(P(k1) V P(k2) V P(k3)...)
+¬P(k1) ⋀ ¬P(k2) ⋀ ¬P(k3) ⋀ ... ⋀ ¬P(n)
 
+∀
 
 
 
@@ -237,8 +277,21 @@ Domain: students
     friendsWith(x, y): student x is friends with student y
 
 ///
+/////////////////////////
+
+∀ ∃     ∈ ∉     ∅ ⋂ ⋃ ⊂ ⊆   ⋀ ⋁ ¬ →     ℕ ℤ     ≠ ≤ ≥
+
+/////////////////////////
 
 All prize-winners were 5th graders
+
+Translation: ∀ x (winPrize(x) → in5th(x))
+Negation: ¬(∀ x (winPrize(x) → in5th(x)))
+            ∃ x (¬(wonPrize(x) → in5th(x)))
+            ∃ x (¬(¬wonPrize(x) ⋁ in5th(x)))
+            ∃ x (wonPrize(x) ⋀ ¬in5th(x)) <------- finished negation
+
+    Translation of negation: There is a student who won a prize and isn't in 5th grade
 
 ///
 
@@ -247,6 +300,17 @@ All prize winners are friends with all 5th graders
 ///
 
 A 5th grade prize winner isn't friends with anyone
+
+Two quantifiers
+Translation: ∃ x ∀ y (wonPrize(x) ⋀ is5th(x) ⋀ ¬friendsWith(x, y))
+
+Negation: ¬(∃ x ∀ y (wonPrize(x) ⋀ is5th(x) ⋀ ¬friendsWith(x, y)))
+            ∀ x ∃ y ¬((wonPrize(x) ⋀ is5th(x)) ⋀ ¬friendsWith(x, y))
+            ∀ x ∃ y (¬(wonPrize(x) ⋀ is5th(x)) ⋀ ¬friendsWith(x, y))
+            ∀ x ∃ y (¬(wonPrize(x) ⋀ is5th(x)) ⋁ friendsWith(x, y)) ------- (¬(x ⋀ y) ⋁ z) = x ⋀ y → z, so:
+            ∀ x ∃ y (wonPrize(x) ⋀ is5th(x) → friendsWith(x, y)) <----------- finished negation 
+
+            Translation: All 5th grade prize winners have someone they're friends with
 
 ////////////////////////////////////
 
