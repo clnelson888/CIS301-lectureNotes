@@ -142,6 +142,7 @@ What do these mean in English? Are they true?
 ∀ n ∃ m (n^2 == m)
 
 
+
 ∃ m ∀ n (n^2 == m)
 
 
@@ -167,6 +168,9 @@ Domain: ℤ
 
 The difference of two positive integers is
 not necessarily positive
+
+
+
 
 
 /////////////////////////
@@ -225,10 +229,9 @@ Apply DeMorgan's laws: example
 or outside a statement with logical connectives
 
     Reminder:
-        p → q is equivalent to: ¬p ⋁ q
+        p → q is equivalent to: ???
         ¬(p ⋀ q) is equivalent to: ¬p ⋁ ¬q
         ¬(p ⋁ q) is equivalent to: ¬p ⋀ ¬q
-        ¬(p → q) is equivalent to: ???
 
 ///
 Domain: students
@@ -242,7 +245,7 @@ All prize-winners were 5th graders
 
 ///
 
-All prize winners are friends with a 5th grader
+A 5th grader is friends with all prize winners
 
 ///
 
