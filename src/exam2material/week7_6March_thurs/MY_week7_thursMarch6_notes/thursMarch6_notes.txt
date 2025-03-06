@@ -194,6 +194,12 @@ First: consider these two statements:
 
 ∀ x (P(x) ⋀ Q(x))           (∀ x P(x)) ⋀ (∀ x Q(x))
 
+    ∀ x (P(x) ⋀ Q(x)) 
+      Translation: Everyone in my domain satisfies both P and Q
+
+    (∀ x P(x)) ⋀ (∀ x Q(x))
+        Translation: Everyone in my domain satisfies P AND Everyone in my domain satisfies Q
+
 
 are they equivalent?
     ∀ x (P(x) ⋀ Q(x))  - for all individuals, P and Q are true for them
@@ -203,6 +209,8 @@ are they equivalent?
 
 
 how would we defend our position?
+    Pick a random individual in your domain we know P(random) and also Q(random)
+
 
 
 //////////////////////////////////
@@ -269,6 +277,7 @@ Are these statements equivalent?
 
 ∀ x (P(x) ⋁ Q(x))           (∀ x P(x)) ⋁ (∀ x Q(x))
 
+#   No
 
 
 ////////////////////////////////////////
@@ -324,6 +333,20 @@ Suppose you are trying to prove this conclusion:
 ∀ ((x: T) => P(x) ⋀ Q(x) → ¬R(x) )
 
 How to construct?
+
+Let random : T be individual in AllI SubProof
+
+    ImplyI Subproof
+        Assume P(random) & Q(random)
+
+            NegI SubProof
+                Assume R(random)
+                
+                //Goal: F
+
+        //Goal: !R(random)
+
+    //Goal: P(random) ⋀ Q(random) → ¬R(random)
 
 ////////////////////////////
 
