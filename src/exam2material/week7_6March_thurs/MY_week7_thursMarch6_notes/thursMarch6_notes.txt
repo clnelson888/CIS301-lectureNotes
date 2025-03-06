@@ -36,6 +36,7 @@ Premises: ∀ x (P(x) → Q(x)), ∃ x P(x)
 Conclusion: ∃ x Q(x)
 
 Valid or not? 
+    Yes, no matter what the domain is (technically)
 
 
 ///
@@ -44,6 +45,17 @@ Premises: ∀ x P(x) : everyone in my domain is P-ish
 Conclusion: ∃ x P(x): there is someone in domain who is P-ish
 
 Valid or not? 
+#    If our domain is empty, INVALID
+
+        ∀ x P(x) would be true (everyone in our domain is P)
+        But ∃ x P(x) would be false
+    
+
+/////////////////////////////////
+
+#   Soundness - everything I can prove with my proof system is actually true
+
+#   Completeness - A proof system is complete if I can prove everything that is true
 
 /////////////////////////////////
 
@@ -65,17 +77,19 @@ Writing predicate logic statements in Logika
 
 In Logika, ∀ x P(x) is written as:
 
-    ∀ ((x: T) => P(x))
-
+*    ∀ ((x: T) => P(x))
 
 
 In Logika, ∃ x P(x) is written as:
 
-    ∃ ((x: T) => P(x))
+*    ∃ ((x: T) => P(x))
 
 
 
 --> what is "T"?
+    
+#    T = the Domain
+
 
 
 Settings->Command Palette->Tasks (run task)->Sireum slang template->
@@ -150,7 +164,7 @@ Syntax:
 
 Proof(
     1 ( ∀ ((x: T) => Human(x)) )    by Premise,
-    2 Human(Socrates)               by ???
+    2 ( Human(Socrates) )           by AllE[T](2)
 )
 
 Note: This assumes "Socrates" and "Human" were both parameters
