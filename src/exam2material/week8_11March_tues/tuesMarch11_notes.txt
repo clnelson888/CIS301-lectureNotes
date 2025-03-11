@@ -14,9 +14,17 @@ Today:
 
 Reminder:
 
-AllE
-AllI
-ExistsI
+AllE - use when we have a specific individual, can plug into 
+    any for all statement
+
+AllI - subproof (starts with "Let"), choosing random individual
+    end subproof with a statement about our random individual
+    right after subproof ends, claim same statement about All
+    individuals
+
+ExistsI - use when I have a statement about a particular individual,
+    can then say there exists an individual in my domain
+    where something holds
 
 ////////////////////////
 
@@ -49,6 +57,7 @@ Sets, including:
             R (reals - includes whole numbers, fractions,
             numbers with decimals)
     - union, intersection, difference (-), subsets
+    - Venn diagrams
     - general reasoning about sets
 
 Predicate logic statements, including:
@@ -65,13 +74,7 @@ Predicate logic statements, including:
     using: AllE, AllI, ExistsI
 
 - Using natural deduction to prove two statements are equivalent
-    I would complete two proofs:
 
-    statement1 |- statement2
-
-    and also:
-
-    statement2 |- statement1
 
 
 --> what about predicate logic proof syntax?
