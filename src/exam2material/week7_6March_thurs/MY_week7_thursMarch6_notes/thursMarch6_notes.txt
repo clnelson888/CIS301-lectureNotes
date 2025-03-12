@@ -7,6 +7,31 @@ Exam 2 is Thurs March 13
 
 ////////////////////
 
+HW 5 comments:
+
+
+4. {x : x ∈ ℤ, x ≥ -5} ∪ {x : x ∈ ℤ, x ≤ 7}
+
+
+
+5. Suppose A ⋃ B = A for two sets A and B.
+What does that tell us about A and B?
+
+
+
+6. Suppose A ⋂ B = A for two sets A and B.
+What does that tell us about A and B?
+
+
+
+7 (a). If A ⋃ C = B ⋃ C, must A = B?
+
+
+
+7 (b). If A ⋂ C = B ⋂ C, must A = B?
+
+////////////////////
+
 Today: 
 - Arguments in predicate logic
 - Begin natural deduction rules in predicate logic
