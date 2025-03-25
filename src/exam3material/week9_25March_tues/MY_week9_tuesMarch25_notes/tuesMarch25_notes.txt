@@ -64,7 +64,7 @@ Syntax:
 2 Let ((a: T) => SubProof(
     3 Assume ( P(a) ),
     ...
-    4 ( Q )                     by Justification
+    4 ( Q )                     by Justification        *** CANT USE A ***
 )),
 5 ( Q )                         by ExistsE[T](1, 2)
 
@@ -99,9 +99,9 @@ x is students
 
     --> what is this argument saying?
 
-∀ x (P(x) → ¬Q(x)): 
+∀ x (P(x) → ¬Q(x)): Everyone who attends doesn't attend KU
 
-¬(∃ x (P(x) ^ Q(x))): 
+¬(∃ x (P(x) ^ Q(x))): There isn't an individual who attends both KSU and KU.
 
 
 ////////////////////////////

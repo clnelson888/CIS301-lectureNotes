@@ -19,6 +19,26 @@ import org.sireum.justification.natded.prop._
       Proof(
       1 ( ∀((x: T) => (P(x)) __>: !Q(x)) ) by Premise,
 
+      //do NegI
+      2 SubProof(
+        3 Assume (∃((x: T) => (P(x) & Q(x)))),
+
+        //Try ExistsE on ∃((x: T) => (P(x) & Q(x)))
+        4 Let ((a: T) => SubProof(
+        5 Assume (P(a) & Q(a)),
+        6 ((P(a)) __>: !Q(a)) by AllE[T](1),
+        7 (P(a)) by AndE1(5),
+        8 (Q(a)) by AndE2(5),
+        9 (!Q(a)) by ImplyE(6, 7),
+        10 (F) by NegE(8, 9)
+
+        //Goal: F
+      )),
+      11 (F) by ExistsE(3, 4)
+
+      //Use NegI to conclude !(∃((x: T) => (P(x) & Q(x))))
+
     )
+  )
   )
 }
