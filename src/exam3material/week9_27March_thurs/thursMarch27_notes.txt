@@ -1,0 +1,203 @@
+HW 7 due Tuesday, April 1
+
+/////////////////////////
+
+Today:
+- proof tactics for predicate logic
+- prove (some) of DeMorgan's laws for quantifiers
+- begin mathematical induction
+
+/////////////////////////
+
+Proof tactics for predicate logic
+
+- see if you can do anything right away with the premises
+    Which rules? 
+
+- look at top-level operator for what you are trying to prove
+    trying to prove a "for all" statement with ∀?
+
+
+    trying to prove a "there exists" statement with ∃?
+
+        do I have that statement about a particular individual?
+
+        could I use AllE for an individual with an all statement?
+
+        do I have a "there exists" statement as a claim?
+
+        do I have an OR statement as a claim?
+
+        really can't find anything? 
+
+
+    trying to prove -> 
+
+
+    trying to prove ¬(something)
+
+
+
+    trying to prove an OR
+        can you get one side? 
+
+        do you have an OR statement already? 
+
+        do you have an "exists" statement? 
+
+
+    trying to prove an AND
+        first approach?
+
+        no luck? 
+
+
+    -->when you are in a subproof?
+
+
+    Unsure what to do?
+
+
+////////////////////////////////////////
+
+Proving DeMorgan's laws 
+
+//demorgan1.sc
+∀ x ¬P(x)       equivalent to       ¬(∃ x P(x))
+
+/////////////////////////////////////
+
+//demorgan2.sc
+∃ x ¬P(x)       equivalent to       ¬(∀ x P(x))
+
+////////////////////////////////////////
+
+Example:
+
+We want to prove that for any positive integer n:
+
+    1 + 2 + ... + n = n*(n+1)/2
+
+
+Try it out first.
+    n = 1?
+    n = 2?
+    n = 3?
+
+
+
+Have we proved it yet?
+
+
+
+///////////////////////////////////////////
+
+Mathematical induction.
+
+Tool for proving some claim P(n) holds for all natural numbers n
+
+
+
+The induction domino effect:
+
+    ( P(1) ∧ ∀ k (P(k) → P(k+1)) ) → ∀ n P(n) 
+
+
+
+What is this saying?
+    P(1)? base case (show our claim is true for first element in our domain)
+
+
+    ∀ k (P(k) → P(k+1))? inductive step
+        (how do we prove this kind of thing?)
+
+
+Putting it all together:
+
+( P(1) ∧ ∀ k (P(k) → P(k+1)) ) → ∀ n P(n) 
+
+
+
+IF ??? THEN ???
+
+
+
+////////////////////////////////////
+
+Why are we doing this?
+
+////////////////////////////////////
+
+Revisit our example:
+
+We want to prove that for any positive integer n:
+
+    1 + 2 + ... + n = n*(n+1)/2
+
+
+
+
+Proof by induction.
+
+
+
+/////////////////////////////////
+
+(in-class quiz)
+
+/////////////////////////////////
+
+Do you think induction can be used to prove properties for
+    ALL integers?
+
+
+
+/////////////////////////////////
+
+Induction template.
+
+1) Label the base case. Prove the claim is true for the smallest element in your domain.
+
+2) Label the inductive step. State the inductive hypothesis:
+    "We assume the inductive hypothesis: that <insert claim> holds for some fixed k in <insert domain>."
+    Prove that the claim holds for k+1 (you will need to use your inductive hypothesis).
+
+3) Summarize: "It follows by induction that <insert claim> holds for all <insert domain>."
+
+/////////////////////////////////
+
+
+Example: Prove that the sum of the first n odd numbers is n^2.
+
+    (what is our domain?)
+
+
+How can we express the sum of the first n odd numbers more formally?
+
+
+
+So, what is our claim?
+
+
+
+Proof by induction.
+
+
+/////////////////////////////////
+
+Example: Prove that 3^n - 1 is even for all positive integers n.
+
+
+what does "even" mean? 
+
+
+
+Proof by induction.
+
+
+
+//////////////////////////////////
+
+Next:
+- more with induction
+- survey of other proof techniques
