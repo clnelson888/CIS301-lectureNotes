@@ -52,6 +52,34 @@ import org.sireum.justification.natded.prop._
     Proof(
       1 ( !(∀((x: T) => P(x)) )              ) by Premise,
 
+      //no obvious strategy, try PbC as a last resort
+
+      2 SubProof(
+        3 Assume( !(∃((x: T) => !P(x))) ),
+
+        //try to prove ∀((x: T) => P(x) to get a F with #1
+        4 Let ((a: T) => SubProof(
+            //no obvious strategy, try PbC as last resort
+            5 SubProof(
+              6 Assume(!P(a)),
+              7 ( ∃((x: T) => !P(x)) ) by ExistsI[T](6),
+              8 ( F ) by NegE(7, 3)
+
+              //goal: F
+            ),
+            9 ( P(a) ) by PbC(5)
+            //use PbC to conclude P(a)
+
+          //goal: P(a)
+        )),
+        10 ( ∀((x: T) => P(x)) ) by AllI[T](4),
+        //use AllI to conclude ∀((x: T) => P(x))
+
+        11 ( F ) by NegE(10, 1)
+        //goal: F
+      ),
+      12 ( ∃((x: T) => !P(x)) ) by PbC(2)
+      //use PbC to conclude ∃((x: T) => !P(x))
     )
   )
 }
