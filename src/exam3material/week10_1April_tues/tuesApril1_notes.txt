@@ -167,6 +167,10 @@ Write a recursive definition for the set {1, 3, 5, 7, ...}
 
 
 
+////////////////////////////////
+
+(in-class quiz)
+
 
 ////////////////////////////////
 
