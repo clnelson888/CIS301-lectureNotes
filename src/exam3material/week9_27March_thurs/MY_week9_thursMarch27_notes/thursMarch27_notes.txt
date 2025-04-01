@@ -106,10 +106,14 @@ The induction domino effect:
 
 What is this saying?
     P(1)? base case (show our claim is true for first element in our domain)
+        I need to prove that the claim holds for the smallest n in the domain
 
 
     ∀ k (P(k) → P(k+1))? inductive step
         (how do we prove this kind of thing?)
+            Pick a random k in my domain.
+            assume P(k) (Inductive Hypothesis)
+            Try to prove P(k+1)
 
 
 Putting it all together:
@@ -118,7 +122,9 @@ Putting it all together:
 
 
 
-IF ??? THEN ???
+IF (I can prove the base case (P(1)) and I can prove the inductive step (∀ k (P(k) → P(k+1))) THEN (
+    I've proved the claim for all the 
+)
 
 
 
@@ -137,7 +143,28 @@ We want to prove that for any positive integer n:
 
 
 
-Proof by induction.
+Proof by induction:
+
+    Base Case. We must prove the case for our smallest positive integer,
+    n = 1. We have that 1 = 1(1+1)/2, so the base case holds
+
+Inductive Step:
+
+    We assume the Inductive Hypothesis --
+        1 + 2 + ... + k = k*(k+1)/2
+
+    Holds for some fixed positive integer k (or say k in your domain). We must prove that: [Plugging in (k+1) for (k)]
+        1 + 2 + ... + k + (k+1) = (k+1)*((k+1)+1)/2
+
+    We have that: 
+        1 + 2 + ... + k + (k+1) = k*(k+1)/2 + (k+1)     (By inductive hypothesis)
+                                = (k(k+1) + 2(k+1))/2
+                                = (k+1)(k+2)/2
+                                = (k+1)*((k+1)+1)/2
+
+    Thus the inductive step holds
+
+    We Have proved our claim for all positive integer n.
 
 
 
@@ -150,21 +177,21 @@ Proof by induction.
 Do you think induction can be used to prove properties for
     ALL integers?
 
+#   Would need a base case; integers don't have the smallest element (There isn't a 'First')
 
-
-/////////////////////////////////
+///////////////////////////////// ********************************************************************************************
 
 Induction template.
 
-1) Label the base case. Prove the claim is true for the smallest element in your domain.
+1) Label the base case. Prove the claim is true for the smallest element in your domain.    11111111111111111111111111111111111111
 
 2) Label the inductive step. State the inductive hypothesis:
-    "We assume the inductive hypothesis: that <insert claim> holds for some fixed k in <insert domain>."
+    "We assume the inductive hypothesis: that <insert claim> holds for some fixed k in <insert domain>."    22222222222222222222222222
     Prove that the claim holds for k+1 (you will need to use your inductive hypothesis).
 
-3) Summarize: "It follows by induction that <insert claim> holds for all <insert domain>."
+3) Summarize: "It follows by induction that <insert claim> holds for all <insert domain>."  333333333333333333333333333333333333333333
 
-/////////////////////////////////
+///////////////////////////////// ********************************************************************************************
 
 
 Example: Prove that the sum of the first n odd numbers is n^2.
