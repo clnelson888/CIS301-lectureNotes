@@ -1,5 +1,7 @@
 HW 7 due Tuesday, April 1
 
+--> accessing old in-class quizzes
+
 /////////////////////////
 
 Today:
@@ -11,51 +13,87 @@ Today:
 
 Proof tactics for predicate logic
 
-- see if you can do anything right away with the premises
+- see if you can do anything right away with any claims
     Which rules? 
+
+    for all statement, individual: use AllE with that individual
+    claim about a particular individual: *could* use ExistsI to
+        make a there exists statement (not always useful, but doesn't hurt)
+
+
 
 - look at top-level operator for what you are trying to prove
     trying to prove a "for all" statement with ∀?
+
+        use AllI subproof
+
+        name a random individual
+            by end of subproof: prove our goal about that individual
+        use AllI to conclude the statement for all individuals
 
 
     trying to prove a "there exists" statement with ∃?
 
         do I have that statement about a particular individual?
+            ExistsI with that statement
+
 
         could I use AllE for an individual with an all statement?
+            trying to prove ∃ x P(x)
+            have individual, maybe "a"
+            have ∀ x P(x)
+
+                use AllE to get P(a)
+                use ExistsI to get ∃ x P(x)
+
+
 
         do I have a "there exists" statement as a claim?
+            use ExistsE
 
-        do I have an OR statement as a claim?
+            have ∃ x P(x)
+            want: ∃ x Q(x)
 
-        really can't find anything? 
-
-
-    trying to prove -> 
-
-
-    trying to prove ¬(something)
-
-
-
-    trying to prove an OR
-        can you get one side? 
-
-        do you have an OR statement already? 
-
-        do you have an "exists" statement? 
+            ExistsE subproof, alias "a" for the ∃ x P(x)
+                assume P(a)
+                ...
+                goal: ∃ x Q(x)
+            afterwards, use ExistsE to pull out ∃ x Q(x)
 
 
-    trying to prove an AND
-        first approach?
 
-        no luck? 
+        do I have an OR statement as a claim? want ∃ x Q(x)
+            use OrE 
+
+            subproof: assume LHS:
+                end subproof with ∃ x Q(x)
+            subproof: assume RHS:
+                end subproof with ∃ x Q(x)
+            afterwards, use OrE to conclude ∃ x Q(x)
+
+
+
+
+        really can't find anything? try PbC
+            want ∃ x Q(x)
+
+            subproof where we assume NOT (∃ x Q(x))
+                try to get F
+
+
+
+    (use our propositional logic approaches to prove a top-level operator
+    of AND, OR, NOT, IMPLIES)
+
 
 
     -->when you are in a subproof?
 
 
+
     Unsure what to do?
+
+
 
 
 ////////////////////////////////////////
@@ -79,10 +117,21 @@ We want to prove that for any positive integer n:
     1 + 2 + ... + n = n*(n+1)/2
 
 
+(Carl Gauss)
+
+
 Try it out first.
     n = 1?
+        1 =? 1(2)/2 = 1 yes!
+
     n = 2?
+        1 + 2 = 3
+        2(3)/2 = 3
+
     n = 3?
+        1+2+3 = 6
+        3(4)/2 = 6
+
 
 
 
@@ -104,12 +153,19 @@ The induction domino effect:
 
 
 
+
 What is this saying?
-    P(1)? base case (show our claim is true for first element in our domain)
+    P(1)? base case. I need to prove that the claim holds for the smallest
+        n in the domain.
 
 
-    ∀ k (P(k) → P(k+1))? inductive step
-        (how do we prove this kind of thing?)
+
+    ∀ k (P(k) → P(k+1))? inductive step.
+        pick a random k in my domain. 
+        assume P(k) (inductive hypothesis)
+        try to prove P(k+1)
+
+
 
 
 Putting it all together:
@@ -118,7 +174,8 @@ Putting it all together:
 
 
 
-IF ??? THEN ???
+IF I can prove the base case AND I can prove the inductive step 
+THEN I've proved the claim for all n in my domain
 
 
 
@@ -139,7 +196,25 @@ We want to prove that for any positive integer n:
 
 Proof by induction.
 
+Base case. We must prove the case for our smallest positive integer,
+n = 1. We have that 1 = 1(1+1)/2, so the base case holds.
 
+Inductive step. We assume the inductive hypotheses -- that
+    1 + 2 + ... + k = k*(k+1)/2
+
+holds for some fixed positive integer k. We must prove that:
+    1 + 2 + ... + k + (k+1) = (k+1)*((k+1)+1)/2
+
+We have that: 
+    1 + 2 + ... + k + (k+1) = k*(k+1)/2 + (k+1)   (by inductive hypothesis)
+                            = ( k(k+1) + 2(k+1) )/2 (putting over common denominator)
+                            = (k+1)(k+2)/2
+                            = (k+1)*((k+1)+1)/2
+
+Thus the inductive step holds.
+
+
+We have proved our claim for all positive integer n.
 
 /////////////////////////////////
 
@@ -150,19 +225,30 @@ Proof by induction.
 Do you think induction can be used to prove properties for
     ALL integers?
 
-
+would need a base case, integers don't have a smallest
 
 /////////////////////////////////
 
 Induction template.
 
-1) Label the base case. Prove the claim is true for the smallest element in your domain.
+1) Label the base case. Prove the claim is true for the smallest element 
+    in your domain.
+
 
 2) Label the inductive step. State the inductive hypothesis:
-    "We assume the inductive hypothesis: that <insert claim> holds for some fixed k in <insert domain>."
-    Prove that the claim holds for k+1 (you will need to use your inductive hypothesis).
+        "We assume the inductive hypothesis: that <insert claim> holds 
+        for some fixed k in <insert domain>."
 
-3) Summarize: "It follows by induction that <insert claim> holds for all <insert domain>."
+    Prove that the claim holds for k+1 (you will need to use your inductive
+    hypothesis).
+
+
+3) Summarize: "It follows by induction that <insert claim> holds 
+    for all <insert domain>."
+
+/////////////////////////////////
+
+<--- stopped here, will continue on Tuesday
 
 /////////////////////////////////
 
