@@ -1,0 +1,7 @@
+Reminder: INduction template
+
+1) label the base case. Prove the clain is true for the smallest element in your domain
+
+2) Label the inductive step. state the inductive hypotheses:
+    "We assume the inductive hypothesis: that <insert claim> holds for
+    
