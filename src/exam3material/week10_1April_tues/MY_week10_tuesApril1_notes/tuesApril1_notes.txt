@@ -60,13 +60,36 @@ Example: Prove that the sum of the first n odd numbers is n^2.
 
 How can we express the sum of the first n odd numbers more formally?
 
+#   1 + 3 + ... + (2n-1)
+
 
 
 So, what is our claim?
 
+#   For each natural number n, we wish to prove:
+    1 + 3 + ... + (2n-1) = n^2
+
 
 
 Proof by induction.
+
+#   Base case. We must prove our claim holds for n = 1. We have that 1 = 1^2 
+    So the base case holds.
+
+#   Inductive Step. We assume the inductive hypothesis - that 
+        1 + 3 + ... + (2k-1) = k^2
+    For some fixed natural number k. We must show that:
+        1 + 3 + ... + (2k-1) + (2(k+1) - 1) = (k+1)^2
+
+#   We have that:
+        1 + 3 + ... + (2k-1) + (2(k+1) - 1) = k^2 + 2k + 1 (Using inductive hypothesis)
+                                            = (k+1)^2
+
+#   The inductive step holds.
+
+#   We have shown using induction that 
+        1 + 3 + ... + (2n-1) = n^2
+    for all natural numbers n.
 
 
 /////////////////////////////////
@@ -74,11 +97,30 @@ Proof by induction.
 Example: Prove that 3^n - 1 is even for all positive integers n.
 
 
+
 what does "even" mean? 
 
-
+(Even: a multiple of 2, no remainder when divided by 2)
 
 Proof by induction.
+
+#   Base Case: We must prove that 3^n - 1 is even for n = 1. We have that
+    3^1 - 1 = 3 - 1 = 2, which is even. The base case holds.
+
+# Inductive step.   We assume the inductive hypothesis - that for some fixed positive integer k, 
+                    3^k - 1 is even. We must show that 3^(k+1) - 1 is even.
+
+                    We have that:
+                        3^(k+1) - 1
+                      = 3 * 3^k - 1
+                      = 3 * (3^k - 1) + 3 - 1
+                      = 3 * (3^k - 1) + 2
+
+                    We Know 3^k - 1 is even by the inductive hypothesis, so 3*(3^k - 1) is also even
+                    2 is trivially even. The sum of two even numbers is always even, so 3*(3^k - 1) + 2 is even as well.
+                    The inductive step holds.
+
+                    We have shown using induction that 3^n - 1 is even for all positive integers.
 
 
 
@@ -110,6 +152,9 @@ f(n) = 2f(n-1) + 3, for n > 1
 
 
 What is f(3)?
+    f(3) = 2f(2) + 3 = 2*9 + 3 = 21
+    f(2) = 2f(1) + 3 = 2*3 + 3 = 9
+    f(1) = 3
 
 
 
@@ -118,16 +163,20 @@ What is f(3)?
 
 //////////////////////////////////
 
-What does this define?
+What does this define? (Domain: natural numbers)
 
 g(1) = 1
 g(n) = n * g(n-1), for n > 1
 
 n  | g(n)
 ---------
-1  | 
-2  | 
-3  | 
+1  | 1
+2  | 2 * 1 = 2
+3  | 3 * g(2) = 6
+4  | 4 * g(3) = 24
+
+n! = 1 when n = 1
+n! = n * (n-1)! when n > 1
 
 
 
@@ -139,8 +188,19 @@ Write a recursive definition.
 
 Over natural numbers.
 
-Base case?
+Base case? 
+    f(1) = 1
 Recursive case?
+    f(n) = f(n-1) + (n-1), for n > 1
+
+n  | f(n)
+---------
+1  | 1
+2  | 1 + 1 = 2
+3  | 2 + 2 = 4
+4  | 4 + 3 = 7
+
+********** Should always be calling a previous case (n-1) in a recursive definition ************
 
 
 ////////////////////////////////
@@ -156,7 +216,8 @@ Recursive case: x ∈ S ⋀ y ∈ S → xy ∈ S
 
 --> what are the elements in S?
 
-
+{1, 2, 4, 8, 16, 32, ...}
+(All powers of 2)
 
 
 
@@ -165,7 +226,14 @@ Recursive case: x ∈ S ⋀ y ∈ S → xy ∈ S
 
 Write a recursive definition for the set {1, 3, 5, 7, ...}
 
+Base case:  1 ∈ S 
 
+Recursive Case: x ∈ S → x + 2 ∈ S
+
+
+!!!!!!!!This would be defining a pattern, but NOT a set: !!!!!!!!!!!!
+f(1) = 1
+f(n) = f(n-1) + 2, n > 1
 
 
 ////////////////////////////////
@@ -173,11 +241,7 @@ Write a recursive definition for the set {1, 3, 5, 7, ...}
 (in-class quiz)
 
 
-////////////////////////////////
 
-∀ ∃     ∈ ∉     ∅ ⋂ ⋃ ⊂ ⊆   ⋀ ⋁ ¬ →     ℕ ℤ     ≠ ≤ ≥
-
-/////////////////////////////////
 
 Now we will look at more informal proofs.
 
@@ -211,7 +275,7 @@ Direct (conditional) proof
 
 --> how would we do this with natural deduction?
 
-
+    ImplyI (Assume P, try to get to Q)
 
 
 
@@ -225,7 +289,11 @@ Q
 
 
 
+////////////////////////////////
 
+∀ ∃     ∈ ∉     ∅ ⋂ ⋃ ⊂ ⊆   ⋀ ⋁ ¬ →     ℕ ℤ     ≠ ≤ ≥
+
+/////////////////////////////////
 
 /////////////////////////////
 
@@ -235,16 +303,25 @@ Example: prove that the product of two even integers is even.
 If our domain is integers and we have the predicate Even(x), how
 would you write this statement in predicate logic?
 
-
+#   ∀ x ∀ y (Even(x) ⋀ Even(y) → Even(xy))
 
 
 
 What's the idea of proving this in predicate logic?
 
-
+Pick 2 random individuals, maybe n and m. Assume (Even(x) ⋀ Even(y)), 
+... want to show: Even(nm)
 
 
 Direct proof:
+
+    Len n and m be even integers. since n is even, then n = 2k for some
+    integer k. Since m is even, then m = 2b for some integer b. We have:
+        nm = (2k)(2b)
+           = 2(2kb)
+
+    Thus, nm = 2w where we is the integer 2kb. Thus nm is even.
+
 
 
 
