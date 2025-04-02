@@ -164,6 +164,11 @@ If x^2 is even for an integer x, then x is even.
 
 //////////////////////////
 
+(in-class quiz)
+
+//////////////////////////
+
+
 Definitions: "rational" / "irrational"
 
 A number r is *rational* if r = p/q for some integers p and q,
