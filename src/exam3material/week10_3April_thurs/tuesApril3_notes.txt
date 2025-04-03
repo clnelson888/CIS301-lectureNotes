@@ -14,10 +14,21 @@ Example.
 
 The square of any odd integer is odd.
 
+Rewrite: if I have an odd integer, then its square is odd
 
 
-Direct proof:
 
+Direct proof: Assume x is an odd integer. Then 
+    x = 2k+ 1 where k is an integer
+
+Then we have:
+    x^2 = (2k + 1)^2
+        = (2k + 1)(2k + 1)
+        = 4k^2 + 4k + 1
+        = 2(2k^2 + 2k) + 1
+
+Thus x^2 = 2a + 1, where a is the integer 2k^2 + 2k. Thus
+x^2 is odd by definition.
 
 
 
@@ -33,7 +44,7 @@ Proof by contrapositive
 What is the contrapositive of P → Q?
 
 
-
+¬Q → ¬P
 
 
 
@@ -52,24 +63,37 @@ Example (contrapositive)
 If x^2 is odd for an integer x, then x is odd.
 
 Think of as P → Q
-    P: ?
-    Q: ?
+    P: ? x^2 is odd for some integer x
+    Q: ? x is odd
 
-Contrapositive?
+Contrapositive? if x is an even integer, then x^2 is even
+
 
 
 
 Try direct proof first.
 
+Assume x^2 is odd for some integer x. Then 
+    x^2 = 2k + 1
+for some integer k. Want:
+    x = 2(something) + 1
+
+(hard to work with - would need to take     , don't know if it
+is an integer)
 
 
 
 
-
+Contrapositive? if x is an even integer, then x^2 is even
 Proof (contrapositive).
 
+Assume x is even integer. Then x = 2k for some integer k.
+We have:
+    x^2 = (2k)^2
+        = 4k^2
+        = 2(2k^2)
 
-
+So x^2 = 2a where a is the integer 2k^2, and so x^2 is even.
 
 
 --> best to indicate in proof that you are using contrapositive
@@ -86,24 +110,21 @@ Let a and b be two equal positive integers. We have that:
 
     1) a = b                    (premise)
 
-    2) a^2 = ab                 (reason -
-                                multiplied both sides by a)
+    2) a^2 = ab                 (multiplied both sides by a)
 
-    3) a^2 - b^2 = ab - b^2     (reason -
-                                subtract b^2 from both sides)
+    3) a^2 - b^2 = ab - b^2     (subtracted b^2 from both sides)
 
-    4) (a-b)(a+b) = b(a-b)      (reason - factored both sides)
+    4) (a-b)(a+b) = b(a-b)      (factored both sides)   
 
-    5) a+b = b                  (reason - divide both sides by
-                                    a-b)
+    5) a+b = b                  (cancelled out the a-b on both sides)
 
-    6) 2b = b                   (reason? how do a and b compare?
-                                we had assumed a = b)
+    6) 2b = b                   (substitute a = b on the LHS)                
 
-    7) 2 = 1                    (reason? - divided by b)
+    7) 2 = 1                    (divided both sides by b)  
 
 
-What went wrong? 
+What went wrong? To get to step 5, divided by a-b, but
+a = b so this is division by 0.
 
 //////////////////////////////////////
 
@@ -156,8 +177,22 @@ Example (use proof by contradiction):
 
 If x^2 is even for an integer x, then x is even.
 
-(which template? ) 
+(which template? )  2
 
+Assume x^2 is even for some integer x. Assume, for the sake
+of contradiction, that x is odd. If x is odd, then x = 2k + 1
+for some integer k. If x^2 is even, then x^2 = 2m for some integer m.
+
+We have that:
+    x^2 = (2k + 1)^2
+        = 4k^2 + 4k + 1
+        = 2(2k^2 + 2k) + 1
+
+Thus x^2 = 2b + 1 where b is the integer 2k^2 + 2k. Thus x^2
+is odd by definition. This contradicts with our previous assumption
+that x^2 is even. 
+
+Thus x must be even. 
 
 
 
@@ -183,8 +218,37 @@ and any number that is not irrational is rational.
 Example: use proof by contradiction to prove that sqrt(2)
 is irrational.
 
-(which template?  )
+(which template?  ) 1
 
+Assume, for the sake of contradiction, that sqrt(2) is rational.
+Thus sqrt(2) = p/q for some integers p, q where q ≠ 0. We choose
+p and q such that p/q is fully reduced (i.e, p and q share
+no factors). 
+
+Squaring both sides of sqrt(2) = p/q , I get:
+    2 = p^2/q^2
+
+Multiplying both sides by q^2, I get:
+    2q^2 = p^2
+
+Thus p^2 = 2a where a is the integer q^2, and so p^2 is even.
+Thus p is also even by our previous example. Since p is even,
+p = 2k for some integer k. Plugging p = 2k to our our earlier
+equation, we get:
+    2q^2 = (2k)^2 
+         = 4k^2
+
+Dividing both sides of 2q^2 = 4k^2 by 2, we get:
+    q^2 = 2k^2
+
+We have that q^2 = 2b where b is the integer k^2, and so
+q^2 is even. Thus q is also even by our previous example.
+
+We have shown that p and q are both even, which means they
+both have 2 as a common factor. This contradicts with our
+previous assumption that p and q did not share common factors
+
+Thus sqrt(2) is irrational.
 
 
 /////////////////////////////////
@@ -196,9 +260,10 @@ Proofs with sets.
 Prove that A ⊆ B?
     --> how would we express this in predicate logic?
 
+        ∀ x ∈ A → x ∈ B
 
-
-    --> proof template?
+    --> proof template? Pick a random element x. Assume x
+    is in A. Try to show that x is in B. 
 
 
 
@@ -216,14 +281,21 @@ Prove that {x : x = 4k + 2, k ∈ ℤ} ⊆ {x : x = 2a, a ∈ ℤ}
 A = {x : x = 4k + 2, k ∈ ℤ}
 B = {x : x = 2a, a ∈ ℤ}
 
-A: what elements? 
+A: what elements?  all numbers 2 more than a multiple of 4
 
 
-B: what elements? 
+B: what elements? all even numbers
 
 
 Proof that A ⊆ B.
 
+Let x ∈ A. Thus x = 4k + 2 for some integer k.
+
+Thus we have:
+    x = 4k + 2
+        = 2(2k + 1)
+
+Thus x = 2a where a is the integer 2k + 1, and so x is in B.
 
 
 
@@ -241,8 +313,12 @@ Let A = {x : x = 2k, k ∈ ℤ} (A is all even numbers)
 Let B = {x : x = 3m, m ∈ ℤ} (B is all multiples of 3)
 Let C = {x : x = 6a, a ∈ ℤ} (C is all multiples of 6)
 
+Show A ⋂ B ⊆ C
+Let x ∈ A ⋂ B. Then x ∈ A and x ∈ B. 
+(say what that means in terms of set builder definitions)
+now try to show that x also matches the format of C's definition.
 
-
+Then we would need to also show C ⊆ A ⋂ B.
 
 //////////////////////////////
 
