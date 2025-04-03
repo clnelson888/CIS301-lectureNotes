@@ -14,11 +14,21 @@ Example.
 
 The square of any odd integer is odd.
 
+#    Rewrite: If I have an odd integer, then its square is odd.
 
 
 Direct proof:
 
+#   Assume x is an odd integer. Then 
+    x = 2k + 1 where k is an integer
 
+    Then we have:
+        x^2 = (2k + 1)^2
+            = (2k + 1)(2k + 1)
+            = 4k^2 + 4k + 1
+            = 2(2k^2 + 2k) + 1                         // 2(something) + 1 => 2k + 1
+            
+        This x^2 = 2a + 1, where a is the integer 2k^2 + 2k. Thus x^2 is odd by definition.
 
 
 ////////////////////////////////
@@ -32,7 +42,7 @@ Proof by contrapositive
 
 What is the contrapositive of P → Q?
 
-
+#   ¬Q → ¬P
 
 
 
@@ -52,8 +62,8 @@ Example (contrapositive)
 If x^2 is odd for an integer x, then x is odd.
 
 Think of as P → Q
-    P: ?
-    Q: ?
+    P: ? x^2 is odd for an integer x
+    Q: ? x is odd
 
 Contrapositive?
 
@@ -61,15 +71,23 @@ Contrapositive?
 
 Try direct proof first.
 
+#   x^2 is odd for some integer x. Then 
+        x^2 = 2k + 1
+    For some integer k. Want:
+        x = 2(something) + 1        // Would have to do a square root here, which would not be easy.
+                                    // Hard to work with - would need to take sqrt, don't know if it is an integer
 
 
 
 
+Proof (contrapositive).     If x is an even integer, then x^2 is even
 
-Proof (contrapositive).
+aAssume x is even integer. Then x = 2k for some integer k. We have:
+    x^2 = (2k)^2
+        = 4k^2
+        = 2(2k^2)
 
-
-
+    So x^2 = 2a where a is the integer 2k^2, and so x^2 is even.
 
 
 --> best to indicate in proof that you are using contrapositive
@@ -103,7 +121,7 @@ Let a and b be two equal positive integers. We have that:
     7) 2 = 1                    (reason? - divided by b)
 
 
-What went wrong? 
+What went wrong?    TO Get to step 5, divided by a-b, so this is division with 0
 
 //////////////////////////////////////
 
@@ -156,7 +174,20 @@ Example (use proof by contradiction):
 
 If x^2 is even for an integer x, then x is even.
 
-(which template? ) 
+(which template? )  2
+
+    Assume x^2 is even for some integer x. Assume, for the sake of contradiction, that x is odd. if x is odd, then:
+        x = 2k + 1 for some integer k. If x^2 is even, then x^2 = 2m for some integer m.
+
+    We have that:
+        x^2 = (2k + 1)^2
+            = 4k^2 + 4k + 1
+            = 2(2k^2 + 2k) + 1
+        
+        Thus x^2 = 2b + 1 where b is the integer (2k^2 + 2k). Thus x^2 is odd by definition. 
+            * This contradicts with our previous assumention that x^2 is even.
+
+    Thus x must be even.
 
 
 
@@ -184,7 +215,34 @@ and any number that is not irrational is rational.
 Example: use proof by contradiction to prove that sqrt(2)
 is irrational.
 
-(which template?  )
+(which template?  ) 1
+
+    Assume, for the sake of contradiction, that sqrt(2) is rational.
+    Thus sqrt(2) = p/q for some integers p, q where q ≠ 0. We choose
+    P and Q such that p/q is fully reduced (i.e, p and q share no factors)
+
+    Squaring both sides of sqrt(2) = p/q, I get:
+        2 = p^2/q^2
+    Multiply both sides by q^2, I get:
+        2q^2 = p^2
+
+        Thus p^2 = 2a where a is the integer q^2, and so p^2 is even.
+        *Thus p is also even by our previous example. Since p is even,
+            p = 2k for some integer k. 
+        
+        Plugging in p = 2k to our earlier equation, we get:
+            2q^2 = (2k)^2
+                 = 4k^2
+        Dividing both sides of 2q^2 = 4k^2 by 2, we get:
+            q^2 = 2k^2
+
+        We have that q^2 = 2b where b is the integer k^2, and so q^2 is even. 
+        *Thus q is also even by our previous example.
+
+        We have shown that p and q are both even, which means they both have 2 as a common factor, 
+        this contradicts with our previous assumption that p and q did not share common factors.
+
+        Thus sqrt(2) is irrational. 
 
 
 
@@ -197,11 +255,13 @@ Proofs with sets.
 Prove that A ⊆ B?
     --> how would we express this in predicate logic?
 
+        ∀ x ∈ A → x ∈ B
 
-
-    --> proof template?
-
-
+    --> proof template? 
+    
+        Pick a random element x. 
+        Assume x  is in A.
+        Try to show that x is in B.
 
 
 
@@ -217,14 +277,23 @@ Prove that {x : x = 4k + 2, k ∈ ℤ} ⊆ {x : x = 2a, a ∈ ℤ}
 A = {x : x = 4k + 2, k ∈ ℤ}
 B = {x : x = 2a, a ∈ ℤ}
 
-A: what elements? 
+A: what elements? All numbers 2 more than a multiple of 4
 
 
-B: what elements? 
+B: what elements? All even numbers
 
 
 Proof that A ⊆ B.
 
+    Let x ∈ A. Thus x = 4k + 2 for some integer k.
+
+    Thus we have:
+        x = 4k + 2
+          = 2(2k + 1)
+
+    Thus, -----
+
+    (want x is in B, x = 2(something))
 
 
 
@@ -242,7 +311,8 @@ Let A = {x : x = 2k, k ∈ ℤ} (A is all even numbers)
 Let B = {x : x = 3m, m ∈ ℤ} (B is all multiples of 3)
 Let C = {x : x = 6a, a ∈ ℤ} (C is all multiples of 6)
 
-
+Show A ⋂ B ⊆ C
+Let x ∈ A ⋂ B. Then x ∈ A and x ∈ B
 
 
 //////////////////////////////
