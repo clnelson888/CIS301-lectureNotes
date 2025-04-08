@@ -3,18 +3,28 @@ HW 8 due tonight
 
 Recursive definitions.
 
+13, 23, 33
+
 Consider function f(n) = 10n + 3 over natural numbers
 Rewrite with a recursive definition:
 
+f(1) = 13
+f(n) = f(n-1) + 10, for n > 1
 
 
-
+f(2) = f(1) + 10 = 13 + 10 =23
+f(3) = f(2) + 10 = 23 + 10 = 33
 
 
 Give a recursive definition of the function multBy2(n), where
 multBy2(n) is the product of 2 and the nonnegative integer n.
 
+    multBy2(n) = 2*n
+    0, 2, 4, 6, 
 
+
+multBy2(0) = 0
+multBy2(n) = multBy2(n-1) + 2, for n > 0
 
 
 
@@ -25,32 +35,57 @@ Give a recursive definition of the function Product(m, n),
 where Product(m, n) is the product of the integer m and
 the nonnegative integer n:
 
+multiplying by 2 instead of by m
 
-
-
+base case: Product(m, 0) = 0
 
 
 Give recursive definition of set S of even positive integers.
 
+S = {2, 4, 6, 8, ...}
 
+Base: 2 ∈ S 
+Recursive case: x ∈ S → x+2 ∈ S
+
+(If x is in S, then x+2 is in S)
 
 
 
 /////////
+
+HW 8, #5
 
 Use proof by contradiction to prove that the sum of a rational and
 irrational number is irrational.
 
 How to write as an IF/THEN?
 
-
+If r is a rational number and i is an irrational number,
+then i+r is irrational.
 
 
 
 Rational definition?
 
+A number a is rational if a = p/q for some integers p and q where
+q is not 0.
+
 
 How to start the proof? 
+
+Let r be a rational number and i is an irrational number. 
+Assume, for the sake of contradiction, that i+r is rational.
+
+If r is rational, then r = a/b for some integers a and b where b!=0.
+(similarly with i+r, but use c/d )
+
+We have that:
+
+    i = (i+r) - r 
+        = c/d - a/b
+        (put over a common denominator)
+
+(will show i is rational, will be contradiction)
 
 /////////////////////////////////
 
@@ -70,7 +105,19 @@ Today:
 
 Prove that:
 
-{x : x = 4k - 1, k ∈ ℤ} ⊆ {x : x = 2a + 1 , a ∈ ℤ}
+{x : x = 4k - 1, k ∈ ℤ} ⊆ {x : x = 2k + 1 , k ∈ ℤ}
+
+A = {x : x = 4k - 1, k ∈ ℤ}
+B = {x : x = 2k + 1 , k ∈ ℤ}
+
+Let x ∈ A. Then x = 4k - 1 where k is an integer. We have that:
+
+    x = 4k - 1
+        = 2(2k - 1) + 1
+
+Thus x = 2a + 1 where a is the integer 2k-1, and so x is in B.
+
+(want x in B. need x = 2(some integer) + 1)
 
 
 ////////////////////////////////
@@ -153,9 +200,11 @@ assume statements
     - lets us make assumptions about user input
     - we can pull these assumptions into a proof
 
-    (declaring preconditions about the input)
 
-    assume(num > 0)
+
+Example:
+    var input: Z = Z.prompt("Enter a positive number: ")
+    assume(input > 0)
 
 /////
 
@@ -223,14 +272,32 @@ Premise
     - something shown in a previous proof block
 
 
+
+Example:
+
+var input: Z = Z.prompt("Enter a positive number: ")
+assume(num > 0)
+var y: Z = 12
+
+//proof block?
+
+Deduce(
+    1 ( num > 0 ) by Premise,
+    2 ( y == 12 ) by Premise
+)
+
+
 ////
 
 Algebra* (or Algebra T)
 
-    1 ( x == 2 ) by Justification,
-    2 ( x >= 2 ) by Algebra*(1)
-    3 ( 4 > 0 ) by Algebra T
+    var x: Z = 2
 
+    Deduce(
+        1 ( x == 2 ) by Premise,
+        2 ( x >= 2 ) by Algebra*(1),
+        3 ( 4 > 0 ) by Algebra T
+    )
 
     - any algebraic manipulation on a previous claim
     - include all relevant line numbers in whatever order
@@ -259,6 +326,8 @@ We want to assert at the end that y is 4
 
 (in-class quiz)
 
+<-- question 2 was broken - the answer marked correct was 
+something I intended to delete. I'll fix the quiz after class.
 
 //////////////////////////////
 
@@ -270,7 +339,9 @@ set a max variable to x
 
 want to assert that max is the biggest of our two inputs
 
+///////////////////////////////
 
+<-- stopped here, will continue Thursday
 
 //////////////////////////////
 
@@ -279,9 +350,9 @@ The Algebra* justification works for most mathematical manipulations
 Will not work on claims involving ∧, ∨, →, ∀, ∃
 
 y == z
-x == 2 ^ x == y
+x == 2 ∧ x == y
 
-x == 2 ^ x == z
+x == 2 ∧ x == z
 
 Another justification: Subst
 
