@@ -6,7 +6,7 @@ import org.sireum._
 //get user input number, print whether
 //it is positive or negative
 
-//what does "val" mean?
+//what does "val" mean? *CONSTANT
 val num: Z = Z.prompt("Enter a number: ")
 
 if (num > 0) {

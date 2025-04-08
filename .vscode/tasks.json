@@ -8,6 +8,14 @@
 				"$sireumProblemMatcher"
 			],
 			"label": "sireum slang template: insert a forall quantification"
+		},
+		{
+			"type": "sireum slang",
+			"kind": "run",
+			"problemMatcher": [
+				"$sireumProblemMatcher"
+			],
+			"label": "sireum slang: run"
 		}
 	]
 }

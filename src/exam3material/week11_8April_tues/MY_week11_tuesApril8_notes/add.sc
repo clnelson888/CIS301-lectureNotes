@@ -7,15 +7,25 @@ import org.sireum.justification.natded.prop._
 
 val x: Z = 2
 
+
+
 //What can we put in a proof block here?
-//Do we need this step?
+//Do we need this step? No, could delete the first block as its a premise (2)
 
 
 val y: Z = x + 2
 
+Deduce (
+    1 ( y == x + 2 ) by Premise,
+    2 ( x == 2 ) by Premise,
+    3 ( y == 4 ) by Algebra*(1,2),
+    4 ( y > 0 ) by Algebra*(3),
+    5 (y == 4 & y > 0) by AndI(3,4)
+)
+
 //what can we put in a proof block here?
 
-assert(y == 4)
+assert(y == 4 & y > 0)
 
 
 
