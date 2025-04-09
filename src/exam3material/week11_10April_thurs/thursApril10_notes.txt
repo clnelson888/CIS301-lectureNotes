@@ -1,0 +1,321 @@
+HW 9 due Tuesday, April 15
+
+/////////////////////////
+
+Today:
+- Subst rule in programming logic
+- Handling variable mutation
+- Verifying conditional statements
+
+//////////////////////////
+
+The Algebra* justification works for most mathematical manipulations
+
+Will not work on claims involving ∧, ∨, →, ∀, ∃
+
+y == z
+x == 2 ∧ x == y
+
+x == 2 ∧ x == z
+
+Another justification: Subst
+
+
+
+
+
+
+
+
+
+/////////////////////////////
+
+Subst_<(m, n)
+
+
+
+Deduce(
+    ...
+    m ( LHS_M == RHS_M ),      //must be an equivalence
+    ...
+    n ( claim1 ),
+    ...
+    j ( claim2 )              by Subst_<(m, n)
+)
+
+claim2 rewrites claim1 by substituting all occurrences of
+    LHS_M with RHS_M
+
+
+Think of Subst_< as LHS <- RHS
+
+    (the RHS is coming in for each LHS)
+    (the < points at the value we are REPLACING)
+
+
+Example:
+
+Deduce(
+    ...
+    m ( x + 1 == y - 4 ),
+    ...
+    n ( x*(x + 1) == (x + 1) + y ),
+    ...
+    j ( x*(y-4) == (y-4) + y )     by Subst_<(m, n)
+)
+
+
+
+
+
+/////////////////////////////
+
+Subst_>(,m n)
+
+Deduce(
+    ...
+    m ( LHS_M == RHS_M ),      //must be an equivalence
+    ...
+    n ( claim1 ),
+    ...
+    j ( claim2 )             by Subst_>(m, n)
+)
+
+claim2 rewrites claim1 by substituting all occurrences of
+    RHS_M with LHS_M
+
+
+Think of Subst_> as LHS -> RHS
+
+    (the LHS is coming in for each RHS)
+    (the > points at the value we are REPLACING)
+
+
+Example:
+
+Deduce(
+    ...
+    m ( x + 1 == y )
+    ...
+    n ( y*(x + 1) == (x + 1) + y )
+    ...
+    j ( (x+1)*(x + 1) == (x + 1) + x + 1 ) by Subst_>(m, n)
+)
+
+
+
+
+
+/////////////////////////////////
+
+Example (code fragment):
+
+val num: Z = x + 2
+val answer: Z = 4*num + 8
+val another: Z = 5 - (x + 2)*3
+
+
+Deduce(
+    1 ( num == x + 2 )              by Premise,
+    2 ( answer == 4*num + 8 )       by Premise,
+    3 ( another == 5 - (x+2)*3 )    by Premise,
+
+    //substitute in for "num" in "answer"
+    4 
+
+    //substitute in for "x+2" in "another"
+    5 
+)
+
+
+//////////////////////////////
+
+Assignment with mutation
+
+
+var x: Z = 2
+
+//what could we put in a proof block here?
+
+
+
+x = x + 2       
+
+
+//what might we try to put in a proof block here?
+
+
+
+x = x + 4
+
+
+
+
+//////////////////////////////
+
+If you change the value of variable "name", write that claim
+using:
+
+    Old(name)
+
+in the very next proof block. Only ONE "Old" value exists
+at a time.
+
+
+The Old(name) refers to value of the variable just before
+the latest update.
+
+Goal: state that variable's current value WITHOUT using Old
+by the end of next proof block
+
+
+y = y + 4
+
+Deduce(
+    ???
+)
+
+x = x + 3
+
+Deduce(
+    ???
+    //what "Old" values are available?
+)
+
+//////////////////////
+
+Example (add3.sc):
+
+- get an input number
+- save out an "orig" value that is equal to the input
+
+add 1 to the input number
+add 2 to the input number
+
+want to assert that the resulting number is 3 more than the orig value
+
+
+
+--> what if we added an assume that the input number
+    was positive?
+
+--> could we add to our assert that the resulting number
+    is positive?
+
+//////////////////////////////////
+
+Note: programs with division
+
+//////////////////////////////////
+
+(in-class quiz)
+
+//////////////////////////////////
+
+Verifying conditional statements.
+
+For now, we'll just look at if/else statements:
+
+
+if (condition) {
+
+} else {
+    //can put another if/else in here
+}
+
+
+/////////////////////////////////
+
+(maxOfTwo.sc)
+
+Example: max of two numbers
+
+
+...we still need to prove our assert
+
+
+/////////////////////////////////
+
+How to validate programs with conditionals.
+
+if (C) {
+
+} else {
+
+}
+
+assert(something)
+
+/////////////////////////////////
+
+Deduce(
+    1 ( P )
+)
+
+if (C) {
+    Deduce(
+        //what premises?    
+    )
+
+    statements
+
+    Deduce(
+        1 ( Q ) by Justification,
+        2 ( A ) by Justification
+    )
+
+} else {
+    Deduce(
+        //what premises?    
+    )
+
+    statements
+
+    Deduce(
+        1 ( Q ) by Justification,
+        2 ( B ) by Justification
+    )
+}
+
+Deduce(
+    //what premises?
+)
+
+/////////////////////////////
+
+Revisit the max example (maxOfTwo.sc)
+
+- what claims can we make in BOTH branches?
+- what claim will be different in the two branches?
+- finish the validation
+
+////////////////////////////////
+
+(abs.sc)
+
+Example: absolute value
+
+////////////////////////////////
+
+Next week:
+- Verifying programs with nested conditionals
+    (your last HW 9 problem is like this)
+- Verifying functions
+
+if (cond1) {
+    if (cond2) {
+        //know: cond1, cond2
+    } else {
+        //know: cond1, !cond2
+    }
+    //summary Deduce block for inner if/else
+} else {
+    if (cond2) {
+        //know: !cond1, cond2
+    } else {
+        //know: !cond1, !cond2
+    }
+    //summary Deduce block for inner if/else
+}
+
+summary of outer if/else
