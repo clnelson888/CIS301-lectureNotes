@@ -223,7 +223,7 @@ is irrational.
 Assume, for the sake of contradiction, that sqrt(2) is rational.
 Thus sqrt(2) = p/q for some integers p, q where q ≠ 0. We choose
 p and q such that p/q is fully reduced (i.e, p and q share
-no factors). 
+no factors).
 
 Squaring both sides of sqrt(2) = p/q , I get:
     2 = p^2/q^2

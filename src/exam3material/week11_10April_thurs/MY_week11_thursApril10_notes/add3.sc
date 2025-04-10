@@ -17,7 +17,13 @@ val orig: Z = x
 
 x = x + 1
 
-
+Deduce(
+    1 (x == Old(x) + 1) by Premise,
+    2 (orig == Old(x)) by Premise,
+    3 ( Old(x) > 0) by Premise,
+    4 ( x == orig + 1) by Algebra*(1,2), // Subst_>(2,1)
+    5 ( x > 0 ) by Algebra*(1,3)
+)
 
 
 //what can we put in a proof block here?
@@ -25,7 +31,19 @@ x = x + 1
 
 x = x + 2
 
+Deduce(
+    1 ( x == Old(x) + 2) by Premise, // From Assignment
+    2 ( Old(x) == orig + 1) by Premise, //From previous block
+    3 ( x == orig + 3) by Algebra*(1,2), // or using Subst: x == orig + 2 + 1
+    4 ( Old(x) > 0) by Premise,
+    5 ( x > 0 ) by Algebra*(1,4)
+)
 
+
+
+
+assert(x == orig + 3)
+assert(x > 0)
 
 //what can we put in a proof block here?
 
