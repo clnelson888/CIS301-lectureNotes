@@ -1,0 +1,38 @@
+// #Sireum #Logika
+//@Logika: --manual
+
+import org.sireum._
+import org.sireum.justification._
+import org.sireum.justification.natded.prop._
+
+//adult tickets: $50
+//kid tickets: $30
+def getTicketCosts(adult: Z, kid: Z): Z = {
+  //what do we want for our function contract?
+
+
+  //Step 2: list preconditions as premises
+
+
+  //get the total ticket cost
+  val overall: Z = adult*50 + kid*30
+
+  //Step 3: prove we have satisfied the postconditions
+
+
+  return overall
+}
+
+////////////// Test code /////////////////
+
+val k: Z = 3 //$30 each
+val a: Z = 2 //$50 each
+
+// Step 1 - prove the precondition before calling the function
+
+val cost: Z = getTicketCosts(a, k)
+
+//step 4: use postconditions to prove your asserts
+
+
+//what *should* cost be?
