@@ -1,5 +1,5 @@
 // #Sireum #Logika
-//@Logika: --manual --background disabled
+//@Logika: --manual
 
 import org.sireum._
 import org.sireum.justification._
@@ -23,4 +23,4 @@ if (num < 0) {
 
 
 //How can we assert that num is the absolute value of the input?
-//numOrig was the original input
+//(what was the original input?)
