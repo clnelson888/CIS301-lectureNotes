@@ -90,17 +90,29 @@ Four steps:
 
 1) What should be done before calling the function?
 
+prove the preconditions (requires) in the contract
+based on what WE are passing as those parameters
 
 
 2) What can the function itself do with the preconditions?
 
+list them as premises
 
 
 3) What must the function do with the postconditions?
 
+prove that the postconditions are true
+
+    (plug whatever value is returned in for Res[Z])
+
 
 4) What can the calling code do with the postcondition after
     the function returns? 
+
+    list it as a premise
+    use what it passes as parameters
+    use what variable it is storing the return value in as
+        Res[Z]
 
 
 
@@ -109,6 +121,8 @@ Four steps:
 /////////////////////////////////
 
 Example: put our abs code in a function (absFn.sc)
+
+(will finish this example on Thursday)
 
 /////////////////////////////////
 

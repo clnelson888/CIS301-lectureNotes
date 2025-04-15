@@ -7,6 +7,9 @@ import org.sireum.justification.natded.prop._
 
 def absVal(numOrig: Z) : Z = {
   //what do we need here?
+  Contract(
+    Ensures(Res[Z] >= 0, Res[Z] == numOrig | Res[Z] == -1 * numOrig)
+  )
 
   var num: Z = numOrig
 
@@ -32,6 +35,14 @@ def absVal(numOrig: Z) : Z = {
     )
   }
 
+  //summarize what we learned
+  Deduce(
+    //also shows the postconditions
+    1 ( num >= 0) by Premise, //true in both branches
+    2 ( num == numOrig | num == -1 * numOrig ) by Premise //one side from if,
+                                                      //one side from else
+  )
+
   //what can we say here?
   //what do we need to prove by the end of the function?
 
@@ -46,9 +57,15 @@ val x: Z = -4
 //use function to get absolute value of x
 //what *should* the absolute value be?
 
-
+//no requirements
 
 val ans: Z = absVal(x)
 
+Deduce(
+  1 ( ans >= 0 ) by Premise, //first postcondition
+  2 ( ans == x | ans == -1 * x)
+)
+
 
 //what should we be able to assert?
+//goal: ans is 4 (will finish on Thursday)

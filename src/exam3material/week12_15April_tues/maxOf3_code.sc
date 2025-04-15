@@ -21,18 +21,29 @@ if (a >= b) {
   if (a >= c) {
     max = a
 
+    //need max >= a, max >= b, max >= c
+    //ONE OF max == a, max == b, max == c
   } else {
     max = c
 
+    //need max >= a, max >= b, max >= c
+    //ONE OF max == a, max == b, max == c
   }
+  //summary of inner if/else
 } else {
   if (b >= c) {
     max = b
 
+    //need max >= a, max >= b, max >= c
+    //ONE OF max == a, max == b, max == c
   } else {
     max = c
 
+    //need max >= a, max >= b, max >= c
+    //ONE OF max == a, max == b, max == c
   }
+
+  //summary of what was true in the inner if/else
 }
 
 //overall summary here

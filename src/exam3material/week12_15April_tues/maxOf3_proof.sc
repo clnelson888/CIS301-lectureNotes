@@ -43,6 +43,10 @@ if (a >= b) {
   Deduce(
     //FILL IN
     //what can we state as premises?
+    1 ( max == a | max == b | max == c ) by Premise, //built OR in both
+    2 ( max >= a ) by Premise, //true in both if/else
+    3 ( max >= b ) by Premise, //true in both if/else
+    4 ( max >= c ) by Premise //true in both if/else
 
 
   )
@@ -77,7 +81,10 @@ if (a >= b) {
     1 (max >= a) by Premise,
     2 (max >= b) by Premise,
     3 (max >= c) by Premise,
-    4 (max == b | max == c) by Premise,
+  // one side true in if, one side true in else
+  //max == a | max == b | max == c
+  //max == b | max == c
+    4 (max == b | max == c) by Premise, //b from if, c from else
     5 SubProof(
       6 Assume (max == b),
       7 (max == a | max == b) by OrI2(6),
@@ -97,7 +104,7 @@ Deduce(
   1 (max >= a) by Premise,
   2 (max >= b) by Premise,
   3 (max >= c) by Premise,
-  4 (max == a | max == b | max == c) by Premise
+  4 (max == a | max == b | max == c) by Premise //true in outer if and else
 )
 
 println("Max between ", a, ", ", b, " and ", c, " is ", max)
