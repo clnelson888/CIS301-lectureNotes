@@ -63,6 +63,7 @@ while (condition) {
 
 <-- number of iterations? 
 
+#    definately: !(condition) *
 
     ...why is this more challenging than an if-statement?
 
@@ -78,28 +79,31 @@ in a loop
 - should be STILL true at the end of each iteration
 
 
-Steps to proving correctness of a loop:
+Steps to proving correctness of a loop: ************************************
 ----------------------------------------
 
-1) Prove the invariant is true before the loop begins
+1) Prove the invariant is true before the loop begins 
 
     (what is this like in mathematical induction?)
+        (Base Case)
 
 
 2) Assume the invariant is true at the beginning of an iteration.
     Prove the invariant still holds at the end of the iteration.
 
     (what is this like in mathematical induction?)
+        (Inductive Step)
+        (Invariant is like the Inductive Hypothesis)
 
 
 
 /////////////////////////
 
 When loop ends, you know two things:
-    1) About the invariant?
+    1) About the invariant?      ---> True
 
 
-    2) About the loop condition?
+    2) About the loop condition? ---> False
 
 
 
@@ -109,7 +113,7 @@ to prove the postcondition of the function.
 
 (And if you can't, you need to make your invariant stronger.)
 
-/////////////////////////
+///////////////////////// SYNTAX ///////////////////////////////////*****
 
 Loop invariant block: just inside the loop
 
@@ -117,13 +121,13 @@ Loop invariant block: just inside the loop
 //prove invariants here
 while (condition) {
     Invariant(
-        Modifies(list all variables modified in loop)
+        Modifies(list all variables modified in loop),
         invariant1,
         invariant2,
         ...
     )
 
-    //use invariants as a premise
+    //use invariants as a premise --- 1 ( invariant1 ) by Premise
 
     code for the loop
 
