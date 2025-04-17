@@ -65,6 +65,23 @@ Deduce(
   1 ( ans >= 0 ) by Premise, //first postcondition
   2 ( ans == x | ans == -1 * x) by Premise, //second postcondition
 
+  3 ( x == -4 ) by Premise,
+  4 ( ans == -4 | ans == -1 * (-4) ) by Subst_<(3, 2),
+
+  //use OrE
+  5 SubProof(
+    6 Assume (ans == -4),
+    7 ( F ) by Algebra*(1, 6),
+    8 ( ans == 4 ) by BottomE(7)
+    //want: ans == 4
+  ),
+  9 SubProof(
+    10 Assume ( ans == -1 * (-4) ),
+    11 (ans == 4) by Algebra*(10)
+
+    //want ans == 4
+  ),
+  12 ( ans == 4 ) by OrE(4, 5, 9)
 
   //NEED TO FINISH THIS
 )
