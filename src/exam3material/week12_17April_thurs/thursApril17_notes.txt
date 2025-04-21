@@ -3,7 +3,8 @@ HW 10 due Tuesday, April 22
 Exam 3 is Thursday, April 24
     - will post details by the end of the week
     - will review for the exam some on Tuesday, April 22
-    - Rachel will have a review session from 3-5 on Wednesday, April 23 in DUE 1118
+    - Rachel will have a review session from 3-5 on Wednesday, April 23 
+        in DUE 1118
 
 //////////////////////////////
 
@@ -27,13 +28,18 @@ if (base case condition) {
 } else {
 
     //what to do here?
+    //prove its preconditions based on the 
+    //parameters in the recursive call
 
     recursive call
 
     //what can we do here?
+    // claim postcondition of recursive call as a premise
 
     answer = (something)
 }
+
+//prove postcondition was met in both branches
 
 //if we want some postcondition after an if/else, what do we do?
 
@@ -63,6 +69,7 @@ while (condition) {
 
 <-- number of iterations? 
 
+definitely: !(condition)
 
     ...why is this more challenging than an if-statement?
 
@@ -84,22 +91,25 @@ Steps to proving correctness of a loop:
 1) Prove the invariant is true before the loop begins
 
     (what is this like in mathematical induction?)
+    base case
 
 
 2) Assume the invariant is true at the beginning of an iteration.
     Prove the invariant still holds at the end of the iteration.
 
     (what is this like in mathematical induction?)
+inductive Steps
 
+invariant is like the inductive hypothesis
 
 
 /////////////////////////
 
 When loop ends, you know two things:
-    1) About the invariant?
+    1) About the invariant? true
 
 
-    2) About the loop condition?
+    2) About the loop condition? false
 
 
 
@@ -117,7 +127,7 @@ Loop invariant block: just inside the loop
 //prove invariants here
 while (condition) {
     Invariant(
-        Modifies(list all variables modified in loop)
+        Modifies(list all variables modified in loop),
         invariant1,
         invariant2,
         ...
@@ -140,6 +150,11 @@ Example: see code for multiplication with repeated addition
 
 
 
+////////////////////
+
+<-- stopped here, will continue (and finish example) on Tuesday
+
+////////////////////
 
 --> should the test cases/asserts be different?
 

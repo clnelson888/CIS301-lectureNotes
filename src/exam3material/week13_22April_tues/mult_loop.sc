@@ -21,9 +21,10 @@ def mult(x: Z, y: Z): Z = {
   Deduce(
     1 ( total == 0 ) by Premise,
     2 ( i == 0 ) by Premise,
-    3 ( total == i*x ) by Algebra(1,2) //proves invariant
+    3 ( total == i*x ) by Algebra(1,2) //proves invariant holds before loop
   )
 
+  //assert that invariant holds before loop begins
   assert(total == i*x)
 
   while (i != y) {
@@ -51,10 +52,10 @@ def mult(x: Z, y: Z): Z = {
       3 ( Old(i) == i - 1 ) by Algebra*(1),
       4 ( total == (i-1) * x + x ) by Algebra*(2,3),
       5 ( total == i*x - x + x ) by Algebra*(4),
-      6 ( total == i*x ) by Algebra*(5) 
+      6 ( total == i*x ) by Algebra*(5) //proves invariant still holds at end of iteration
     )
 
-    //prove invariant holds
+    //prove invariant holds at end of iteration
 
     assert(total == i*x)
   }
