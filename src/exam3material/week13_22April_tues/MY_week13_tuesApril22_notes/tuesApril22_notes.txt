@@ -60,24 +60,24 @@ Topics:
 - Predicate logic proofs emphasizing the existential quantifier
 - Recursive definitions (functions and sets)
 - Proof techniques, including:
-    - Mathematical induction
+    - Mathematical induction    // ONE OF THE PROBLEMS IS GOIGN TO BE Mathematical INDUCTION
     - Direct (conditional) proofs
     - Contrapositive proofs 
     - Proof by contradiction
-    - Proofs on sets
-    --> know the formal definition of even/odd numbers
+    - Proofs on sets            //Proving a number is in both sets
+    --> know the formal definition of even/odd numbers : Even: x==2k    Odd: x==2k+1
 - Programming logic, including:
-    - assumes and asserts
-    - Subst and Algebra
+    - assumes and asserts   //Need to assume user input
+    - Subst and Algebra     //Don't have to specifically use Subst (will mostly be using elgebra)
     - Verifying programs with:
         - Variable assignments/expressions/updates
         - If/else statements
         - Functions (plus recursive functions and calling functions)
-        - Loops
+        - Loops         //Loop invarient, not having you write a loop invarient, but given a proof with one or two
     - Function contracts (meaning of preconditions/postconditions)
     - Loop invariants
 
-The exam will NOT involve programs that use modulus or division.
+The exam will NOT involve programs that use modulus or division.    //only addition substraction multiplication
 
 
 Problems will be similar in format to Homework 7-10.

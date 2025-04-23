@@ -21,23 +21,26 @@ def mult(x: Z, y: Z): Z = {
   Deduce(
     1 ( total == 0 ) by Premise,
     2 ( i == 0 ) by Premise,
-    3 ( total == i*x ) by Algebra(1,2) //proves invariant holds before loop
+    3 ( total == i*x ) by Algebra*(1,2), //proves invariant holds before loop
+    4 ( y >= 0 ) by Premise,  //From precondition
+    5 ( i <= y ) by Algebra*(2,4) //From
   )
 
   //assert that invariant holds before loop begins
   assert(total == i*x)
 
-  while (i != y) {
+  while (i < y) {
     Invariant(
       Modifies(i, total),
-      total == i*x
+      total == i*x,
+      i <= y
     )
 
 
     total = total + x
 
     Deduce(
-      1 ( total = Old(total) + x ) by Premise, //from assignment
+      1 ( total == Old(total) + x ) by Premise, //from assignment
       2 ( i != y ) by Premise, //loop condition is true
       3 ( Old(total) == i*x ) by Premise, //loop invariant was true
                               //at beginning of iteration, total has since changed
@@ -58,10 +61,19 @@ def mult(x: Z, y: Z): Z = {
     //prove invariant holds at end of iteration
 
     assert(total == i*x)
+    assert(i <= y)
   }
 
   //STOPPED HERE
   //still need to prove the postcondition
+
+  Deduce(
+    1 ( total == i*x ) by Premise, // invariant is true
+    2 ( !(i < y)) by Premise,  // loop condition is false
+    3 ( i <= y ) by Premise,  //2nd invarient is true
+    4 ( i == y) by Algebra*(2),
+    5 ( total == x*y) by Algebra*(1,4) //proves post condition
+  )
 
   return total
 }
