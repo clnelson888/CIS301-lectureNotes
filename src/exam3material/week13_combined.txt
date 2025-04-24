@@ -1,0 +1,287 @@
+// BEGIN FILE: tuesApril22_notes.txt
+// ------------------------------
+HW 10 due tonight
+    (no new homework this week)
+
+Exam 3 is Thursday, April 24
+
+Rachel will have an exam review session from 3-5 on Wednesday in DUE 1118
+
+//////////////////////////////
+
+Today:
+- finish loop multiplication example
+- more with loop invariants
+- review for exam 3
+
+//////////////////////////////
+
+finish mult_loop.sc
+
+
+--> should the test cases/asserts be different?
+
+
+
+--> what if the loop condition was "i < y" instead?
+
+//////////////////////////////
+
+More with invariants
+
+//////////////////////////////
+
+Loop invariants.
+
+- Summarize loop progress
+- Often describe the relationship between the variables that change
+- Used with the negation of loop condition to prove postconditions
+
+//////////////////
+
+Example: sumEvens.sc
+
+--> make table of relationship between loop variables
+--> write function contract 
+--> write loop invariant 
+--> mark what we could list as PREMISES in all places
+--> mark what we would need to SHOW in all places 
+
+///////////////////
+
+in-class quiz
+
+///////////////////
+
+Exam 3 review.
+
+--> Covers everything since Exam 2 (including today)
+--> Closed notes, closed computers
+
+Topics:
+- Predicate logic proofs emphasizing the existential quantifier
+- Recursive definitions (functions and sets)
+- Proof techniques, including:
+    - Mathematical induction
+    - Direct (conditional) proofs
+    - Contrapositive proofs 
+    - Proof by contradiction
+    - Proofs on sets
+    --> know the formal definition of even/odd numbers
+- Programming logic, including:
+    - assumes and asserts
+    - Subst and Algebra
+    - Verifying programs with:
+        - Variable assignments/expressions/updates
+        - If/else statements
+        - Functions (plus recursive functions and calling functions)
+        - Loops
+    - Function contracts (meaning of preconditions/postconditions)
+    - Loop invariants
+
+The exam will NOT involve programs that use modulus or division.
+
+
+Problems will be similar in format to Homework 7-10.
+
+
+When doing programming logic:
+    - use a proof block to process each variable update
+    - use exact assignment statements, previous claims,
+        conditions, etc. as premises (using "Old" for previous
+        value of variable that just changed)
+    - prove exactly the precondition(s) before any function call
+    - prove exactly the postcondition(s) before any function return
+    - prove loop invariants hold before the loop begins
+            and at end of each iteration
+
+
+Now, we will work through practice exam 3
+
+// END FILE: tuesApril22_notes.txt
+
+// BEGIN FILE: mult_loop.sc
+// ------------------------------
+// #Sireum #Logika
+//@Logika: --manual
+
+import org.sireum._
+import org.sireum.justification._
+import org.sireum.justification.natded.prop._
+
+//finding x*y by doing x + x + x + ... + x (y times)
+def mult(x: Z, y: Z): Z = {
+  //What can we use as the function contract?
+  Contract(
+    Requires( y >= 0),
+    Ensures( Res[Z] == x*y )
+  )
+
+  var total: Z = 0
+  var i: Z = 0
+
+  //prove invariant holds
+
+  Deduce(
+    1 ( total == 0 ) by Premise,
+    2 ( i == 0 ) by Premise,
+    3 ( total == i*x ) by Algebra*(1,2), //proves invariant holds before loop
+    4 ( y >= 0 ) by Premise, //from precondition
+    5 ( i <= y ) by Algebra*(2, 4) //proves 2nd invariant
+  )
+
+  //assert that invariant holds before loop begins
+  assert(total == i*x)
+
+  while (i < y) {
+    Invariant(
+      Modifies(i, total),
+      total == i*x,
+      i <= y
+    )
+
+
+    total = total + x
+
+    Deduce(
+      1 ( total == Old(total) + x ) by Premise, //from assignment
+      2 ( Old(total) == i*x ) by Premise, //loop invariant was true
+                              //at beginning of iteration, total has since changed
+      3 ( total == i*x + x ) by Algebra*(1,2) //summarizes without Old
+    )
+
+    i = i + 1
+
+    Deduce(
+      1 ( i == Old(i) + 1 ) by Premise, //from update
+      2 ( total == Old(i) * x + x ) by Premise, //from previous block
+      3 ( Old(i) == i - 1 ) by Algebra*(1),
+      4 ( total == (i-1) * x + x ) by Algebra*(2,3),
+      5 ( total == i*x - x + x ) by Algebra*(4),
+      6 ( total == i*x ) by Algebra*(5), //proves invariant still holds at end of iteration
+    
+      7 ( Old(i) <= y ) by Premise, //2nd invariant was true at beginning of iteration
+      8 ( Old(i) < y ) by Premise, //from loop condition
+      9 ( i <= y  ) by Algebra*(1, 7, 8) //proves 2nd invariant
+    )
+
+    //prove invariant holds at end of iteration
+
+    assert(total == i*x)
+    assert(i <= y)
+  }
+
+  //STOPPED HERE
+  //still need to prove the postcondition
+  //ensures was: Res[Z] == x*y
+
+  Deduce(
+    1 ( total == i*x ) by Premise, //invariant is true 
+    2 ( !(i < y) ) by Premise, //loop condition is false
+    3 ( i <= y ) by Premise, //2nd invariant is true
+    4 ( i == y ) by Algebra*(2, 3),
+    5 ( total == x*y ) by Algebra*(1, 4) //proves postcondition
+  )
+
+  //need: total == x*y
+
+  return total
+}
+
+//////////// test code /////////
+
+val a: Z = 5
+val b: Z = 4
+
+//Step 1: prove the precondition
+
+Deduce(
+  1 ( b == 4 ) by Premise,
+  2 ( b >= 0 ) by Algebra*(1) //proves precondition
+  //need b >= 0
+)
+
+//show 2nd parameter >= 0
+
+var ans: Z = mult(a, b)
+
+//what do we want to assert that ans is?
+Deduce(
+  1 ( ans == a*b ) by Premise, //postcondition from function call
+  2 ( a == 5 ) by Premise,
+  3 ( b == 4 ) by Premise,
+  4 ( ans == 20 ) by Algebra*(1,2,3)
+
+  //Res[Z] == x*y
+)
+
+assert(ans == 20)
+// END FILE: mult_loop.sc
+
+// BEGIN FILE: sumEvens.sc
+// ------------------------------
+// #Sireum #Logika
+//@Logika: --manual
+
+import org.sireum._
+import org.sireum.justification._
+import org.sireum.justification.natded.prop._
+
+//sum of first n even numbers
+def sumEvens(n: Z): Z = {
+  //What can we use as the function contract?
+  Contract(
+    Requires(n >= 0),
+    Ensures(Res[Z] == n*(n+1))
+  )
+
+  var sum: Z = 0
+  var cur: Z = 0
+
+  //premises: sum == 0, cur == 0, n >= 9
+  //need to prove: sum == cur * (cur + 1) (prove invariant)
+
+  while (cur != n) {
+    //what about our loop invariant?
+    Invariant(
+      Modifies(cur, sum),
+      sum == cur * (cur+1)
+    )
+
+    //premises: cur != n, sum == cur * (cur+1), n >= 0
+
+    cur = cur + 1
+    sum = sum + 2*cur
+
+    //need to prove: sum == cur * (cur+1)
+  }
+
+  //premises: !(cur != n), sum == cur * (cur+1), n >= 0
+
+  //need to prove: sum == n*(n+1)
+
+  return sum
+}
+
+//////////// test code /////////
+
+val num: Z = 5
+
+//premise: num == 5
+//need to prove: num >= 0
+
+var sum5evens: Z = sumEvens(num)
+
+//premises: sum5evens == num*(num+1), num == 5
+//need to prove: sum5evens == 30
+
+
+//NOTE: we did not complete the full proof of this example -- 
+//we just marked what we could list at premises at different points
+//and what we would need to prove at different points. I recommend
+//trying to finish this example on your own for practice.
+
+//sum of first 5 evens: 2 + 4 + 6 + 8 + 10 = 30
+assert(sum5evens == 30)
+// END FILE: sumEvens.sc
+

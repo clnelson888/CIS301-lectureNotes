@@ -1,0 +1,935 @@
+// BEGIN FILE: tuesApril15_notes.txt
+// ------------------------------
+HW 9 due tonight
+ 
+HW 10 will be posted after class, due next Tues
+
+Exam 3 is Thursday, April 24
+    (more information will be posted this week)
+
+//////////////////////
+
+Today:
+- one more conditional verification example
+- verification with nested conditionals
+- verifying programs with functions
+
+//////////////////////////////////
+
+(abs.sc)
+
+Example: absolute value
+
+////////////////////////////////
+
+Verify programs with nested conditionals.
+
+Max of 3 numbers
+
+-- see code
+
+-- in each branch, what do we know about max?
+
+-- finish verification
+
+//////////////////////////////////
+
+Function contracts - just under function definition:
+
+Contract(
+    Requires(
+        precondition,
+        precondition,
+    ),
+    Ensures(
+        postcondition,
+        postcondition
+    )
+)
+
+
+Requires/preconditions:
+- any assumptions we need to make about the parameters
+- user must prove these requirements BEFORE calling the function
+- list preconditions as PREMISES in first proof block in function
+- can none or several preconditions
+
+
+///
+
+Ensures/postconditions:
+- describes what the function returns (or what it changes)
+    - use "Res[Z]" to mean return value (if returning Z)
+
+- function has to PROVE that it is fulfilling the postconditions
+
+- user can use a postcondition as a PREMISE in a proof block
+    after calling the function
+
+- can have several postconditions
+
+
+/////////////////////////////////
+
+Example: tickets.sc
+- find the total cost of tickets based on adult/child numbers
+- each adult ticket is $50, and each child ticket is $30
+
+- what do we need as preconditions?
+
+- what do we want as the postcondition?
+
+--> finish verification
+
+
+//////////////////////////////////
+
+(in-class quiz)
+
+//////////////////////////////////
+
+Four steps:
+
+1) What should be done before calling the function?
+
+prove the preconditions (requires) in the contract
+based on what WE are passing as those parameters
+
+
+2) What can the function itself do with the preconditions?
+
+list them as premises
+
+
+3) What must the function do with the postconditions?
+
+prove that the postconditions are true
+
+    (plug whatever value is returned in for Res[Z])
+
+
+4) What can the calling code do with the postcondition after
+    the function returns? 
+
+    list it as a premise
+    use what it passes as parameters
+    use what variable it is storing the return value in as
+        Res[Z]
+
+
+
+
+
+/////////////////////////////////
+
+Example: put our abs code in a function (absFn.sc)
+
+(will finish this example on Thursday)
+
+/////////////////////////////////
+
+Recursive functions
+
+- exactly the same idea
+
+if (base case condition) {
+    answer = base case
+} else {
+
+    //what to do here?
+
+    recursive call
+
+    //what can we do here?
+
+    answer = recursive call case
+}
+
+//if we want some postcondition after an if/else, what do we do?
+
+return answer
+
+
+
+/////////////////////////////////
+
+Example (mult_rec.sc):
+
+- multiplication through repeated (recursive) addition
+- write function contract
+- do verification
+
+/////////////////////////////
+
+Next time:
+- verifying functions with loops
+// END FILE: tuesApril15_notes.txt
+
+// BEGIN FILE: thursApril17_notes.txt
+// ------------------------------
+HW 10 due Tuesday, April 22
+
+Exam 3 is Thursday, April 24
+    - will post details by the end of the week
+    - will review for the exam some on Tuesday, April 22
+    - Rachel will have a review session from 3-5 on Wednesday, April 23 
+        in DUE 1118
+
+//////////////////////////////
+
+Today:
+- More with verifying functions
+- Working with recursive functions
+- Loop invariants and loop correctness
+
+///////////////////////////
+
+Finish verification of absolute value function
+
+/////////////////////////////////
+
+Recursive functions
+
+- exactly the same idea
+
+if (base case condition) {
+    answer = (something)
+} else {
+
+    //what to do here?
+    //prove its preconditions based on the 
+    //parameters in the recursive call
+
+    recursive call
+
+    //what can we do here?
+    // claim postcondition of recursive call as a premise
+
+    answer = (something)
+}
+
+//prove postcondition was met in both branches
+
+//if we want some postcondition after an if/else, what do we do?
+
+return answer
+
+
+
+/////////////////////////////////
+
+Example (mult_rec.sc):
+
+- multiplication through repeated (recursive) addition
+- write function contract
+- do verification
+
+////////////////////////////
+
+(in-class quiz)
+
+/////////////////////////////
+
+Validating loops.
+
+while (condition) {
+    statements
+}
+
+<-- number of iterations? 
+
+definitely: !(condition)
+
+    ...why is this more challenging than an if-statement?
+
+
+//////////////////////////////
+
+Solution: kind of like mathematical induction
+
+Come up with a loop INVARIANT that summarizes the behavior
+in a loop
+
+- invariant should be true before loop begins
+- should be STILL true at the end of each iteration
+
+
+Steps to proving correctness of a loop:
+----------------------------------------
+
+1) Prove the invariant is true before the loop begins
+
+    (what is this like in mathematical induction?)
+    base case
+
+
+2) Assume the invariant is true at the beginning of an iteration.
+    Prove the invariant still holds at the end of the iteration.
+
+    (what is this like in mathematical induction?)
+inductive Steps
+
+invariant is like the inductive hypothesis
+
+
+/////////////////////////
+
+When loop ends, you know two things:
+    1) About the invariant? true
+
+
+    2) About the loop condition? false
+
+
+
+
+If your loop is in a function, you can use those two pieces
+to prove the postcondition of the function.
+
+(And if you can't, you need to make your invariant stronger.)
+
+/////////////////////////
+
+Loop invariant block: just inside the loop
+
+
+//prove invariants here
+while (condition) {
+    Invariant(
+        Modifies(list all variables modified in loop),
+        invariant1,
+        invariant2,
+        ...
+    )
+
+    //use invariants as a premise
+
+    code for the loop
+
+    //prove the invariants still hold
+}
+
+
+/////////////////////////
+
+Example: see code for multiplication with repeated addition
+    using a loop (mult_loop.sc)
+
+--> can we use the function contract from recursive implementation?
+
+
+
+////////////////////
+
+<-- stopped here, will continue (and finish example) on Tuesday
+
+////////////////////
+
+--> should the test cases/asserts be different?
+
+
+
+--> what if the loop condition was "i < y" instead?
+
+
+/////////////////////
+
+Next time:
+- more with loop invariants
+- writing recursive definitions for postconditions/
+    invariants
+- review for exam 3
+// END FILE: thursApril17_notes.txt
+
+// BEGIN FILE: abs.sc
+// ------------------------------
+// #Sireum #Logika
+//@Logika: --manual
+
+import org.sireum._
+import org.sireum.justification._
+import org.sireum.justification.natded.prop._
+
+var num: Z = Z.prompt("Enter a number: ")
+val numOrig : Z = num
+
+
+if (num < 0) {
+  num = num * -1
+
+  Deduce(
+    1 ( Old(num) < 0 ) by Premise,
+    2 ( num == Old(num) * -1 ) by Premise,
+    3 ( numOrig == Old(num) ) by Premise,
+
+    //goal: num >= 0
+    4 ( num >= 0 ) by Algebra*(1, 2),
+
+    //goal: num == -1*numOrig
+    5 ( num == -1*numOrig ) by Algebra*(2,3)
+  )
+
+} else {
+  //no code, just for verification
+
+  Deduce(
+    1 ( !(num < 0) ) by Premise, //if condition is false
+    2 ( numOrig == num ) by Premise,
+    3 ( num >= 0 ) by Algebra*(1),
+    4 ( num == numOrig ) by Algebra*(2)
+
+    //goal: num >= 0 
+    //goal: num == numOrig
+  )
+
+}
+
+//summarize what we learned
+Deduce(
+  1 ( num >= 0) by Premise, //true in both branches
+  2 ( num == numOrig | num == -1*numOrig ) by Premise //one side from if,
+                                                    //one side from else
+)
+
+
+//How can we assert that num is the absolute value of the input?
+//(what was the original input?)
+
+
+assert(num >= 0)
+assert(num == numOrig | num == -1*numOrig)
+// END FILE: abs.sc
+
+// BEGIN FILE: absFn.sc
+// ------------------------------
+// #Sireum #Logika
+//@Logika: --manual
+
+import org.sireum._
+import org.sireum.justification._
+import org.sireum.justification.natded.prop._
+
+def absVal(numOrig: Z) : Z = {
+  //what do we need here?
+  Contract(
+    Ensures(Res[Z] >= 0, Res[Z] == numOrig | Res[Z] == -1 * numOrig)
+  )
+
+  var num: Z = numOrig
+
+  //update num to be the absolute value of the input
+  if (num < 0) {
+    num = num * -1
+
+    Deduce(
+      1 ( num == Old(num) * -1) by Premise, //from assignment
+      2 ( Old(num) < 0) by Premise, //from condition
+
+      3 ( num >= 0 ) by Algebra*(1, 2),
+      4 ( Old(num) == numOrig) by Premise,
+      5 ( num== -1 * numOrig ) by Algebra*(1, 4)
+    )
+  } else {
+    //do nothing -- num is already its own absolute value
+
+    Deduce(
+      1 (!(num < 0)) by Premise, //condition is false
+      2 ( num >= 0 ) by Algebra*(1),
+      3 ( num == numOrig ) by Premise
+    )
+  }
+
+  //summarize what we learned
+  Deduce(
+    //also shows the postconditions
+    1 ( num >= 0) by Premise, //true in both branches
+    2 ( num == numOrig | num == -1 * numOrig ) by Premise //one side from if,
+                                                      //one side from else
+  )
+
+  //what can we say here?
+  //what do we need to prove by the end of the function?
+
+  return num
+
+}
+
+////////////////// Test code //////////////
+
+val x: Z = -4
+
+//use function to get absolute value of x
+//what *should* the absolute value be?
+
+//no requirements
+
+val ans: Z = absVal(x)
+
+Deduce(
+  1 ( ans >= 0 ) by Premise, //first postcondition
+  2 ( ans == x | ans == -1 * x) by Premise, //second postcondition
+
+  3 ( x == -4 ) by Premise,
+  4 ( ans == -4 | ans == -1 * (-4) ) by Subst_<(3, 2),
+
+  //use OrE
+  5 SubProof(
+    6 Assume (ans == -4),
+    7 ( F ) by Algebra*(1, 6),
+    8 ( ans == 4 ) by BottomE(7)
+    //want: ans == 4
+  ),
+  9 SubProof(
+    10 Assume ( ans == -1 * (-4) ),
+    11 (ans == 4) by Algebra*(10)
+
+    //want ans == 4
+  ),
+  12 ( ans == 4 ) by OrE(4, 5, 9)
+
+  //NEED TO FINISH THIS
+)
+
+assert(ans == 4)
+
+//what should we be able to assert?
+//goal: ans is 4 (will finish on Thursday)
+// END FILE: absFn.sc
+
+// BEGIN FILE: mult_loop.sc
+// ------------------------------
+// #Sireum #Logika
+//@Logika: --manual
+
+import org.sireum._
+import org.sireum.justification._
+import org.sireum.justification.natded.prop._
+
+//finding x*y by doing x + x + x + ... + x (y times)
+def mult(x: Z, y: Z): Z = {
+  //What can we use as the function contract?
+  Contract(
+    Requires( y >= 0),
+    Ensures( Res[Z] == x*y )
+  )
+
+  var total: Z = 0
+  var i: Z = 0
+
+  //prove invariant holds
+
+  Deduce(
+    1 ( total == 0 ) by Premise,
+    2 ( i == 0 ) by Premise,
+    3 ( total == i*x ) by Algebra(1,2) //proves invariant
+  )
+
+  assert(total == i*x)
+
+  while (i != y) {
+    Invariant(
+      Modifies(i, total),
+      total == i*x
+    )
+
+
+    total = total + x
+
+    Deduce(
+      1 ( total = Old(total) + x ) by Premise, //from assignment
+      2 ( i != y ) by Premise, //loop condition is true
+      3 ( Old(total) == i*x ) by Premise, //loop invariant was true
+                              //at beginning of iteration, total has since changed
+      4 ( total == i*x + x ) by Algebra*(1,3) //summarizes without Old
+    )
+
+    i = i + 1
+
+    Deduce(
+      1 ( i == Old(i) + 1 ) by Premise, //from update
+      2 ( total == Old(i) * x + x ) by Premise, //from previous block
+      3 ( Old(i) == i - 1 ) by Algebra*(1),
+      4 ( total == (i-1) * x + x ) by Algebra*(2,3),
+      5 ( total == i*x - x + x ) by Algebra*(4),
+      6 ( total == i*x ) by Algebra*(5) 
+    )
+
+    //prove invariant holds
+
+    assert(total == i*x)
+  }
+
+  //STOPPED HERE
+  //still need to prove the postcondition
+
+  return total
+}
+
+//////////// test code /////////
+
+val a: Z = 5
+val b: Z = 4
+
+var ans: Z = mult(a, b)
+
+//what do we want to assert that ans is?
+// END FILE: mult_loop.sc
+
+// BEGIN FILE: mult_rec.sc
+// ------------------------------
+// #Sireum #Logika
+//@Logika: --manual
+
+import org.sireum._
+import org.sireum.justification._
+import org.sireum.justification.natded.prop._
+
+//want to return x * y, through repeated addition
+//recursively compute x + x + ... + x (y times)
+def mult(x: Z, y: Z): Z = {
+  //what goes here?
+  //what should we require?
+  //what should we ensure?
+  Contract(
+    Requires( y >= 0),
+    Ensures( Res[Z] == x*y )
+  )
+
+  var answer: Z = 0
+
+  if (y == 0) {
+    answer = 0
+
+    //what do we need to do here?
+
+    Deduce(
+      1 ( y == 0 ) by Premise, //condition is true
+      2 ( x*y == 0 ) by Algebra*(1),
+      3 ( answer == 0 ) by Premise, //assignment statement
+      4 ( answer == x*y ) by Algebra*(2, 3)
+    )
+
+    //need: answer == x*y
+  } else {
+    //what do we need to do here?
+    //prove precondition before recursive call
+
+    Deduce(
+      1 ( !(y == 0) ) by Premise, //if condition is false
+      2 ( y >= 0 ) by Premise, //from the precondition
+      3 ( y - 1 >= 0 ) by Algebra*(1, 2) //proves precondition for recursive call
+    )
+
+    //need: y-1 >= 0
+
+    var temp: Z = mult(x, y-1)
+    answer = x + temp
+
+    //what do we need to show here?
+
+    Deduce(
+      1 ( temp == x * (y-1)) by Premise, //from postcondition of recursive call
+      2 ( answer == x + temp ) by Premise, //from assignment
+      3 ( temp == x*y - x) by Algebra*(1),
+      4 ( answer == x + x*y - x ) by Algebra*(2, 3),
+      5 ( answer == x*y ) by Algebra*(4) //needed for postconditoin
+    )
+
+    //need: answer == x*y
+  }
+
+  Deduce(
+    1 ( answer == x*y ) by Premise //true in both branches
+                                  //proves postcondition
+  )
+
+  //what do we need to do here?
+  //need: answer == x*y
+
+  return answer
+}
+
+////////////// Test code //////////////
+
+val a: Z = 5
+val b: Z = 4
+
+//Step 1: prove the precondition
+
+Deduce(
+  1 ( b == 4 ) by Premise,
+  2 ( b >= 0 ) by Algebra*(1) //proves precondition
+  //need b >= 0
+)
+
+//show 2nd parameter >= 0
+
+var ans: Z = mult(a, b)
+
+//what do we want to assert that ans is?
+Deduce(
+  1 ( ans == a*b ) by Premise, //postcondition from function call
+  2 ( a == 5 ) by Premise,
+  3 ( b == 4 ) by Premise,
+  4 ( ans == 20 ) by Algebra*(1,2,3)
+
+  //Res[Z] == x*y
+)
+
+assert(ans == 20)
+// END FILE: mult_rec.sc
+
+// BEGIN FILE: maxOf3_code.sc
+// ------------------------------
+// #Sireum #Logika
+//@Logika: --manual
+
+import org.sireum._
+import org.sireum.justification._
+import org.sireum.justification.natded.prop._
+
+//just the code for finding the biggest of 3 numbers
+
+val a: Z = Z.read()    //suppose a is 3
+val b: Z = Z.read()    //suppose b is 5
+val c: Z = Z.read()    //suppose c is 10
+var max: Z = 0
+
+/*
+    mark where logic blocks would go
+    finish the verification in the next file
+*/
+
+if (a >= b) {
+  if (a >= c) {
+    max = a
+
+    //need max >= a, max >= b, max >= c
+    //ONE OF max == a, max == b, max == c
+  } else {
+    max = c
+
+    //need max >= a, max >= b, max >= c
+    //ONE OF max == a, max == b, max == c
+  }
+  //summary of inner if/else
+} else {
+  if (b >= c) {
+    max = b
+
+    //need max >= a, max >= b, max >= c
+    //ONE OF max == a, max == b, max == c
+  } else {
+    max = c
+
+    //need max >= a, max >= b, max >= c
+    //ONE OF max == a, max == b, max == c
+  }
+
+  //summary of what was true in the inner if/else
+}
+
+//overall summary here
+
+println("Max between ", a, ", ", b, " and ", c, " is ", max)
+
+//How do we know we have the max?
+//what assert(s) do we want?
+
+//need the first 3 in EVERY branch
+//need ONE of the last assert in every branch
+
+assert(max >= a)
+assert(max >= b)
+assert(max >= c)
+assert(max == a | max == b | max == c)
+// END FILE: maxOf3_code.sc
+
+// BEGIN FILE: maxOf3_proof.sc
+// ------------------------------
+// #Sireum #Logika
+//@Logika: --manual
+
+import org.sireum._
+import org.sireum.justification._
+import org.sireum.justification.natded.prop._
+
+val a: Z = Z.read()    
+val b: Z = Z.read()    
+val c: Z = Z.read()    
+var max: Z = 0
+
+
+if (a >= b) {
+  if (a >= c) {
+    max = a
+
+    Deduce(
+      1 ( max == a ) by Premise,
+      2 ( a >= b ) by Premise, //outer if is true
+      3 (a >= c) by Premise, //inner if is true
+      4 ( max >= a) by Algebra*(1),
+      5 ( max >= b ) by Subst_>(1, 2),
+      6 (max >= c) by Subst_>(1, 3),
+      7 (max == a | max == b) by OrI1(1),
+      8 (max == a | max == b | max == c) by OrI1(7)
+    )
+  } else {
+    max = c
+
+    Deduce(
+      1 (max == c) by Premise,
+      2 (a >= b) by Premise, //outer if condition is true
+      3 (!(a >= c)) by Premise, //inner if condition is false
+      4 (max >= c) by Algebra*(1),
+      5 (max >= a)  by Algebra*(1, 3),
+      6 (max >= b) by Algebra*(2, 5),
+      7 ( max == a | max == b | max == c ) by OrI2(1)
+    )
+  }
+
+  //summary logic block
+  Deduce(
+    //FILL IN
+    //what can we state as premises?
+    1 ( max == a | max == b | max == c ) by Premise, //built OR in both
+    2 ( max >= a ) by Premise, //true in both if/else
+    3 ( max >= b ) by Premise, //true in both if/else
+    4 ( max >= c ) by Premise //true in both if/else
+
+
+  )
+} else {
+  if (b >= c) {
+    max = b
+
+    //block here
+    Deduce(
+      1 (!(a >= b)) by Premise,
+      2 (b >= c) by Premise,
+      3 (max == b) by Premise,
+      4 (max >= a) by Algebra*(3, 1),
+      5 (max >= b) by Algebra*(3),
+      6 (max >= c) by Algebra*(2, 3)
+    )
+  } else {
+    max = c
+
+    //block here
+    Deduce(
+      1 (!(a >= b)) by Premise,
+      2 (!(b >= c)) by Premise,
+      3 (max == c) by Premise,
+      4 (max >= a) by Algebra*(1, 2, 3),
+      5 (max >= b) by Algebra*(2, 3),
+      6 (max >= c) by Algebra*(3)
+    )
+  }
+  //summary block
+  Deduce(
+    1 (max >= a) by Premise,
+    2 (max >= b) by Premise,
+    3 (max >= c) by Premise,
+  // one side true in if, one side true in else
+  //max == a | max == b | max == c
+  //max == b | max == c
+    4 (max == b | max == c) by Premise, //b from if, c from else
+    5 SubProof(
+      6 Assume (max == b),
+      7 (max == a | max == b) by OrI2(6),
+      8 (max == a | max == b | max == c) by OrI1(7)
+    ),
+    9 SubProof(
+      10 Assume (max == c),
+      11 (max == a | max == b | max == c) by OrI2(10)
+    ),
+    12 (max == a | max == b | max == c) by OrE(4, 5, 9)
+  )
+}
+
+//overall summary here
+//summarize both branches
+Deduce(
+  1 (max >= a) by Premise,
+  2 (max >= b) by Premise,
+  3 (max >= c) by Premise,
+  4 (max == a | max == b | max == c) by Premise //true in outer if and else
+)
+
+println("Max between ", a, ", ", b, " and ", c, " is ", max)
+
+assert(max >= a)
+assert(max >= b)
+assert(max >= c)
+assert(max == a | max == b | max == c)
+// END FILE: maxOf3_proof.sc
+
+// BEGIN FILE: tickets.sc
+// ------------------------------
+// #Sireum #Logika
+//@Logika: --manual
+
+import org.sireum._
+import org.sireum.justification._
+import org.sireum.justification.natded.prop._
+
+//adult tickets: $50
+//kid tickets: $30
+def getTicketCosts(adult: Z, kid: Z): Z = {
+  //what do we want for our function contract?
+  Contract(
+    Requires(adult >= 0, kid >= 0),
+    Ensures(Res[Z] == adult*50 + kid*30, Res[Z] >= 0)
+  )
+
+
+  //what to do here?
+
+
+  //get the total ticket cost
+  val overall: Z = adult*50 + kid*30
+
+  //what to do here?
+  //we must prove the postconditions
+  //goal: overall == adult*50 + kid*30
+  //goal: overall >= 0
+
+  Deduce(
+    1 ( overall == adult*50 + kid*30 ) by Premise,
+    2 ( adult >= 0 ) by Premise, //first precondition
+    3 ( kid >= 0 ) by Premise, //second precondition
+    4 ( overall >= 0 ) by Algebra*(1, 2, 3) //proves 2nd postcondition
+  )
+
+  return overall
+}
+
+////////////// Test code /////////////////
+
+val k: Z = 3 //$30 each
+val a: Z = 2 //$50 each
+
+//what to do here?
+Deduce(
+  1 ( k == 3 ) by Premise,
+  2 ( a == 2 ) by Premise,
+  3 ( a >= 0 ) by Algebra*(2), //proves first precondition
+  4 ( k >= 0 ) by Algebra*(1) //proves second precondition
+
+  //adult >= 0, kid >= 0
+)
+
+val cost: Z = getTicketCosts(a, k)
+
+//what to do here?
+Deduce(
+  1 ( cost == a*50 + k*30 ) by Premise, //postcondition as a premise
+  2 ( k == 3) by Premise,
+  3 ( a == 2 ) by Premise,
+  4 ( cost == 190) by Algebra*(1,2,3)
+)
+
+//what *should* cost be?
+assert(cost == 190)
+// END FILE: tickets.sc
+
