@@ -1,13 +1,16 @@
 Exam 3 results.
 
-High: ??/100
-Average: ??/100
+Added 4 points for everyone who took exam
 
-A (90-100): ?? students
-B (80-89): ?? students
-C (70-79): ?? students
-D (60-69): ?? students
-F (below 60): ?? students
+
+High: 103/100 (2 students)
+Average: 78/100 (Canvas reports lower, but that includes several students who didn't take exam)
+
+A (90-100): 7 students
+B (80-89): 13 students
+C (70-79): 8 students
+D (60-69): 4 students
+F (below 60): 5 students (plus 3 who didn't take exam)
 
 ////////////////////////////
 
