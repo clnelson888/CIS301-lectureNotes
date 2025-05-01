@@ -8,6 +8,14 @@ def makeFirstZero(seq: ZS): Unit = {
   //what do we want to require of seq?
   //how can we describe how seq will change?
 
+  Contract(
+    Requires(seq.size > 0),
+    Modifies(seq),
+    Ensures(seq(0) == 0,
+            ∀(1 until seq.size)(k => seq(k) == In(seq)(k)) //All of the other ones have not changed
+    )
+  )
+
   seq(0) = 0
 }
 
@@ -20,3 +28,4 @@ makeFirstZero(nums)
 //element as a 0
 
 //---> what should we assert?
+assert( nums == ZS(0,2,3))

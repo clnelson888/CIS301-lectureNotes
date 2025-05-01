@@ -7,6 +7,15 @@ def makePosZero(seq: ZS, pos: Z): Unit = {
   //how would we write the function contract?
   //what do we want to require of seq?
   //how can we describe how seq will change?
+  Contract(
+    Requires(pos >= 0, pos < seq.size),
+    Modifies(seq),
+    Ensures(
+      seq(pos) == 0,
+      ∀(0 until seq.size)(k => (k != pos) __>: (seq(k) == In(seq)(k))) 
+       //If it is not the position of pos __>: then it will not change
+    )
+  )
 
   seq(pos) = 0
 }
@@ -20,3 +29,4 @@ makePosZero(nums, 2)
 //changed to 0
 
 //---> what should we assert?
+assert(nums == ZS(1, 2, 0))

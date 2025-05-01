@@ -73,7 +73,7 @@ Sequences. (like an array or list)
 --> sequences are passed to a function by reference
     --> postcondition should describe how a sequence changes
 
-///////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 
 Making claims about sequences.
 
@@ -96,13 +96,13 @@ Similarly, can use ∃
 ∃ (0 until seq.size)(k => seq(k) == 0 )
     there is some element in seq that equals 0
 
-///////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 
 Writing function contract for function with a sequence:
 
 - Requires:
-    - Include any requirements about sequence size
-    - Include any requirements about index parameters to make
+    - Include any requirements about sequence size                      >= 0
+    - Include any requirements about index parameters to make           > seq.size
         sure they're in bounds.
 - Modifies: needed if the function changes a sequence
 - Ensures:

@@ -1,5 +1,5 @@
 // #Sireum #Logika
-//@Logika: --manual
+@Logika: --manual
 
 import org.sireum._
 import org.sireum.justification._
@@ -18,16 +18,7 @@ def mult(x: Z, y: Z): Z = {
 
   //prove invariant holds
 
-  Deduce(
-    1 ( total == 0 ) by Premise,
-    2 ( i == 0 ) by Premise,
-    3 ( total == i*x ) by Algebra*(1,2), //proves invariant holds before loop
-    4 ( y >= 0 ) by Premise, //from precondition
-    5 ( i <= y ) by Algebra*(2, 4) //proves 2nd invariant
-  )
-
   //assert that invariant holds before loop begins
-  assert(total == i*x)
 
   while (i < y) {
     Invariant(
@@ -89,24 +80,11 @@ def mult(x: Z, y: Z): Z = {
 val a: Z = 5
 val b: Z = 4
 
-//Step 1: prove the precondition
-
-Deduce(
-  1 ( b == 4 ) by Premise,
-  2 ( b >= 0 ) by Algebra*(1) //proves precondition
-  //need b >= 0
-)
 
 //show 2nd parameter >= 0
 
 var ans: Z = mult(a, b)
 
-//what do we want to assert that ans is?
-Deduce(
-  1 ( ans == a*b ) by Premise, //postcondition from function call
-  2 ( a == 5 ) by Premise,
-  3 ( b == 4 ) by Premise,
-  4 ( ans == 20 ) by Algebra*(1,2,3)
 
   //Res[Z] == x*y
 )
