@@ -1,0 +1,112 @@
+HW 11 due Tues May 6
+
+--> last assignment
+--> highly recommend completing even if you plan to drop it
+
+Final exam:
+    cumulative
+    a bit more emphasis on programming logic, content since exam 3
+    Friday, May 16 2:00-3:50
+    midterm equivalent in Canvas
+
+--> I'll post review material next week
+
+--> we'll spend some time next Thursday reviewing
+
+//////////////////////////////
+
+looking for 1-2 CIS 301 UTAs for the fall
+email me (juliet@ksu.edu) if interested
+
+//////////////////////////////
+
+Today:
+- loop invariants with sequences
+- begin global invariants
+
+
+//////////////////////////////
+
+Loop invariant block:
+    - Describe what has been changed so far about the sequence
+    - (Often) describe what has NOT changed so far in the sequence
+    - Bound the loop counter
+    - State that the sequence size doesn't change (if changing the sequence)
+
+/////////////////////////////
+
+Example: seqAll10.sc 
+
+--> what if we wanted to add 10 to each element instead?
+
+////////////////////////////
+
+Example: seqMin.sc
+
+////////////////////////////
+
+new type: B (bool)
+
+Example: containsElem.sc
+
+/////////////////////////////
+
+(in-class quiz)
+
+/////////////////////////////
+
+Global variables and global invariants.
+
+- Multiple functions might modify the same global variables
+
+--> function postcondition needs to describe how the global variables change 
+    in the function (use "In")
+
+
+
+- Will add GLOBAL INVARIANTS specifying constraints about global variables
+
+--> global invariants  must be true initially
+
+--> the global invariants become both a precondition and a postcondition
+    for all functions
+
+
+
+
+What does this mean?
+
+
+/////////////////////////////////////
+
+Function contracts when considering global variables/invariants:
+    - Requires: what kind of parameters should we not allow?
+
+    - Modifies: list any global variables that are changed
+
+    - Ensures: describe impact of function on global variables
+        Use In(globalVariable) to reference global variable
+        value at beginning of function
+
+
+
+/////////////////////////////////////
+
+Bank example (bank.sc)
+
+Global variables:
+    - account balance
+    - "elite" status (a boolean for whether the balance is >= 1 million)
+
+Global invariants:
+    - balance should be non-negative
+    - elite status should reflect balance
+
+
+
+////////////////////////////////////
+
+Next time:
+- termination
+- specification in Java
+
