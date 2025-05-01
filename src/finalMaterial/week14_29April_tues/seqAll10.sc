@@ -30,3 +30,4 @@ var test: ZS = ZS(4,1,3,8,10,2)
 all10(test)
 
 //what do we want to assert?
+assert(test == ZS(10,10,10,10,10,10))

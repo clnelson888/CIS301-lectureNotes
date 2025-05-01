@@ -28,16 +28,22 @@ Today:
 //////////////////////////////
 
 Loop invariant block:
-    - Describe what has been changed so far about the sequence
-    - (Often) describe what has NOT changed so far in the sequence
-    - Bound the loop counter
-    - State that the sequence size doesn't change (if changing the sequence)
+    1) Bound the loop counter (upper and lower bounds)
+    2) State that the sequence size doesn't change (if changing the sequence)
+    3) Describe what HAS been changed so far about the sequence
+    4) (Often) describe what has NOT changed so far in the sequence
+        (doesnt hurt to always do this even if not necessary)
+
+Note: MUST bound the loop counter and then state that the sequence
+size doesn't change FIRST (before describing what has/hasn't changed
+in sequence) 
 
 /////////////////////////////
 
-Example: seqAll10.sc 
+Example: seqAll10.sc (set all elements to 10)
 
 --> what if we wanted to add 10 to each element instead?
+    (seqAllPlus10.sc)
 
 ////////////////////////////
 
