@@ -4,7 +4,8 @@ Added 4 points for everyone who took exam
 
 
 High: 103/100 (2 students)
-Average: 78/100 (Canvas reports lower, but that includes several students who didn't take exam)
+Average: 78/100 (Canvas reports lower, but that includes several students 
+                who didn't take exam)
 
 A (90-100): 7 students
 B (80-89): 13 students
@@ -16,9 +17,12 @@ F (below 60): 5 students (plus 3 who didn't take exam)
 
 HW 11 will be posted after class, due Tues May 6
     --> this is the last assignment
-    --> I HIGHLY recommend completing it even if you are able to use it as one of your drops
+    --> I HIGHLY recommend completing it 
+        (even if you are able to use it as one of your drops)
 
 Final exam: Friday, May 16 2:00-3:50 pm
+
+Canvas category: "midterm equivalent from final"
 
 /////////////////////////////
 
@@ -114,7 +118,9 @@ Writing function contract for function with a sequence:
 
 
 
-Use "In(seq)"" refers to the state of a sequence at the
+
+
+Use "In(seq)" refers to the state of a sequence at the
     beginning of the function call
 
 
@@ -125,16 +131,16 @@ Example: function that sets first element in a sequence to 0
 (seqZeroFirst.sc)
 
 
+//////////////////////////
+
+in-class quiz
+
 ///////////////////////////
 
 Example: function that sets some position in a sequence to 0
 (seqZeroPos.sc)
 
-//////////////////////////
-
-in-class quiz
-
-/////////////////////////
+///////////////////////////
 
 Example: swap function
 (swap.sc)
@@ -148,9 +154,12 @@ Functions with sequences and loops.
     - Bound the loop counter
     - State that the sequence size doesn't change (if changing the sequence)
 
+//////////////////////////
 
 Example: function that sets every position in a sequence to 10
 (seqAll10.sc)
+
+<--- stopped here, will finish this example Thursday
 
 //////////////////////////
 
