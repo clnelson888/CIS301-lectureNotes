@@ -1,0 +1,782 @@
+// BEGIN FILE: tuesApril29_notes.txt
+// ------------------------------
+Exam 3 results.
+
+Added 4 points for everyone who took exam
+
+
+High: 103/100 (2 students)
+Average: 78/100 (Canvas reports lower, but that includes several students 
+                who didn't take exam)
+
+A (90-100): 7 students
+B (80-89): 13 students
+C (70-79): 8 students
+D (60-69): 4 students
+F (below 60): 5 students (plus 3 who didn't take exam)
+
+////////////////////////////
+
+HW 11 will be posted after class, due Tues May 6
+    --> this is the last assignment
+    --> I HIGHLY recommend completing it 
+        (even if you are able to use it as one of your drops)
+
+Final exam: Friday, May 16 2:00-3:50 pm
+
+Canvas category: "midterm equivalent from final"
+
+/////////////////////////////
+
+Today:
+
+- Logika modes
+- Verifying programs with sequences
+
+
+Rest of semester:
+- Verifying programs with global invariants
+- Proving termination
+- If time, see how to do similar function contracts in Java
+
+//////////////////////////////
+
+Logika modes.
+
+Default/manual mode - what we've been doing.
+
+auto mode - only needs function contracts and invariant blocks.
+    --> can do all intermediate reasoning itself.
+
+--> Mode is defined in your "starter" files at the top
+
+
+
+For manual:
+
+    //@Logika: --manual
+
+
+For auto, that line is deleted
+
+
+
+**All HW 11 problems will use auto mode
+
+////////////////////////////
+
+Example: See what we can change in multiplication example
+    (mult_loop.sc)
+
+
+
+
+///////////////////////////
+
+Sequences. (like an array or list)
+
+--> see sequence operations (seqOp.sc)
+
+--> Want to ensure sequence position is always valid
+
+--> sequences are passed to a function by reference
+    --> postcondition should describe how a sequence changes
+
+///////////////////////////
+
+Making claims about sequences.
+
+Suppose "seq" is our sequence
+
+
+
+∀ (lower until upper)(k => some statement about seq(k) )
+    (does NOT include upper)
+
+
+∀ (0 until seq.size)(k => seq(k) == 0 )
+    all elements in seq equal 0
+
+∀ (lower to upper)(k => some statement about seq(k) )
+    (DOES include upper)
+
+Similarly, can use ∃
+
+∃ (0 until seq.size)(k => seq(k) == 0 )
+    there is some element in seq that equals 0
+
+///////////////////////////
+
+Writing function contract for function with a sequence:
+
+- Requires:
+    - Include any requirements about sequence size
+    - Include any requirements about index parameters to make
+        sure they're in bounds.
+- Modifies: needed if the function changes a sequence
+- Ensures:
+    - Describe the value of EVERY element in the sequence
+        by the end of the function call
+
+
+
+
+
+Use "In(seq)" refers to the state of a sequence at the
+    beginning of the function call
+
+
+
+///////////////////////////
+
+Example: function that sets first element in a sequence to 0
+(seqZeroFirst.sc)
+
+
+//////////////////////////
+
+in-class quiz
+
+///////////////////////////
+
+Example: function that sets some position in a sequence to 0
+(seqZeroPos.sc)
+
+///////////////////////////
+
+Example: swap function
+(swap.sc)
+
+///////////////////////////
+
+Functions with sequences and loops.
+--> same idea, but loop invariant block needs to:
+    - Describe what has been changed so far about the sequence
+    - (Often) describe what has NOT changed so far in the sequence
+    - Bound the loop counter
+    - State that the sequence size doesn't change (if changing the sequence)
+
+//////////////////////////
+
+Example: function that sets every position in a sequence to 10
+(seqAll10.sc)
+
+<--- stopped here, will finish this example Thursday
+
+//////////////////////////
+
+--> what if instead setting everything to 10,
+    we added one to each element?
+
+//////////////////////////
+
+Next time:
+- More sequences and loops
+- Programs with multiple functions
+- Begin global invariants
+// END FILE: tuesApril29_notes.txt
+
+// BEGIN FILE: thursMay1_notes.txt
+// ------------------------------
+HW 11 due Tues May 6
+
+--> last assignment
+--> highly recommend completing even if you plan to drop it
+
+Final exam:
+    cumulative
+    a bit more emphasis on programming logic, content since exam 3
+    Friday, May 16 2:00-3:50
+    midterm equivalent in Canvas
+
+--> I'll post review material next week
+
+--> we'll spend some time next Thursday reviewing
+
+//////////////////////////////
+
+looking for 1-2 CIS 301 UTAs for the fall
+email me (juliet@ksu.edu) if interested
+
+//////////////////////////////
+
+Today:
+- loop invariants with sequences
+- begin global invariants
+
+
+//////////////////////////////
+
+Loop invariant block:
+    1) Bound the loop counter (upper and lower bounds)
+    2) State that the sequence size doesn't change (if changing the sequence)
+    3) Describe what HAS been changed so far about the sequence
+    4) (Often) describe what has NOT changed so far in the sequence
+        (doesnt hurt to always do this even if not necessary)
+
+Note: MUST bound the loop counter and then state that the sequence
+size doesn't change FIRST (before describing what has/hasn't changed
+in sequence) 
+
+/////////////////////////////
+
+Example: seqAll10.sc (set all elements to 10)
+
+--> what if we wanted to add 10 to each element instead?
+    (seqAllPlus10.sc)
+
+////////////////////////////
+
+Example: seqMin.sc
+
+////////////////////////////
+
+new type: B (bool)
+
+Example: containsElem.sc
+
+/////////////////////////////
+
+(in-class quiz)
+
+/////////////////////////////
+
+Global variables and global invariants.
+
+- Multiple functions might modify the same global variables
+
+--> function postcondition needs to describe how the global variables change 
+    in the function (use "In")
+
+
+
+- Will add GLOBAL INVARIANTS specifying constraints about global variables
+
+--> global invariants  must be true initially
+
+--> the global invariants become both a precondition and a postcondition
+    for all functions
+
+
+
+
+What does this mean?
+
+
+/////////////////////////////////////
+
+Function contracts when considering global variables/invariants:
+    - Requires: what kind of parameters should we not allow?
+
+    - Modifies: list any global variables that are changed
+
+    - Ensures: describe impact of function on global variables
+        Use In(globalVariable) to reference global variable
+        value at beginning of function
+
+
+
+/////////////////////////////////////
+
+Bank example (bank.sc)
+
+Global variables:
+    - account balance
+    - "elite" status (a boolean for whether the balance is >= 1 million)
+
+Global invariants:
+    - balance should be non-negative
+    - elite status should reflect balance
+
+
+
+////////////////////////////////////
+
+Next time:
+- termination
+- specification in Java
+
+// END FILE: thursMay1_notes.txt
+
+// BEGIN FILE: mult_loop.sc
+// ------------------------------
+// #Sireum #Logika
+
+import org.sireum._
+import org.sireum.justification._
+import org.sireum.justification.natded.prop._
+
+//finding x*y by doing x + x + x + ... + x (y times)
+def mult(x: Z, y: Z): Z = {
+  //What can we use as the function contract?
+  Contract(
+    Requires( y >= 0),
+    Ensures( Res[Z] == x*y )
+  )
+
+  var total: Z = 0
+  var i: Z = 0
+
+  //prove invariant holds
+
+  while (i < y) {
+    Invariant(
+      Modifies(i, total),
+      total == i*x,
+      i <= y
+    )
+
+
+    total = total + x
+    i = i + 1
+  }
+
+  return total
+}
+
+//////////// test code /////////
+
+val a: Z = 5
+val b: Z = 4
+
+
+var ans: Z = mult(a, b)
+
+assert(ans == 20)
+// END FILE: mult_loop.sc
+
+// BEGIN FILE: seqAll10.sc
+// ------------------------------
+// #Sireum #Logika
+
+import org.sireum._
+
+//set all elements to 10
+def all10(nums: ZS): Unit = {
+  //function contract?
+  Contract(
+    //don't need to require anything
+    Modifies(nums),
+    Ensures(
+      ∀(0 until nums.size)(k => nums(k) == 10)
+    )
+  )
+
+  var i: Z = 0
+  while (i < nums.size) {
+    //loop invariant block?
+    Invariant(
+      Modifies(nums, i),
+      i >= 0, //lower bound of loop counter
+      i <= nums.size, //upper bound of loop counter
+      nums.size == In(nums).size, //the size doesn't change
+      ∀(0 until i)(k => nums(k) == 10), //what HAS changed in nums
+      
+      //We do NOT have to say what hasn't changed here,
+      //but it doesn't hurt
+      ∀(i until nums.size)(k => nums(k) == In(nums)(k)) //what has NOT changed
+
+    )
+
+    nums(i) = 10
+    i = i + 1
+
+    //set all the later positions to 0
+  }
+}
+
+///////////////////////////
+
+var test: ZS = ZS(4,1,3,8,10,2)
+
+all10(test)
+
+//what do we want to assert?
+assert(test == ZS(10,10,10,10,10,10))
+// END FILE: seqAll10.sc
+
+// BEGIN FILE: seqAllplus10.sc
+// ------------------------------
+// #Sireum #Logika
+
+import org.sireum._
+
+//set all elements to 10
+def all10(nums: ZS): Unit = {
+  //function contract?
+  Contract(
+    //don't need to require anything
+    Modifies(nums),
+    Ensures(
+      ∀(0 until nums.size)(k => nums(k) == 10)
+    )
+  )
+
+  var i: Z = 0
+  while (i < nums.size) {
+    //loop invariant block?
+    //still need to complete - will finish Thursday
+
+    nums(i) = 10// #Sireum #Logika
+
+import org.sireum._
+
+//set all elements to 10
+def all10(nums: ZS): Unit = {
+  //function contract?
+  Contract(
+    //don't need to require anything
+    Modifies(nums),
+    Ensures(
+      //at end of function, all elements in nums are 10 more than
+      //they were initially
+      ∀(0 until nums.size)(k => nums(k) == In(nums)(k) + 10)
+    )
+  )
+
+  var i: Z = 0
+  while (i < nums.size) {
+    //loop invariant block?
+    Invariant(
+      Modifies(nums, i),
+      i >= 0, //lower bound of loop counter
+      i <= nums.size, //upper bound of loop counter
+      nums.size == In(nums).size, //the size doesn't change
+      ∀(0 until i)(k => nums(k) == In(nums)(k) + 10), //what HAS changed
+      ∀(i until nums.size)(k => nums(k) == In(nums)(k)) //what has NOT changed
+    )
+
+    nums(i) = nums(i) + 10
+    i = i + 1
+
+    //set all the later positions to 0
+  }
+}
+
+///////////////////////////
+
+var test: ZS = ZS(4,1,3,8,10,2)
+
+all10(test)
+
+//what do we want to assert?
+assert(test == ZS(14, 11, 13, 18, 20, 12))
+    i = i + 1
+  }
+}
+
+///////////////////////////
+
+var test: ZS = ZS(4,1,3,8,10,2)
+
+all10(test)
+
+//what do we want to assert?
+// END FILE: seqAllplus10.sc
+
+// BEGIN FILE: seqMin.sc
+// ------------------------------
+// #Sireum #Logika
+
+import org.sireum._
+
+//return the smallest element in list
+def min(list: ZS): Z = {
+  Contract(
+    Requires(list.size > 0),
+    Ensures(
+      //whatever we are returning is <= everything in the list
+      ∀(0 until list.size)(k => Res[Z] <= list(k)),
+
+      //whatever we are returning is one of the list elements
+      ∃(0 until list.size)(k => Res[Z] == list(k))
+    )
+  )
+
+  var small: Z = list(0)
+  var i: Z = 1
+  
+  while (i < list.size) {
+    Invariant(
+      Modifies(small, i),
+      i >= 1,
+      i <= list.size,
+      ∀(0 until i)(k => small <= list(k)),
+      ∃(0 until i)(k => small == list(k))
+    )
+
+    if (list(i) < small) {
+      small = list(i)
+    }
+    i = i + 1
+  }
+
+  return small
+}
+
+////////////// Calling code ///////////////////
+
+var test: ZS = ZS(8,1,0,10,9,2,0)
+var testMin: Z = min(test)
+
+//what should testMin be?
+assert(testMin == 0)
+// END FILE: seqMin.sc
+
+// BEGIN FILE: seqOp.sc
+// ------------------------------
+// #Sireum #Logika
+
+import org.sireum._
+
+//create a sequence of literals
+var seq: ZS = ZS(5,10,15)
+
+//create an empty sequence
+var empty: ZS = ZS()
+
+//indexing a sequence
+var first: Z = seq(0) //first will be 5
+seq(2) = 100    //seq is (5,10,100)
+assert(seq == ZS(5,10,100))
+
+//getting the size of a sequence
+var len: Z = seq.size   //len will be 3
+assert(len == 3)
+// END FILE: seqOp.sc
+
+// BEGIN FILE: seqZeroFirst.sc
+// ------------------------------
+// #Sireum #Logika
+
+import org.sireum._
+
+//"Unit" is like a void return type
+def makeFirstZero(seq: ZS): Unit = {
+  //how would we write the function contract?
+  //what do we want to require of seq?
+  //how can we describe how seq will change?
+
+  Contract(
+    Requires(seq.size > 0),
+    Modifies(seq),
+    Ensures(
+      seq(0) == 0,
+
+      //all the other ones have not changed
+      ∀(1 until seq.size)(k => seq(k) == In(seq)(k))    )
+  )
+
+  seq(0) = 0
+}
+
+///// Test code ///////////
+
+var nums: ZS = ZS(1,2,3)
+makeFirstZero(nums)
+
+//we want to claim that nums is what it was, but with the first
+//element as a 0
+
+//---> what should we assert?
+assert(nums == ZS(0,2,3))
+// END FILE: seqZeroFirst.sc
+
+// BEGIN FILE: seqZeroPos.sc
+// ------------------------------
+// #Sireum #Logika
+
+import org.sireum._
+
+//"Unit" is like a void return type
+def makePosZero(seq: ZS, pos: Z): Unit = {
+  //how would we write the function contract?
+  //what do we want to require of seq?
+  //how can we describe how seq will change?
+  Contract(
+    Requires(pos >= 0, pos < seq.size ),
+    Modifies(seq),
+    Ensures(
+      seq(pos) == 0,
+      ∀(0 until seq.size)(k => (k != pos) __>: (seq(k) == In(seq)(k))   )
+    )
+  )
+
+  seq(pos) = 0
+}
+
+///// Test code ///////////
+
+var nums: ZS = ZS(1,2,3)
+makePosZero(nums, 2)
+
+//we want to claim that nums is what it was, but with position 2
+//changed to 0
+
+//---> what should we assert?
+assert(nums == ZS(1,2,0))
+// END FILE: seqZeroPos.sc
+
+// BEGIN FILE: swap.sc
+// ------------------------------
+// #Sireum #Logika
+
+import org.sireum._
+
+//want to write a swap function
+def swap(nums: ZS, pos1: Z, pos2: Z): Unit = {
+  //how to write?
+  Contract(
+    Requires(pos1 >= 0, pos1 < nums.size, pos2 >= 0, pos2 < nums.size),
+    Modifies(nums),
+    Ensures(
+      nums(pos1) == In(nums)(pos2),
+      nums(pos2) == In(num)(pos1),
+      ∀(0 until nums.size)(k => (k != pos1 && k != pos2) __>: (nums(k) == In(nums)(k))   )
+    )
+  )
+
+  var temp: Z = nums(pos1)
+  nums(pos1) = nums(pos2)
+  nums(pos2) = temp
+
+  //how to write contract?
+}
+
+///////////////////////////
+
+var test: ZS = ZS(4,1,3,8,10,2)
+
+swap(test, 2, 4)
+
+
+//what do we want to assert?
+// END FILE: swap.sc
+
+// BEGIN FILE: bank.sc
+// ------------------------------
+// #Sireum #Logika
+
+import org.sireum._
+
+var balance: Z = 0
+var elite: B = F
+val eliteMin: Z = 1000000 // $1M is the minimum balance for elite members
+
+//these are the global invariants
+@spec def inv = Invariant(
+  balance >= 0,
+  elite == (balance >= eliteMin)
+)
+
+def deposit(amount: Z): Unit = {
+  //what can we assume about the global invariants here?
+  Contract(
+    Requires(
+      //unwritten precondition: global invariants must hold
+      amount > 0
+    ),
+    Modifies(balance, elite),
+    Ensures(
+      balance == In(balance) + amount,
+      //unwritten postcondition: need to be sure the global invariants hold
+    )
+  )
+
+  balance = balance + amount
+
+  if (balance >= eliteMin) {
+    elite = true
+  }
+
+  //what must be true about the global invariants here? must be true!
+}
+
+def withdraw(amount: Z): Unit = {
+  Contract(
+    Requires(
+      //unwritten precondition: global invariants must hold
+      amount <= balance
+    ),
+    Modifies(balance, elite),
+    Ensures(
+      balance == In(balance) - amount,
+      //unwritten: the global invariants must hold
+    )
+  )
+
+  balance = balance - amount
+
+  if (balance >= eliteMin) {
+    elite = true
+  } else {
+    elite = false
+  }
+
+}
+
+//////////////// Test code /////////////////////
+
+deposit(500000)
+assert(balance == 500000 & !elite)
+deposit(600000)
+assert(balance == 1100000 & elite)
+withdraw(150000)
+assert(balance == 950000 & !elite)
+deposit(200000)
+assert(balance == 1150000 & elite)
+// END FILE: bank.sc
+
+// BEGIN FILE: containsElem.sc
+// ------------------------------
+// #Sireum #Logika
+
+import org.sireum._
+
+//returns whether an element is in a sequence
+//returns true/false (B is bool)
+//can either write true or T, same with false
+def containsElem(nums: ZS, elem: Z): B = {
+  Contract(
+    Ensures(
+      //if I am returning true, one of the nums values equals elem
+      Res[B] == true __>: ∃(0 until nums.size)(k => nums(k) == elem),
+      //if I am returning false, none of the nums values equaled num
+      Res[B] == false __>: !(∃(0 until nums.size)(k => nums(k) == elem))
+    )
+  )
+
+  var i: Z = 0
+  var found: B = false
+  while (i < nums.size) {
+    Invariant(
+      Modifies(i, found),
+      i >= 0,
+      i <= nums.size,
+      found == true __>: ∃(0 until i)(k => nums(k) == elem),
+      found == false __>: !(∃(0 until i)(k => nums(k) == elem))
+    )
+
+    if (nums(i) == elem) {
+      found = true
+    }
+    i = i + 1
+  }
+
+  return found
+}
+
+////////////// Calling code ///////////////////
+
+var test: ZS = ZS(8,1,0,10,9,2,0)
+var testFound: B = containsElem(test, 0)
+
+//what should testFound be?
+assert(testFound == true)
+
+testFound = containsElem(test, 4)
+
+//what should testFound be?
+assert(testFound == false)
+// END FILE: containsElem.sc
+
