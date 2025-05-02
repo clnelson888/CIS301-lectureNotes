@@ -6,7 +6,7 @@ var balance: Z = 0
 var elite: B = F
 val eliteMin: Z = 1000000 // $1M is the minimum balance for elite members
 
-//these are the global invariants - Will always be given, don't have to write but will need to read
+//these are the global invariants
 @spec def inv = Invariant(
   balance >= 0,
   elite == (balance >= eliteMin)
@@ -15,11 +15,14 @@ val eliteMin: Z = 1000000 // $1M is the minimum balance for elite members
 def deposit(amount: Z): Unit = {
   //what can we assume about the global invariants here?
   Contract(
-    Requires(amount > 0),
+    Requires(
+      //unwritten precondition: global invariants must hold
+      amount > 0
+    ),
     Modifies(balance, elite),
     Ensures(
-      balance == In(balance) + amount
-      //unwritten: need to be sure the gloabal invariant holds
+      balance == In(balance) + amount,
+      //unwritten postcondition: need to be sure the global invariants hold
     )
   )
 
@@ -29,16 +32,19 @@ def deposit(amount: Z): Unit = {
     elite = true
   }
 
-  //what must be true about the global invariants here?
+  //what must be true about the global invariants here? must be true!
 }
 
 def withdraw(amount: Z): Unit = {
   Contract(
-    Requires(amount <= balance),
+    Requires(
+      //unwritten precondition: global invariants must hold
+      amount <= balance
+    ),
     Modifies(balance, elite),
     Ensures(
-      balance == In(balance) - amount
-      //Unwritten: the global invariants
+      balance == In(balance) - amount,
+      //unwritten: the global invariants must hold
     )
   )
 
