@@ -30,20 +30,28 @@ loops while i < seq.size/2
 
 
 What does it mean to be reversed?
-
+    for all positions k,
+        new value at k = old value at seq.size-k-1
 
 
 
 After i iterations of the loop:
     what has changed?
+        first i positions equal the original last i positions
+            from (0 until i)
+        last i positions equal the original first i positions
 
     what is the same? 
+        the middle is unchanged
+            (i until seq.size-i)
 
 
 
 ///////////////////////////////////
 
-Problem 4 on HW 11 (sorted): 
+Problem 4 on HW 11 (sorted): model after containsElem
+
+can add a precondition about sequence size
 
 
 ///////////////////////////////////
@@ -80,31 +88,46 @@ Global invariants:
 Functions:
     setSpeed(speed: Z)
     turnOn()
+    turnOff()
     makeRotate()
     stopRotate()
 
 
 
     Fan on, speed 3, rotate on. Can we call setSpeed(2)?
+        NO, shouldn't allow (fan would be going too slow to rotate)
 
     Fan off, speed 0, rotate off. Can we call setSpeed(1)?
+        Yes, (and would also mark fan as on)
 
     Fan on, speed 2, rotate off. Can we call setSpeed(0)?
+        NO, can only change speed by 1 at a time
 
     Fan on, speed 3, rotate on. Can we call setSpeed(4)?
+        Yes
 
     Fan on, speed 3, rotate on. Can we call makeRotate()?
+        NO, it is already rotating
+
 
     Fan on, speed 5, rotate off. Can we call setSpeed(5)?
+        NO, it is already at 5 (speed needs to change)
+
 
     Fan on, speed 5, rotate off. Can we call setSpeed(6)?
+        NO, the speed is out of bounds
 
     Fan on, speed 1, rotate off. Can we call setSpeed(0)?
+        Yes, (and we would mark the fan as off)
+
+
 
 setSpeed(speed: Z) preconditions?
+    require that speed be either curSpeed+1 or curSpeed-1
+        speed needs to be within our bounds
+        if rotate is on, then speed should be fast enough
 
-
-
+    ensures that curSpeed is changed to speed
 
 ///////////////////////////
 
@@ -122,7 +145,8 @@ Termination - whether a program will finish on all inputs
 
 Partial Correctness:
     IF the precondition is satisfied
-    THEN we guarantee the postcondition, but only IF the program terminates
+    THEN we guarantee the postcondition, but only IF 
+        the program terminates
 
 
 Total Correctness:
@@ -138,8 +162,10 @@ We need to show termination to achieve total correctness
 Termination with a loop.
     - create measure of how much work is left
         (i.e., how many iterations are left)
+        --> should be a nonnegative integer
 
     - show that the measure DECREASES with each iteration
+
     - show that if there is no more work to do, then the loop
         has finished
 
@@ -165,6 +191,33 @@ Halting problem - given a computer program and a set of inputs
     program will halt for the inputs?
 
 
+Assume, for the sake of contradiction, that we CAN write a program
+that will take another program + set of inputs and determine whether
+that program will terminate on those inputs.
+
+def Halt(Function, Input):
+    if (Function(Input) halts) return true
+    else return false
+
+Then we can write:
+
+def DoOpposite(Function):
+    if (Halt(Function, Function)): loop forever
+    else return (halt)
+
+
+Then consider DoOpposite(DoOpposite).
+
+Case 1: DoOpposite(DoOpposite) loops forever. Then  
+    Halt(DoOpposite, DoOpposite) would return true. that
+    would mean that DoOpposite(DoOpposite) would halt.
+
+Case 2: DoOpposite(DoOpposite) halts. Then 
+Halt(DoOpposite, DoOpposite) would return false, which means
+that DoOpposite(DoOpposite) would have looped forever. 
+
+Both cases ended with a contradiction. This means our original
+assumption is wrong -- we can't write a Halt function.
 
 ///////////////////////////
 
@@ -174,14 +227,29 @@ If a file has global invariants.
 
 --> when do they need to hold?
 
+    Initially
+    If calling a function, global invariants must hold 
+        BEFORE function call and
+        AFTER function call
 
---> how to write function contracts for function that change global variables?
+    global invariants are an unwritten preconditon/postcondition
+
+
+
+--> how to write function contracts for function that change 
+    global variables?
 
 requires?
+    whatever restrictions on parameters so that function code
+    doesn't violate global invariants
 
 modifies?
+    say what global variables are changed in the function
 
 ensures?
+    describe how global variables changed
+
+    globalVariable == (some expression with In(globalVariable))
 
 //////////////////////////
 
@@ -197,7 +265,7 @@ Binary search bug.
 
 --> what's the problem? how to fix?
 
-
+    int mid = low + (high-low)/2;
 
 
 --> how long was it there? original C++ (in 80s)
@@ -207,14 +275,14 @@ Binary search bug.
 
 ///////////////////
 
-Timsort bug (Java's Collections sort / Arrays.sort / Python's sort)
+Timsort bug (Java's Collections sort / Arrays.Sort / Python's sort)
     - developed in 2002
     - breaks array into series of runs that are separately sorted
         and merged
 
 
---> bug discovered when researchers tried to use formal verification
-    to prove correctness in 2015...and were unsuccessful
+--> bug discovered when researchers tried to prove correctness 
+    in 2015...and were unsuccessful
 
 --> would crash in certain cases when the run lengths became smaller
     than expected
@@ -250,7 +318,20 @@ JML specification syntax.
 See jmlSyntax.txt for a primer
 
 
-////////////////////////////////
+
+
+IntelliJML - does some JML syntax checking
+
+https://gitlab.utwente.nl/fmt/intellijml/-/releases
+
+Download the IntelliJ-1.1.8.jar file
+
+In IntelliJ, File->Settings->Plugins, click the gear, select
+    "Load Plugin from Disk", find the jar file
+
+
+
+////////////////////////////////////
 
 
 Complete formal verification is not practical in many cases
@@ -262,6 +343,10 @@ Halfway option
 - Enforce preconditions
 - Check postconditions
 
+/////////////////////////////////
+
+<-- stopped here-ish, will do a little more with
+this material on Thursday
 
 /////////////////////////////////
 
@@ -270,7 +355,7 @@ Whose job is it to check preconditions?
     --> ...can we enforce in practice?
 
 
-    --> What to do if preconditions not met? Should we return a dummy
+    --> What to do if preconditions not met? Rreturn a dummy
         value?
 
 
@@ -286,19 +371,6 @@ How to check postconditions?
 
 
 /////////////////////////////
-
-IntelliJML - does some JML syntax checking
-
-https://gitlab.utwente.nl/fmt/intellijml/-/releases
-
-Download the IntelliJ-1.1.8.jar file
-
-In IntelliJ, File->Settings->Plugins, click the gear, select
-    "Load Plugin from Disk", find the jar file
-
-
-
-////////////////////////////////////
 
 JMLExample.java
 

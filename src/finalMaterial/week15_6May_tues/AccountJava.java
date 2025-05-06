@@ -1,6 +1,6 @@
-package finalExamMaterial.week15_Dec3_tues;
+package week15_6May_tues;
 
-public class Account {
+public class AccountJava {
     private int _balance;
     private boolean _elite;
 
@@ -24,7 +24,7 @@ public class Account {
         assert isElite() == (getBalance() >= 1000000);
     }
 
-    public Account() {
+    public AccountJava() {
         _balance = 0;
         _elite = false;
 
