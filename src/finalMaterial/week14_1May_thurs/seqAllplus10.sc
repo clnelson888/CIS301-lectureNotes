@@ -40,9 +40,9 @@ def all10(nums: ZS): Unit = {
     //loop invariant block?
     Invariant(
       Modifies(nums, i),
-      i >= 0, //lower bound of loop counter
+      i >= 0, //lower bound of loop counter (list the loop bounds first)
       i <= nums.size, //upper bound of loop counter
-      nums.size == In(nums).size, //the size doesn't change
+      nums.size == In(nums).size, //the size doesn't change (needed if sequence changes in loop)
       ∀(0 until i)(k => nums(k) == In(nums)(k) + 10), //what HAS changed
       ∀(i until nums.size)(k => nums(k) == In(nums)(k)) //what has NOT changed
     )
