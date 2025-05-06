@@ -3,10 +3,14 @@ package finalExamMaterial.week15_Dec3_tues;
 public class JMLExample {
     //function contract
     /*@
-
+        requires y >= 0; 
+        ensures \result == x*y;
     */
     public static int mult(int x, int y) {
         //what should we do here?
+        if (y < 0) {
+            throw new IllegalArgumentException("second parameter must be nonnegative");
+        }
 
         int sum = 0;
         int count = 0;
@@ -17,6 +21,7 @@ public class JMLExample {
         }
 
         //what should we do here?
+        assert sum == x*y;
 
         return sum;
     }

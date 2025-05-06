@@ -86,20 +86,28 @@ Functions:
 
 
     Fan on, speed 3, rotate on. Can we call setSpeed(2)?
+        No, fan would be going too slow to rotate
 
     Fan off, speed 0, rotate off. Can we call setSpeed(1)?
+        Yes, then marked as on
 
     Fan on, speed 2, rotate off. Can we call setSpeed(0)?
+        No, only change by one at a time
 
     Fan on, speed 3, rotate on. Can we call setSpeed(4)?
+        Yes
 
     Fan on, speed 3, rotate on. Can we call makeRotate()?
+        No, already rotating
 
     Fan on, speed 5, rotate off. Can we call setSpeed(5)?
+        No, already at 5
 
     Fan on, speed 5, rotate off. Can we call setSpeed(6)?
+        No, above 5
 
     Fan on, speed 1, rotate off. Can we call setSpeed(0)?
+        Yes, just changing by one, fan marked as off
 
 setSpeed(speed: Z) preconditions?
 
@@ -137,7 +145,7 @@ We need to show termination to achieve total correctness
 
 Termination with a loop.
     - create measure of how much work is left
-        (i.e., how many iterations are left)
+        (i.e., how many iterations are left)  --> Should be a nonnegative integer
 
     - show that the measure DECREASES with each iteration
     - show that if there is no more work to do, then the loop
@@ -164,7 +172,31 @@ Halting problem - given a computer program and a set of inputs
     can you write another program to determine if the original
     program will halt for the inputs?
 
+Assume for the sake of contradiction, that we CAN write a program
+that will take another program + set of inputs and determine whether 
+that program will terminate on those inputs
 
+def Halt(Function, Input):
+    if (Function(input) halts) return true
+    else return false
+
+Then we can write:
+    def DoOpposite(Function):
+    if (Halt(Function, Function)): loop forever
+    else return (halt)
+
+Then consider DoOpposite(DoOpposite),
+    Case 1: DoOpposite(DoOpposite)                  loops forever. Then
+                Halt(DoOpposite, DoOpposite)        would return true. that would mean that
+                DoOpposite(DoOpposite)              would halt.
+    
+    Case 2: DoOpposite(DoOpposite)                  halts, then
+                Halt(DoOpposite, DoOpposite)        would return false, which means
+                DoOpposite(DoOpposite)              would have looped forever
+
+
+Both cases ended with a contradiciton. 
+This means our original assumption is wrong -- we can't write a Halt function.
 
 ///////////////////////////
 
@@ -173,15 +205,23 @@ Review: global invariants.
 If a file has global invariants.
 
 --> when do they need to hold?
+#     # Initially
+#     IF calling a function, global invariants must hold
+      # BEFORE function call and
+      # AFTER function call
 
 
 --> how to write function contracts for function that change global variables?
 
 requires?
+    Whatever restrictions on parameters so that function code doesn't violate global invariants
 
 modifies?
+    say what global variables are changed in the function
 
 ensures?
+    Describe how global variables changed
+        GlobalVariable == (some expression with IN(globalVariable))
 
 //////////////////////////
 
@@ -197,7 +237,7 @@ Binary search bug.
 
 --> what's the problem? how to fix?
 
-
+    int mid = low + (high-low)/2
 
 
 --> how long was it there? original C++ (in 80s)
