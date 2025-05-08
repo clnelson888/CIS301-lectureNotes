@@ -10,6 +10,11 @@ Office hour times during finals week.
 
 What to do with preconditions and postconditions in practice?
 
+precondition violated: throw an exception in the method
+
+
+postcondition: add assert statements before leaving method
+    leave those on during development
 
 
 
