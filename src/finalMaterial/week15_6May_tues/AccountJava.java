@@ -29,6 +29,7 @@ public class AccountJava {
         _elite = false;
 
         //what should we do here?
+        globalAsserts();
     }
     /*@
         requires amount >= 0;
@@ -36,6 +37,10 @@ public class AccountJava {
     */
     public void deposit(int amount) {
         //what do we do here?
+        if (amount < 0) {
+            throw new IllegalArgumentException("deposit amount can't be negative");
+        }
+        globalAsserts();
 
         int oldBalance = _balance;
 
@@ -46,6 +51,9 @@ public class AccountJava {
         }
 
         //what do we do here?
+        assert getBalance() == oldBalance+amount;
+
+        globalAsserts();
     }
 
     /*@
