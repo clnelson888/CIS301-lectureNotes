@@ -10,17 +10,23 @@ def diff(big: Z, small: Z): Z = {
     )
 
     //PREMISES:
-    big >= small
+        big >= small
 
 
     var count: Z = 0
     var cur: Z = big
 
     //PREMISES:
+        count == 0
+        cur == big
+        big >= small
+    
 
 
 
-    //SHOW:
+    //SHOW: (Prove invariant, prove all if multiple stated)
+        count == (big-cur),
+
 
 
 
@@ -31,6 +37,10 @@ def diff(big: Z, small: Z): Z = {
         )
 
         //PREMISES:
+        cur != small,           // loop condition is true
+        big >= small,           // Precondition
+        count == (big-cur),     // Loop invariant
+
 
 
 
@@ -38,16 +48,21 @@ def diff(big: Z, small: Z): Z = {
         count = count + 1
 
         //SHOW:
+        count == (big-cur)      // Loop invariant
 
 
     }
 
     //PREMISES:
+        !(cur != small)         // Loop condition is false
+        count == (big-cur)      // Loop invariant
+        big >= small,           // Precondition
+
 
 
 
     //SHOW:
-
+        count == big-small
 
 
     return count
@@ -58,22 +73,23 @@ def diff(big: Z, small: Z): Z = {
 var one: Z = 10
 
 //PREMISES:
-one == 10
-
+    one == 10
 
 //SHOW:
-one+4 >= one
+    one+4 >= one        // Prove Precondition for parameters I am passing
 
 var answer: Z = diff(one+4, one)
 
 
 
 //PREMISES:
-answer == (one+4)-one
-one == 10
+    answer == (one+4)-one
+    one == 10
+
+
 
 
 //SHOW:
-answer == 4
+    answer == 4
 
 assert(answer == 4)

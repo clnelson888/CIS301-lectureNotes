@@ -15,10 +15,16 @@ c) Translate your negation to English
 1. ∀ x (KS(x) V ¬CS(x))
 
 Translation: 
+    All people from KS or are not CS majors 
 
 Negation:
+    !(∀ x (KS(x) V ¬CS(x)))
+      ∃ x !(KS(x) V ¬CS(x)) 
+      ∃ x !KS(x) ^ CS(x) 
+
 
 Translation of negation:
+    There is a person who isn't from KS and is a CS major
 
 
 

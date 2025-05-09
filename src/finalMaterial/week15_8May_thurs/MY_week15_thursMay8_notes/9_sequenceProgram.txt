@@ -4,6 +4,17 @@ program (including the assert at the bottom) would be verified in Logika's auto 
 def addToNeg(a: ZS, pos: Z): Unit = {
     Contract(
         //COMPLETE THE FUNCTION CONTRACT
+        Requires(
+            pos >= 0, 
+            pos < a.size
+        ),
+        Modifies(a),
+        Ensures(
+            ∀(0 until pos)(k => a(k) == In(a)(k)),                              // Everything out of range
+            ∀(pos until a.size)(k => In(a)(k) < 0 -> a(k) == In(a)(k) + 1),     // Everything changed
+            ∀(pos until a.size)(k => In(a)(k) >= 0 -> a(k) == In(a)(k)),        // Everything that wasn't negative
+        )
+
         
 
     )
@@ -12,8 +23,22 @@ def addToNeg(a: ZS, pos: Z): Unit = {
     while (i < a.size) {
         Invariant(
             //COMPLETE THE LOOP INVARIANT BLOCK
-            
-            
+            Modifies(a, i),
+
+            //Bound the loop counter
+            i >= pos,
+            i <= a.size,
+
+            //Size doesn't change
+            a.size == In(a).size,
+
+            //Describe the value of every element in the sequence
+            ∀(0 until pos)(k => a(k) == In(a)(k)),                              // Everything that is out of range
+            ∀(pos until i)(k => In(a)(k) < 0 -> a(k) == In(a)(k) + 1),          // Everything in range we have changed
+            ∀(pos until i)(k => In(a)(k) >= 0 -> a(k) == In(a)(k)),             // Everything in range we HAVEN'T changed 
+            ∀(i until a.size)(k => In(a)(k) >= 0 -> a(k) == In(a)(k)),          // Everything in range it hasn't gotten to yet
+
+
         )
 
         if (a(i) < 0) {
