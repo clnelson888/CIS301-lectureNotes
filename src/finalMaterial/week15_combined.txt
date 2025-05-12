@@ -1,0 +1,542 @@
+// BEGIN FILE: finalReview_notes.txt
+// ------------------------------
+Today:
+- more on specifications in practice
+- review for final exam
+
+
+Office hour times during finals week.
+
+
+////////////////////////////////////
+
+What to do with preconditions and postconditions in practice?
+
+precondition violated: throw an exception in the method
+
+
+postcondition: add assert statements before leaving method
+    leave those on during development
+
+
+
+--> why might this would be preferable to only using test cases?
+
+
+
+See Java API
+
+/////////////////////////////
+
+Global invariants in practice.
+
+--> write globalsAssert method to assert each global invariant
+
+--> where should we call it?
+
+
+
+
+///////////////////////////////////////
+
+See Java Account example (from Tues May 6 folder)
+
+//////////////////////////////////////
+
+Final exam: Friday, May 16 2:00-3:50 in DUE 1109 (here)
+
+Closed notes, closed computers
+
+Cumulative. Similar format as previous exams.
+
+- recommend reviewing previous exams and practice exams
+
+- final exam practice problems
+    --> these don't include all possible problem types
+    --> all topics include:
+        - all topics listed for Exam 1
+        - all topics listed for Exam 2
+        - all topics listed for Exam 3
+        - verifying programs with sequences
+        - verifying programs with global variables and global invariants
+
+
+(How to find list of topics from previous exams?)
+
+
+//////////////////////////////////
+
+Do sequence (#9), globals (#10), loop program (#7) first
+
+
+<-- then in-class quiz
+
+
+
+Continue practice problems
+// END FILE: finalReview_notes.txt
+
+// BEGIN FILE: 1_propProof.txt
+// ------------------------------
+Complete the following propositional logic proof:
+
+( (p ∧ q) → r, r → s, q ∧ ¬s ) ⊢ ( ¬p )
+Proof(
+  1 ( (p ∧ q) → r ) by Premise,
+  2 ( r → s ) by Premise,
+  3 ( q ∧ ¬s ) by Premise,
+
+  //COMPLETE THE PROOF
+  4 ( q ) by AndE1(3),
+  5 ( ¬s ) by AndE2(3),
+
+  6 SubProof(
+    7 Assume ( p ),
+    8 ( p ∧ q ) by AndI(7, 4),
+    9 ( r ) by ImplyE(1, 8),
+    10 ( s ) by ImplyE(2, 9),
+    11 ( F ) by NegE(10, 5)
+
+    //goal: F
+  ), //use NegI 
+  12 ( ¬p ) by NegI(6)
+)
+// END FILE: 1_propProof.txt
+
+// BEGIN FILE: 2_truthTableProof.txt
+// ------------------------------
+Use a truth table to prove that the following argument is valid.
+
+Premises: p → q, q → ¬r
+Conclusion: p → ¬r
+
+
+proving argument valid: show that every truth assignment that makes
+each premise true also makes the conclusion true
+
+proving argument invalid: find one truth assignment that makes
+all premises true but the conclusion false
+
+           *       *            *
+-------------------------------------
+p q r # ( p → q, q → ¬r ) |-  p → ¬r
+-------------------------------------
+T T T #    T       F            F
+T T F #    T       T            T
+T F T #    F       T            F
+T F F #    F       T            T
+F T T #    T       F            T
+F T F #    T       T            T
+F F T #    T       T            T
+F F F #    T       T            T
+---------------------------------------
+
+Valid [T T F] [F T F] [F F T] [F F F]
+
+We can see that every truth assignment that makes all the premises
+true also makes the conclusion true
+
+// END FILE: 2_truthTableProof.txt
+
+// BEGIN FILE: 3_circuitTree.txt
+// ------------------------------
+Draw a circuit for the following propositional logic statement:
+
+(p V q) ^ (¬p V ¬r)
+
+
+(see circuit.png)
+
+
+Draw a parse tree for the following propositional logic statement:
+
+p V q ^ r → ¬p
+
+(see parse.png)
+// END FILE: 3_circuitTree.txt
+
+// BEGIN FILE: 4_predProof.txt
+// ------------------------------
+Complete the following predicate logic proof:
+
+(
+  ∀ ((x: T) => (P(x) ∨ Q(x)) ),
+  ¬(∃ ((x: T) => Q(x) ))
+)
+⊢
+(  ∀ ((x: T) => P(x)  ))
+
+Proof(
+    1 ( ∀ ((x: T) => (P(x) ∨ Q(x)) ) ) by Premise,
+    2 ( ¬(∃ ((x: T) => Q(x) )) ) by Premise,
+
+    //COMPLETE THE PROOF
+    3 Let ((a: T) => SubProof(
+    4 ( P(a) ∨ Q(a) ) by AllE[T](1),
+    5 SubProof(
+        6 Assume ( P(a) ),
+
+        //goal: P(a)
+    ),
+    7 SubProof(
+        8 Assume ( Q(a) ),
+        9 ( ∃ ((x: T) => Q(x) ) by ExistsI[T](8),
+        10 ( F ) by NegE(9, 2),
+        11 ( P(a) ) by BottomE(10)
+        //goal: P(a)
+    ),
+    12 ( P(a) ) by OrE(4, 5, 7)
+    //goal: P(a)
+  )),
+  13 ( ∀ ((x: T) => P(x)  ) by AllI[T](3)
+)
+// END FILE: 4_predProof.txt
+
+// BEGIN FILE: 5_sets.txt
+// ------------------------------
+1. Use set builder notation to describe the set 1, 3, 9, 27, etc.
+
+{x : x = 3^k, k ∈ ℤ, k >= 0}
+
+
+
+
+2. List the elements in the set {x : x = 2k, k ∈ ℤ} ∩ B, where B is defined
+by the following recursive definition:
+
+    2, 7 ∈ B
+    If x, y ∈ B and x + y ≤ 20, then x + y ∈ B
+
+B = {2, 7, 9, 11, 13, 15, 17, 19, 4, 6, 8, 10, 12, 14, 16, 18, 20}
+{x : x = 2k, k ∈ ℤ} = all evens, positive and negative
+
+intersection: {2, 4, 6, 8, 10, 12, 14, 16, 18, 20}
+
+
+
+
+3. What can we say about sets A and B if we know:
+    a) A ∪ B = A?
+            B is a subset of A
+
+    b) A - B = A?
+            A ∩ B = the empty set
+
+    c) A - B = B - A?
+            A = B
+
+    d) A ∩ B = A?
+        A is a subset of B
+
+
+    e) A ∩ B = B ∩ A
+
+        I know nothing! This is always true.
+// END FILE: 5_sets.txt
+
+// BEGIN FILE: 6_negation.txt
+// ------------------------------
+Suppose we have the following predicates:
+
+P(x, y): person x is partners with person y
+CS(x): person x is a CS major
+ECE(x): person x is an ECE major
+KS(x): person x is from Kansas
+
+
+For each statement:
+a) Translate it to English
+b) Negate it, showing your work 
+    (any OR statement with a for-all should be converted to an ->)
+c) Translate your negation to English
+
+
+1. ∀ x (KS(x) V ¬CS(x))
+
+Translation: All people are from KS or are not CS majors
+
+Negation:
+!(∀ x (KS(x) V ¬CS(x)))
+∃ x !(KS(x) V ¬CS(x))
+∃ x (!KS(x) ^ CS(x))
+
+Translation of negation:
+There is a person who isn't from KS and is a CS major
+
+
+
+
+2. ∃ x (ECE(x) ^ ∀ y (KS(y) → P(x, y)))
+
+
+Translation: 
+There is an ECE major who is partners with everyone from KS
+
+
+(p → q is equivalent to ¬p V q)
+
+Negation:
+
+¬(∃ x (ECE(x) ^ ∀ y (KS(y) → P(x, y))))
+∀ x !(ECE(x) ^ ∀ y (KS(y) → P(x, y))))
+∀ x (!ECE(x) V ¬(∀ y (KS(y) → P(x, y))))
+∀ x (!ECE(x) V (∃ y ¬(KS(y) → P(x, y))))
+∀ x (!ECE(x) V (∃ y ¬(¬KS(y) V P(x, y))))
+∀ x (!ECE(x) V (∃ y (KS(y) ^ ¬P(x, y))))
+∀ x (ECE(x) → (∃ y (KS(y) ^ ¬P(x, y))))
+
+Translation of negation: All ECE majors have a person from KS that
+they are not partners with.
+
+// END FILE: 6_negation.txt
+
+// BEGIN FILE: 7_loopProgram.txt
+// ------------------------------
+At each "PREMISES" heading, list ALL claims we could make using the justification "Premise"
+
+At each "SHOW" heading, list the claim that we MUST prove for the program to be validated in Logika's manual mode
+    //(you don't have to prove it - just list what we want to prove)
+
+def diff(big: Z, small: Z): Z = {
+    Contract(
+        Requires( big >= small ),
+        Ensures ( Res[Z] == big-small )
+    )
+
+    //PREMISES:
+    big >= small (precondition)
+
+
+    var count: Z = 0
+    var cur: Z = big
+
+    //PREMISES:
+    count == 0
+    cur == big
+    big >= small (precondition)
+    
+
+
+    //SHOW:
+    count == (big-cur) (prove invariant)
+
+
+    while (cur != small) {
+        Invariant(
+            Modifies(count, cur),
+            count == (big-cur)
+        )
+
+        //PREMISES:
+        cur != small (loop condition is true)
+        big >= small (precondition)
+        count == (big-cur) (loop invariant)
+
+
+        cur = cur - 1
+        count = count + 1
+
+        //SHOW:
+        count == (big-cur) (loop invariant)
+
+    }
+
+    //PREMISES:
+    !(cur != small) (loop condition is false)
+    count == (big-cur) (loop invariant)
+    big >= small (precondition)
+
+
+    //SHOW:
+    count == big-small
+
+
+    return count
+}
+
+/////////// Test code ////////////////
+
+var one: Z = 10
+
+//PREMISES:
+one == 10
+
+
+//SHOW:
+one+4 >= one (prove precondition for parameters I am passing)
+
+var answer: Z = diff(one+4, one)
+
+
+
+//PREMISES:
+answer == (one+4)-one
+one == 10
+
+
+//SHOW:
+answer == 4
+
+assert(answer == 4)
+// END FILE: 7_loopProgram.txt
+
+// BEGIN FILE: 8_induction.txt
+// ------------------------------
+Use mathematical induction to prove that the following expression:
+
+    n(n+1)(n+5)
+    
+Is a multiple of 3 for all integers n>=1.
+
+
+Base case. We must show that n(n+1)(n+5) is a multiple of 3 when n = 1.
+We have: 1(1+1)(1+5) = 1*2*6 = 12, which is a multiple of 3.
+The base case holds.
+
+
+
+Inductive step. We assume the inductive hypothesis -- that 
+k(k+1)(k+5) is a multiple of 3 where k >= 1.
+
+We must show that (k+1)(k+2)(k+6) is multiple of 3.
+
+From our inductive hypothesis, we know k(k+1)(k+5) is a multiple of 3.
+We know either k is a multiple of 3 or k+1 is a multiple of 3 or 
+k+5 is a multiple of 3.
+
+Consider each case.
+
+Case 1: Suppose k is a multiple of 3. Then k+6 is also a multiple of 3,
+and so (k+1)(k+2)(k+6) is a multiple of 3.
+
+Case 2: Suppose k+1 is a multiple of 3. Then (k+1)(k+2)(k+6) 
+is also a multiple of 3.
+
+Case 3: Suppose k+5 is a multiple of 3. Then k+2 is also a 
+multiple of 3, and so (k+1)(k+2)(k+6) is a multiple of 3.
+
+
+In each case, we showed that (k+1)(k+2)(k+6) is a multiple of 3.
+The inductive step holds.
+
+
+It follows from induction that n(n+1)(n+5) is a multiple of 3 
+for all integers n>=1.
+
+// END FILE: 8_induction.txt
+
+// BEGIN FILE: 9_sequenceProgram.txt
+// ------------------------------
+In the program below, complete the function contract and loop invariant block so the
+program (including the assert at the bottom) would be verified in Logika's auto mode.
+
+def addToNeg(a: ZS, pos: Z): Unit = {
+    Contract(
+        //COMPLETE THE FUNCTION CONTRACT
+        Requires(
+            pos >= 0,
+            pos < a.size
+        ),
+        Modifies(a),
+        Ensures(
+            ∀(pos until a.size) (k => In(a)(k) < 0 -> a(k) == In(a)(k) + 1),
+            ∀(0 until pos) (k => a(k) == In(a)(k)),
+            ∀(pos until a.size) (k => In(a)(k) >= 0 -> a(k) == In(a)(k))
+        )
+    )
+    var i: Z = pos
+
+    while (i < a.size) {
+        Invariant(
+            //COMPLETE THE LOOP INVARIANT BLOCK
+            Modifies(a, i),
+
+            //bound the loop counter
+            i >= pos,
+            i <= a.size,
+
+            //size doesn't change
+            a.size == In(a).size,
+
+            //describe the value of every element in the sequence
+            ∀(0 until pos) (k => a(k) == In(a)(k)),
+            ∀(pos until i) (k => In(a)(k) < 0 -> a(k) == In(a)(k) + 1),
+            ∀(pos until i) (k => In(a)(k) >= 0 -> a(k) == In(a)(k)),
+            ∀(i until a.size) (k => a(k) == In(a)(k))
+        )
+
+        if (a(i) < 0) {
+            a(i) = a(i) + 1
+        }
+
+        i = i + 1
+    }
+}
+
+/////// Test code ////////////
+var test: ZS = ZS(-3, -4, 0, 1, -1, 5, 6, -7)
+
+addToNeg(test, 3)
+
+assert (test == ZS(-3, -4, 0, 1, 0, 5, 6, -6))
+// END FILE: 9_sequenceProgram.txt
+
+// BEGIN FILE: 10_globalProgram.txt
+// ------------------------------
+In the program below, complete the function contract in the castVotes function so the
+program (including the asserts at the bottom) would be verified in Logika's auto mode.
+
+
+
+var total: Z = 0
+var cand1: Z = 0
+var cand2: Z = 0
+
+//global invariants
+@spec def inv = Invariant(
+    total == cand1 + cand2,
+    cand1 >= 0,
+    cand2 >= 0
+)
+
+def castVotes(candNum: Z, numVotes: Z) : Unit = {
+    Contract(
+        //COMPLETE THE FUNCTION CONTRACT
+        Requires(
+            candNum == 1 V candNum == 2,
+            numVotes >= 0
+        ),
+        Modifies(cand1, cand2, total),
+        Ensures(
+            //describe how global variables have changed
+            total == In(total) + numVotes,
+            candNum == 1 -> cand1 == In(cand1) + numVotes,
+            candNum == 2 -> cand2 == In(cand2) + numVotes
+        )
+    )
+
+    if (candNum == 1) {
+        cand1 = cand1 + numVotes
+    }
+
+    if (candNum == 2) {
+        cand2 = cand2 + numVotes
+    }
+
+    total = total + numVotes
+}
+
+//////// Test code ///////////
+assert(total == 0 & cand1 == 0 & cand2 == 0)
+
+castVotes(1, 3)
+
+assert(total == 3 & cand1 == 3 & cand2 == 0)
+
+castVotes(2, 2)
+assert(total == 5 & cand1 == 3 & cand2 == 2)
+
+castVotes(1, 1)
+assert(total == 6 & cand1 == 4 & cand2 == 2)
+// END FILE: 10_globalProgram.txt
+
